@@ -14,6 +14,8 @@
 
     @yield('content')
     
+    @include('frontend.shared.footer')
+
     @include('frontend.layouts.partials.script')
 </body>
 </html>
