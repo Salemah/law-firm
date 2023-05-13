@@ -6,7 +6,7 @@
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:wght@400;500;600;700&display=swap");
 
-    * {
+    /* * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -15,7 +15,6 @@
 
     html {
         font-size: 62.5%;
-        /* 1rem = 10px */
         overflow-x: hidden;
     }
 
@@ -74,34 +73,7 @@
         display: none;
     }
 
-    /* ===========================================
-Hero and Service Section Start
-======================================= */
-    /* .section-hero,
-    .section-services {
-        padding: 9.6rem 0;
-        background-color: #a5d8ff;
-        height: 60vh;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .section-services {
-        background: #f3f0ff;
-    }
-
-    .section-hero p,
-    .section-services p {
-        font-size: 3.2rem;
-    } */
-
-    /* ===========================================
-Responsive Codes
-======================================= */
-
-    /* 980px  */
     @media (max-width: 62em) {
         .mobile-navbar-btn {
             display: block;
@@ -119,7 +91,6 @@ Responsive Codes
         }
 
         .navbar {
-            /* display: none; */
             width: 100%;
             height: 100vh;
             background: #e7f5ff;
@@ -131,7 +102,6 @@ Responsive Codes
             justify-content: center;
             align-items: center;
 
-            /* to get the tranisition  */
             transform: translateX(100%);
             transition: all 0.5s linear;
 
@@ -161,7 +131,6 @@ Responsive Codes
         }
     }
 
-    /* Below 560px  */
     @media (max-width: 35em) {
         .header {
             padding: 0 2.4rem;
@@ -170,7 +139,7 @@ Responsive Codes
         .header .logo {
             width: 60%;
         }
-    }
+    } */
 
 </style>
 

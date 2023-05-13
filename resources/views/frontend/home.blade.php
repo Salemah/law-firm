@@ -9,12 +9,13 @@
         /* .carousel  {
        height:40vh;
      } */
+
         .carousel img {
-            width: 90%
+            width: 90%;
         }
         .programmes-top{
             width: 70vw;
-            margin:30px auto;
+            margin:50px auto;
             text-align: center;
             color: #015AA6;
             font-size: 20px;
@@ -34,6 +35,10 @@
             font-size: 24px;
             line-height: 29px;
             font-weight: 700;
+            transition: .3s ease;
+        }
+        .programmes-data  p:hover{
+            color: red;
         }
         .programmes-data img{
             width: 40%;
@@ -71,6 +76,11 @@
             text-decoration: none;
             color: black;
             cursor: pointer;
+            transition: .3s ease;
+        }
+        .post h4 a:hover{
+            color: rgb(9, 58, 164);
+
         }
         .post .date-time{
             font-size: 15px;
@@ -105,8 +115,36 @@
             padding: 15px 0px;
         }
         /* ca,paign-section */
+        .card{
+            border: none !important;
+            background: #EEEDEF !important;
+            padding-bottom:15px;
+        }
         .reach-content-campaign{
             margin: 15px 0
+        }
+        .reach-content-campaign-content{
+            min-height: 50vh;
+        }
+        .reach-content-campaign-content h5{
+            font-size: 30px;
+            font-weight: 500;
+            line-height: 1.5;
+            text-transform: capitalize;
+        }
+        .reach-content-campaign-content p{
+            font-size: 18px;
+            padding: 10px 5px
+        }
+        .reach-content-campaign-content a{
+            font-size: 18px;
+            padding: 10px 10px;
+            border-radius: 30px;
+            transition: .3s ease;
+        }
+        .reach-content-campaign-content a :hover{
+            color: #564895 !important;
+            background: black !important;
         }
     </style>
 @endpush
@@ -123,6 +161,8 @@
                             aria-label="Slide 2"></button>
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                             aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                            aria-label="Slide 4"></button>
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -151,6 +191,7 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
+            </div>
                 <div class="">
                     <div class="container programmes-top">
                         <p>The Bangladesh Legal Aid and Services Trust (BLAST) was established in 1993 dedicated to providing free legal services for the poor, with a Board of Trustees including eminent jurists, lawyers, professionals, and former judges of the Bangladesh Supreme Court.</p>
@@ -254,26 +295,65 @@
                         </div>
                         <h4>BLAST seeks to reach out to this section of society, raising their awareness and understanding of available rights, remedies and services, and seeking to ensure greater responsiveness to their needs from within the justice system.</h4>
                         <div class="reach-content-campaign">
-                            <h2>CAMPAIGNS</h2>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12 col-md-3">
-                                        <div class="card" style="width: 18rem;">
-                                            <img src="{{asset('image/03-social-justice-400x194.jpg')}}" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                              <h5 class="card-title">Card title</h5>
-                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                                            </div>
-                                          </div>
+                            <h2 class="my-5">CAMPAIGNS</h2>
+                            <div class="container " style="margin-top:90px">
+                                <div class="row "  >
+                                    <div class="col-12 col-md-3  my-5">
+                                        <div class="px-3">
+                                            <div class="card reach-content-campaign-content" >
+                                                <img src="{{asset('image/03-social-justice-400x194.jpg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                  <h5 class="card-title">Card title</h5>
+                                                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                  <a href="#" class="btn btn-primary">Read More</a>
+                                                </div>
+                                              </div>
+                                        </div>
                                     </div>
+                                    <div class="col-12 col-md-3 my-5">
+                                        <div class="px-3">
+                                            <div class="card reach-content-campaign-content" >
+                                                <img src="{{asset('image/03-social-justice-400x194.jpg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                  <h5 class="card-title">Card title</h5>
+                                                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                  <a href="#" class="btn btn-primary">Read More</a>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-3 my-5">
+                                        <div class="px-3">
+                                            <div class="card reach-content-campaign-content" >
+                                                <img src="{{asset('image/03-social-justice-400x194.jpg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                  <h5 class="card-title">Card title</h5>
+                                                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                  <a href="#" class="btn btn-primary">Read More</a>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-3 my-5">
+                                        <div class="px-3">
+                                            <div class="card reach-content-campaign-content" >
+                                                <img src="{{asset('image/03-social-justice-400x194.jpg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                  <h5 class="card-title">Card title</h5>
+                                                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                  <a href="#" class="btn btn-primary">Read More</a>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
         </section>
     </main>
 
