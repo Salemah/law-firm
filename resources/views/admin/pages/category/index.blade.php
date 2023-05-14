@@ -50,6 +50,7 @@
 <div class="">
    <!-- Alert -->
    @include('admin.dashboard.layouts.partials.alert')
+
        <div class="row">
            <div class="col-12 col-md-12">
                 <div class="card mb-4">
@@ -87,6 +88,7 @@
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
     <script>
+
         $(document).ready(function () {
             var searchable = [];
             $.ajaxSetup({
@@ -159,7 +161,7 @@
                     }
                 }, // success end
                 error: function (error) {
-                    location.reload();
+                    //location.reload();
                 } // Error
             })
         }
@@ -180,26 +182,26 @@
         };
 
         // Status Change
-        // function statusChange(id) {
-        //
-        //     $.ajax({
-        //         type: "GET",
-        //         url: url.replace(':id', id),
-        //         success: function (resp) {
-        //            // Reloade DataTable
-        //             $('#table').DataTable().ajax.reload();
-        //             if(resp == "active"){
-        //                 toastr.success('This status has been changed to Publish.');
-        //                 return false;
-        //             }else{
-        //                 toastr.error('This status has been changed to Un Publish.');
-        //                 return false;
-        //             }
-        //         }, // success end
-        //         error: function (error) {
-        //             location.reload();
-        //         } // Error
-        //     })
-        // }
+        function statusChange(id) {
+            var url = '{{ route("admin.category.update.status",":id") }}';
+            $.ajax({
+                type: "GET",
+                url: url.replace(':id', id),
+                success: function (resp) {
+                   // Reloade DataTable
+                    $('#table').DataTable().ajax.reload();
+                    if(resp == "active"){
+                        toastr.success('This status has been changed to Publish.');
+                        return false;
+                    }else{
+                        toastr.error('This status has been changed to Un Publish.');
+                        return false;
+                    }
+                }, // success end
+                error: function (error) {
+                   // location.reload();
+                } // Error
+            })
+        }
     </script>
 @endpush

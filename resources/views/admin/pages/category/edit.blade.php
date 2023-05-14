@@ -39,8 +39,9 @@
    <!-- Alert -->
    @include('admin.dashboard.layouts.partials.alert')
 
-   <form action="{{ route('admin.category.store') }}" enctype="multipart/form-data" method="POST">
+   <form action="{{ route('admin.category.update',$category->id) }}" enctype="multipart/form-data" method="POST">
        @csrf
+       @method('PUT')
        <div class="row">
            <div class="col-md-12">
                <div class="card">
@@ -50,7 +51,7 @@
                                    <label for="name"><b>Category Name</b><span class="text-danger">*</span></label>
                                    <input type="text" name="name" id="name"
                                        class="form-control @error('name') is-invalid @enderror"
-                                       value="{{ old('name') }}"
+                                       value="{{$category->name}}"
                                        placeholder="Enter Product Category Name">
                                    @error('name')
                                        <span class="alert text-danger" role="alert">
@@ -64,8 +65,8 @@
                                    <select name="status" id="status"
                                            class="custom-select @error('status') is-invalid @enderror">
                                        <option >--Select Status--</option>
-                                       <option value="1" selected>Active</option>
-                                       <option value="0">Inactive</option>
+                                       <option value="1" selected {{$category->status == 1 ? 'selected': ''}}>Active</option>
+                                       <option value="0" {{$category->status == 0 ? 'selected': ''}}>Inactive</option>
                                    </select>
                                    @error('status')
                                    <span class="alert text-danger" role="alert">

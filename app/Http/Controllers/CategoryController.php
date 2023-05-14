@@ -15,9 +15,7 @@ class CategoryController extends Controller
     {
         try{
             if ($request->ajax()) {
-                // $Warehouse = Warehouse::latest()->get();
                 $Category = Category::get();
-                //\dd( $Category);
                 return DataTables::of($Category)
                     ->addIndexColumn()
 
@@ -32,8 +30,8 @@ class CategoryController extends Controller
 
                     ->addColumn('action', function ($Category) {
                         return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                  <a href="' . route('admin.category.edit', $Category->id) . '" class="btn btn-sm btn-success text-white" style="cursor:pointer" title="Edit"><i class="bx bxs-edit"></i></a>
-                                  <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm(' . $Category->id . ')" title="Delete"><i class="bx bxs-trash"></i></a>
+                                  <a href="' . route('admin.category.edit', $Category->id) . '" class="btn btn-sm btn-success text-white" style="cursor:pointer" title="Edit"><i class="fas fa-edit"></i></a>
+                                  <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm(' . $Category->id . ')" title="Delete"><i class="fas fa-trash-alt"></i></a>
                             </div>';
                     })
                     ->rawColumns(['action', 'status' ])
@@ -66,11 +64,13 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name'            =>      'required|unique:categories,name',
+            'status'            =>      'required',
         ]);
 
         try {
             $data                       =       new Category();
             $data->name                 =       $request->name;
+            $data->status                 =       $request->status;
             $data->save();
 
             return redirect()->route('admin.category.index')
@@ -93,7 +93,12 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        try {
+            $category = Category::findOrFail($id);
+            return view('admin.pages.category.edit',compact('category'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
     }
 
     /**
@@ -101,14 +106,61 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name'=>'required|unique:categories,name,'.$id.',id',
+            'status'=>'required',
+        ]);
+
+        try {
+            $category = Category::findOrFail($id);
+            $category->name=$request->name;
+            $category->status = $request->status;
+            $category->save();
+
+            return redirect()->route('admin.category.index')
+                    ->with('message', 'Category Update Successfully');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        if ($request->ajax()) {
+            try {
+                $category = Category::findOrFail($id);
+                if ($category) {
+                    $category->delete();
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Category Deleted Successfully.',
+                    ]);
+                }
+            } catch (\Exception $exception) {
+                return redirect()->back()->with('error', $exception->getMessage());
+            }
+        }
+    }
+    //starts status change function
+    public function statusUpdate($id)
+    {
+        try {
+
+            $category = Category::findOrFail($id);
+            $category->status == 1 ? $category->status = 0 : $category->status = 1;
+
+            $category->update();
+
+            if ($category->status == 1) {
+                return "active";
+            } else {
+                return "inactive";
+            }
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 }

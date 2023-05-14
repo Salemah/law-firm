@@ -22,8 +22,8 @@
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item active">Category</li>
-            <li class="breadcrumb-item active"><a class="btn btn-sm btn-success text-white" href="{{ route('admin.category.create') }}">
-                <i class='bx bx-plus'></i> Create
+            <li class="breadcrumb-item active"><a class="btn btn-sm btn-success text-white" href="{{ route('admin.category.index') }}">
+                <i class="fas fa-arrow-left"></i> back
             </a></li>
           </ol>
         </div><!-- /.col -->
