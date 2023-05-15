@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardSettingController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard.master');
-    // return view('frontend.home');
+// Route::get('/', function () {
+//     //return view('admin.dashboard.master');
+//      return view('frontend.home');
+// });
+Route::resource('/',HomeController::class);
+Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
+    Route::get('post/{id}',[HomeController::class,'postShow'])->name('post.show');
+    Route::get('all-post',[HomeController::class,'allPost'])->name('all.post');
 });
-
 // Category
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('category',CategoryController::class);
@@ -35,4 +41,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
         Route::get('status/update/{id}',[PostController::class,'statusUpdate'])->name('update.status');
     });
+    //slider route
+    Route::resource('slider',SliderController::class);
+    Route::group(['prefix' => 'slider', 'as' => 'slider.'], function () {
+        Route::get('status/update/{id}',[SliderController::class,'statusUpdate'])->name('update.status');
+    });
+
 });

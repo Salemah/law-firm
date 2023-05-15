@@ -1,6 +1,6 @@
 @extends('admin.dashboard.master')
 
-@section('title', 'Category')
+@section('title', 'Post')
 
 @push('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
@@ -80,7 +80,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                                         class="custom-select @error('category') is-invalid @enderror">
                                         <option value="" selected>--Select Status--</option>
                                         @foreach ($categories as $category )
-                                            <option value="{{$category->id}}" {{$post->category ==$category->id ? 'selected' : '' }} >{{$category->name}}</option>
+                                            <option value="{{$category->id}}" {{$post->category_id ==$category->id ? 'selected' : '' }} >{{$category->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('category')

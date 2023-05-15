@@ -52,7 +52,7 @@ class DashboardSettingController extends Controller
             if ($request->file('logo')) {
                 $file = $request->file('logo');
                 $filename = time() . $file->getClientOriginalName();
-                $file->move(public_path('/image/dashboard'), $filename);
+                $file->move(public_path('/image/dashboard/'), $filename);
                 $data->logo = $filename;
             }
             if ($request->file('favicon')) {

@@ -21,7 +21,7 @@ class PostController extends Controller
                 // $posts = Post::with('category')->get();
                 $posts = DB::table('posts')
                                     ->orderBy('posts.ID','DESC')
-                                    ->join('categories', 'posts.category', '=', 'categories.id')
+                                    ->join('categories', 'posts.category_id', '=', 'categories.id')
                                     ->select('posts.*', 'categories.name as category_by')
                                     ->where('posts.deleted_at',null)
                                     ->get();
@@ -92,7 +92,7 @@ class PostController extends Controller
             }
 
             $data->title = $request->title;
-            $data->category = $request->category;
+            $data->category_id = $request->category;
             $data->description = $request->description;
             $data->status = $request->status;
 
@@ -149,7 +149,7 @@ class PostController extends Controller
             }
 
             $data->title = $request->title;
-            $data->category = $request->category;
+            $data->category_id = $request->category;
             $data->description = $request->description;
             $data->status = $request->status;
 

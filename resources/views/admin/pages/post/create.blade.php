@@ -1,6 +1,6 @@
 @extends('admin.dashboard.master')
 
-@section('title', 'Category')
+@section('title', 'Post')
 
 @push('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"

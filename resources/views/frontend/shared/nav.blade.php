@@ -24,9 +24,12 @@
 
 
      --}}
-<nav class="navbar navbar-expand-lg bg-body-tertiary"">
+     @php
+        $dashboard_settings = \Illuminate\Support\Facades\DB::table('dashboard_settings')->first();
+    @endphp
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
-        <a class="navbar-brand" href="#"><img src="{{ asset('image/logo.png') }}" style="width:40px" alt="logo"
+        <a class="navbar-brand" href="#"><img src="{{ asset('/image/dashboard/'.$dashboard_settings->logo) }}" style="width:40px" alt="logo"
                 class="logo" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,12 +38,12 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav  mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="{{route('home.all.post')}}">Articles</a>
                 </li>
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Dropdown
@@ -53,7 +56,7 @@
                         </li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link disabled">Disabled</a>
                 </li>

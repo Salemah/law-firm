@@ -7,7 +7,9 @@
 }
     </style>
 @endpush
-
+@php
+$dashboard_settings = \Illuminate\Support\Facades\DB::table('dashboard_settings')->first();
+@endphp
 <div class=" my-5">
     <!-- Footer -->
     <footer
@@ -26,9 +28,7 @@
                 Company name
               </h6>
               <p style="font-size: 15px;">
-                Here you can use rows and columns to organize your footer
-                content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit.
+                {!!$dashboard_settings->about!!}
               </p>
             </div>
             <!-- Grid column -->
@@ -83,10 +83,10 @@
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
               <h6 class="text-uppercase mb-4 font-weight-bold" style="font-size:
               18px">Contact</h6>
-              <p style="font-size:14px;"><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-              <p style="font-size:14px;"><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-              <p style="font-size:14px;"><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-              <p style="font-size:14px;"><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+              <p style="font-size:14px;"><i class="fas fa-home mr-3"></i> {{$dashboard_settings->address}}</p>
+              <p style="font-size:14px;"><i class="fas fa-envelope mr-3"></i> {{$dashboard_settings->email}}</p>
+              <p style="font-size:14px;"><i class="fas fa-phone mr-3"></i> {{$dashboard_settings->phone}}</p>
+              {{-- <p style="font-size:14px;"><i class="fas fa-print mr-3"></i> + 01 234 567 89</p> --}}
             </div>
             <!-- Grid column -->
           </div>
@@ -116,6 +116,7 @@
             <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
               <!-- Facebook -->
               <a
+              href="{{$dashboard_settings->facebook}}"
                  class="btn btn-outline-light btn-floating m-1"
                  class="text-white"
                  role="button"
@@ -124,6 +125,7 @@
 
               <!-- Twitter -->
               <a
+              href="{{$dashboard_settings->twitter}}"
                  class="btn btn-outline-light btn-floating m-1"
                  class="text-white"
                  role="button"
@@ -132,14 +134,15 @@
 
               <!-- Google -->
               <a
+              href="{{$dashboard_settings->linkedin}}"
                  class="btn btn-outline-light btn-floating m-1"
                  class="text-white"
                  role="button"
-                 ><i class="fab fa-google"></i
-                ></a>
+                 ><i class="fa-brands fa-linkedin"></i></a>
 
               <!-- Instagram -->
               <a
+              href="{{$dashboard_settings->instagram}}"
                  class="btn btn-outline-light btn-floating m-1"
                  class="text-white"
                  role="button"

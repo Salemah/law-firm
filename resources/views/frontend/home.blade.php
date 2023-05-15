@@ -61,6 +61,7 @@
         }
         .post img{
             width: 90%;
+            height: 200px;
             transition: 0.7s ease;
         }
         .post img:hover{
@@ -70,6 +71,8 @@
         .post h4{
             font-weight: 600;
             font-size: 20px;
+            height: 23vh;
+            margin-bottom: 16px;
 
         }
         .post h4 a{
@@ -230,7 +233,18 @@
                     <h2 class="py-5">SEE THE LATEST</h2>
                     <div class="container">
                         <div class="row">
-                            <div class="col-12 col-md-3 p-3 mb-4">
+                            @foreach ($posts as $post )
+                                <div class="col-12 col-md-3 p-3 mb-4">
+                                    <div class="post">
+                                        <img src="{{asset('image/post/'.$post->image)}}" alt="default-bg">
+                                        <h4 class="pt-4">
+                                            <a href="{{route('home.post.show',$post->id)}}">{{Str::limit($post->title,150)}}</a>
+                                        </h4>
+                                        <span class="date-time">{{Carbon\Carbon::parse($post->created_at)->format('M d, Y ')}}</span> <span class="date-time">| {{$post->category->name}}</span>
+                                    </div>
+                                </div>
+                            @endforeach
+                            {{-- <div class="col-12 col-md-3 p-3 mb-4">
                                 <div class="post">
                                     <img src="{{asset('image/Artboard-2-700x441.png')}}" alt="default-bg">
                                     <h4 class="pt-4">
@@ -259,10 +273,15 @@
                                     <h4 class="pt-4">রানা প্লাজা ধসের দশ বছর: ক্ষতিগ্রস্ত সকল শ্রমিক ও পরিবারের পূনর্বাসনসহ মামলার দ্রুত নিষ্পত্তি এবং যথাযথ ক্ষতিপূরণ প্রদানের দাবী জানাচ্ছে ব্লাস্ট</h4>
                                     <span class="date-time">April 24th, 2023</span>| <span class="date-time">Category</span>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
-
+                        {{-- <span style="padding-top: 20px">
+                            {!!$posts->withQueryString()->links('pagination::bootstrap-5')!!}
+                        </span> --}}
+                        <span style="padding-top: 20px">
+                            <a href="{{route('home.all.post')}}"  ><button style="background-color: #564895" class="btn  text-light">view all <i class="fa-sharp fa-solid fa-arrow-up-right-from-square ml-2"></i></button> </a>
+                        </span>
                     </div>
 
                 </div>
@@ -353,7 +372,6 @@
                         </div>
                     </div>
                 </div>
-
         </section>
     </main>
 
