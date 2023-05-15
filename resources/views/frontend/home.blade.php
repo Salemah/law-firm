@@ -10,9 +10,13 @@
        height:40vh;
      } */
 
+     .carousel-item{
+        height: 700px;
+     }
         .carousel img {
             width: 90%;
         }
+
         .programmes-top{
             width: 70vw;
             margin:50px auto;
@@ -156,9 +160,13 @@
     <main>
         <section class="section-hero mb-5">
             <div class="hero">
-                <div id="carouselExampleIndicators" class="carousel slide">
-                    <div class="carousel-indicators">
+                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators" data-bs-interval="500">
+                        @foreach ($sliders as $slider )
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide {{$slider->id}}"></button>
+                        @endforeach
+                        {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                             aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
                             aria-label="Slide 2"></button>
@@ -166,9 +174,21 @@
                             aria-label="Slide 3"></button>
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
                             aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                            aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                            aria-label="Slide 6"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                            aria-label="Slide 7"></button> --}}
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        @foreach ($sliders as $key => $slider )
+                        <div class="carousel-item @if ($key == 1) active @endif" >
+                            <img src="{{ asset('image/slider/'.$slider->image) }}" class="d-block w-100"
+                                alt="...">
+                        </div>
+                        @endforeach
+                        {{-- <div class="carousel-item active">
                             <img src="{{ asset('image/My_Life_My_Rights_Jotirmoy_Deb.jpg') }}" class="d-block w-100"
                                 alt="...">
                         </div>
@@ -181,7 +201,7 @@
                         </div>
                         <div class="carousel-item">
                             <img src="{{ asset('image/stop_rape.jpg') }}" class="d-block w-100" alt="...">
-                        </div>
+                        </div> --}}
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="prev">
@@ -276,9 +296,9 @@
                             </div> --}}
 
                         </div>
-                        {{-- <span style="padding-top: 20px">
+                        <span style="padding-top: 20px">
                             {!!$posts->withQueryString()->links('pagination::bootstrap-5')!!}
-                        </span> --}}
+                        </span>
                         <span style="padding-top: 20px">
                             <a href="{{route('home.all.post')}}"  ><button style="background-color: #564895" class="btn  text-light">view all <i class="fa-sharp fa-solid fa-arrow-up-right-from-square ml-2"></i></button> </a>
                         </span>

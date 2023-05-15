@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DashboardSetting;
 use App\Models\Post;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,7 +16,10 @@ class HomeController extends Controller
     {
         try {
             $posts = Post::with('category')->where('status',1)->latest()->paginate(8);
-            return view('frontend.home',compact('posts'));
+
+            $sliders = Slider::where('status',1)->get();
+
+            return view('frontend.home',compact('posts','sliders'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

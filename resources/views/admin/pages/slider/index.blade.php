@@ -1,6 +1,6 @@
 @extends('admin.dashboard.master')
 
-@section('title', 'Category')
+@section('title', 'Slider')
 
 @push('css')
 
@@ -62,6 +62,8 @@
                                         <tr class="align-middle table">
                                             <th>#</th>
                                             <th>Name</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -111,12 +113,14 @@
                 pagingType: "full_numbers",
                 // dom: "<'row'<'col-sm-2'l><'col-sm-7 text-center'B><'col-sm-3'f>>tipr",
                 ajax: {
-                    url: "{{route('admin.category.index')}}",
+                    url: "{{route('admin.slider.index')}}",
                     type: "get"
                 },
                 columns: [
                     {data: "DT_RowIndex",      name: "DT_RowIndex",       orderable: false,  searchable: false},
-                    {data: 'name',             name: 'name',              orderable: true,   searchable: true},
+                    {data: 'image',             name: 'image',              orderable: true,   searchable: true},
+                    {data: 'title',             name: 'title',              orderable: true,   searchable: true},
+                    {data: 'details',             name: 'details',              orderable: true,   searchable: true},
 
                     {data: 'status',           name: 'status'},
                     //only those have manage_user permission will get access
@@ -143,7 +147,7 @@
 
         // Delete Button
         function deleteItem(id) {
-            var url = '{{ route("admin.category.destroy",":id") }}';
+            var url = '{{ route("admin.slider.destroy",":id") }}';
             $.ajax({
                 type: "DELETE",
                 url: url.replace(':id', id),
@@ -183,7 +187,7 @@
 
         // Status Change
         function statusChange(id) {
-            var url = '{{ route("admin.category.update.status",":id") }}';
+            var url = '{{ route("admin.slider.update.status",":id") }}';
             $.ajax({
                 type: "GET",
                 url: url.replace(':id', id),
