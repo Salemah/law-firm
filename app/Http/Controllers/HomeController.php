@@ -96,5 +96,14 @@ class HomeController extends Controller
             return redirect()->back()->with('error', $exception->getMessage());
         }
     }
+    public function contact()
+    {
+        try {
+            $dashboardSettings =  DashboardSetting::first();
+            return view('frontend.contact.contact',compact('dashboardSettings'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
 
 }

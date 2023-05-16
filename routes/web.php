@@ -24,8 +24,9 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::resource('/',HomeController::class);
 Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
-    Route::get('post/{id}',[HomeController::class,'postShow'])->middleware(['auth', 'verified'])->name('post.show');
-    Route::get('all-post',[HomeController::class,'allPost'])->middleware(['auth', 'verified'])->name('all.post');
+    Route::get('post/{id}',[HomeController::class,'postShow'])->name('post.show');
+    Route::get('all-post',[HomeController::class,'allPost'])->name('all.post');
+    Route::get('contact',[HomeController::class,'contact'])->name('contact');
 });
 // Category
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
