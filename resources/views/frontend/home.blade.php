@@ -10,12 +10,12 @@
        height:40vh;
      } */
 
-     .carousel-item{
-        height: 700px;
-     }
-        .carousel img {
-            width: 90%;
-        }
+     .carousel .item {
+  height: 300px;
+}
+        /* .carousel img {
+            width: 100%;
+        } */
 
         .programmes-top{
             width: 70vw;
@@ -160,26 +160,40 @@
     <main>
         <section class="section-hero mb-5">
             <div class="hero">
-                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($sliders as $key => $slider )
+                        <div class="carousel-item @if ($key == 1) active @endif" data-bs-interval="500" >
+                            <img src="{{ asset('image/slider/'.$slider->image) }}" class="d-block w-100"
+                                alt="...">
+                        </div>
+                        @endforeach
+                      {{-- <div class="carousel-item active" >
+                        <img src="{{ asset('image/My_Life_My_Rights_Jotirmoy_Deb.jpg') }}" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ asset('image/My_Life_My_Rights_Jotirmoy_Deb.jpg') }}" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ asset('image/My_Life_My_Rights_Jotirmoy_Deb.jpg') }}" class="d-block w-100" alt="...">
+                      </div> --}}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                {{-- <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators" data-bs-interval="500">
                         @foreach ($sliders as $slider )
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                             aria-current="true" aria-label="Slide {{$slider->id}}"></button>
                         @endforeach
-                        {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                            aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                            aria-label="Slide 4"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                            aria-label="Slide 5"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                            aria-label="Slide 6"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                            aria-label="Slide 7"></button> --}}
+
                     </div>
                     <div class="carousel-inner">
                         @foreach ($sliders as $key => $slider )
@@ -188,20 +202,7 @@
                                 alt="...">
                         </div>
                         @endforeach
-                        {{-- <div class="carousel-item active">
-                            <img src="{{ asset('image/My_Life_My_Rights_Jotirmoy_Deb.jpg') }}" class="d-block w-100"
-                                alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('image/Rape-Law-Reform-e1662269063745-1.jpeg') }}" class="d-block w-100"
-                                alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('image/stop_rape.jpg') }}" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('image/stop_rape.jpg') }}" class="d-block w-100" alt="...">
-                        </div> --}}
+
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="prev">
@@ -213,7 +214,7 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
-                </div>
+                </div> --}}
             </div>
                 <div class="">
                     <div class="container programmes-top">
