@@ -153,6 +153,16 @@
                             @enderror
                         </div>
                         <div class="form-group col-12 mb-2">
+                            <label for="copyright">Address</label>
+                            <textarea name="copyright" id="copyright" rows="10" cols="40"
+                                class="form-control @error('copyright') is-invalid @enderror" placeholder="Copyright...">{{ isset($DashboardSetting) ? $DashboardSetting->copyright : old('copyright') }}</textarea>
+                            @error('copyright')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-12 mb-2">
                             <label for="description">Description</label>
                             <textarea name="description" id="description" rows="10" cols="40"
                                 class="form-control @error('description') is-invalid @enderror" placeholder="Description...">{{ isset($DashboardSetting) ? $DashboardSetting->about : old('about') }}</textarea>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DashboardSetting;
 use App\Models\Post;
 use App\Models\Slider;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -18,8 +19,9 @@ class HomeController extends Controller
             $posts = Post::with('category')->where('status',1)->latest()->paginate(8);
 
             $sliders = Slider::where('status',1)->get();
+            $teams = Team::where('status',1)->get();
 
-            return view('frontend.home',compact('posts','sliders'));
+            return view('frontend.home',compact('posts','teams','sliders'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('slider',SliderController::class)->middleware(['auth', 'verified']);
     Route::group(['prefix' => 'slider', 'as' => 'slider.'], function () {
         Route::get('status/update/{id}',[SliderController::class,'statusUpdate'])->name('update.status');
+    });
+    //TEAM
+    Route::resource('team',TeamController::class)->middleware(['auth', 'verified']);
+    Route::group(['prefix' => 'team', 'as' => 'team.'], function () {
+        Route::get('status/update/{id}',[TeamController::class,'statusUpdate'])->name('update.status');
     });
 
 });

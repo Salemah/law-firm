@@ -60,23 +60,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Settings
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('admin.dashboard-setting.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard Setting</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -107,6 +91,40 @@
                 <a href="{{route('admin.slider.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Slider</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Team
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.team.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Team</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Settings
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.dashboard-setting.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dashboard Setting</p>
                 </a>
               </li>
             </ul>
