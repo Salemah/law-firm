@@ -10,7 +10,7 @@
 @php
 $dashboard_settings = \Illuminate\Support\Facades\DB::table('dashboard_settings')->first();
 @endphp
-<div class=" my-5">
+<div class=" mt-5">
     <!-- Footer -->
     <footer
             class="text-center text-lg-start text-white"
