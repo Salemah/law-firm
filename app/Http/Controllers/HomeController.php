@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\DashboardSetting;
 use App\Models\Post;
 use App\Models\Slider;
@@ -22,6 +23,19 @@ class HomeController extends Controller
             $teams = Team::where('status',1)->get();
 
             return view('frontend.home',compact('posts','teams','sliders'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
+    public function index2()
+    {
+        try {
+            $posts = Post::with('category')->where('status',1)->latest()->paginate(8);
+
+            $sliders = Slider::where('status',1)->get();
+            $teams = Team::where('status',1)->get();
+
+            return view('frontend.oldhome',compact('posts','teams','sliders'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -58,8 +72,10 @@ class HomeController extends Controller
     public function allPost()
     {
         try {
-            $posts = Post::with('category')->where('status',1)->paginate(6);
-            return view('frontend.post.all-post',compact('posts'));
+            $posts = Post::with('category')->where('status',1)->paginate(10);
+            $categorys = Category::latest()->take(3)->get();
+            $ltposts = Post::with('category')->where('status', 1)->latest()->take(3)->get();
+            return view('frontend.post.all-post',compact('posts', 'ltposts', 'categorys'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -93,7 +109,11 @@ class HomeController extends Controller
         try {
             $post = Post::with('category')->findOrFail($id);
             $dashboardSettings =  DashboardSetting::first();
-            return view('frontend.post.show',compact('post','dashboardSettings'));
+            $ids = explode(',', $post->category_id);
+            $categories = Category::whereIn('id', $ids)->pluck('name')->toArray();
+            $categorys = Category::latest()->take(3)->get();
+            $posts = Post::with('category')->where('status', 1)->latest()->take(3)->get();
+            return view('frontend.post.show',compact('categorys','post','posts', 'categories','dashboardSettings'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

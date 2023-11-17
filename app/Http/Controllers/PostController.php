@@ -21,8 +21,6 @@ class PostController extends Controller
                 // $posts = Post::with('category')->get();
                 $posts = DB::table('posts')
                                     ->orderBy('posts.ID','DESC')
-                                    ->join('categories', 'posts.category_id', '=', 'categories.id')
-                                    ->select('posts.*', 'categories.name as category_by')
                                     ->where('posts.deleted_at',null)
                                     ->get();
                 return DataTables::of($posts)
@@ -37,8 +35,16 @@ class PostController extends Controller
                         return $status;
                     })
                     ->addColumn('category', function ($post) {
+                        $ids = explode(',', $post->category_id);
+                    $items =Category::whereIn('id', $ids)->pluck('name')->toArray();
+                   
+                    if ($items) {
+                        $itemName = implode(',', $items);
+                        return $items;
+                    } else {
+                        return $items;
+                    }
 
-                        return $post->category_by;
                     })
 
                     ->addColumn('action', function ($post) {
@@ -90,10 +96,20 @@ class PostController extends Controller
                 $file->move(public_path('/image/post'), $filename);
                 $data->image = $filename;
             }
+            if ($request->file('scndimage')) {
+                $file = $request->file('scndimage');
+                $filename = time() . $file->getClientOriginalName();
+                $file->move(public_path('/image/post'), $filename);
+                $data->scndimage = $filename;
+            }
 
             $data->title = $request->title;
-            $data->category_id = $request->category;
+            $data->category_id = implode(',',$request->category);
             $data->description = $request->description;
+            $data->snddescription= $request->snddescription;
+            $data->thddescription = $request->thddescription;
+            $data->quote = $request->quote;
+            $data->quoteby = $request->quoteby;
             $data->status = $request->status;
 
             $data->save();
@@ -140,19 +156,21 @@ class PostController extends Controller
         try {
 
             $data =Post::findOrFail($id);
-
-            if ($request->file('image')) {
-                $file = $request->file('image');
+            if ($request->file('scndimage')) {
+                $file = $request->file('scndimage');
                 $filename = time() . $file->getClientOriginalName();
                 $file->move(public_path('/image/post'), $filename);
-                $data->image = $filename;
+                $data->scndimage = $filename;
             }
 
             $data->title = $request->title;
-            $data->category_id = $request->category;
+            $data->category_id =implode(',', $request->category);
             $data->description = $request->description;
+            $data->snddescription= $request->snddescription;
+            $data->thddescription = $request->thddescription;
+            $data->quote = $request->quote;
+            $data->quoteby = $request->quoteby;
             $data->status = $request->status;
-
             $data->update();
 
             return redirect()->route('admin.post.index')->with('message', 'Update successfull.');

@@ -128,6 +128,12 @@
                 </a>
               </li>
             </ul>
+            <li class="nav-item">
+                <a href="{{route('admin.dashboard-setting.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Profile</p>
+                </a>
+              </li>
           </li>
           <li class="nav-item">
             <a  class="nav-link">

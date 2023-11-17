@@ -61,6 +61,15 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="form-group col-12  col-md-6 mb-2">
+                                    <label for="scndimage">Second Image <span>(if any)</span></label>
+                                    <input type="file" id="scndimage"  data-height="290"class="dropify form-control @error('scndimage') is-invalid @enderror" name="scndimage">
+                                    @error('scndimage')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                     <label for="title"><b>Title</b><span class="text-danger">*</span></label>
                                     <input type="text" name="title" id="title"
@@ -75,9 +84,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                     <label for="category"><b>Category</b><span class="text-danger">*</span></label>
-                                    <select name="category" id="category"
-                                        class="custom-select @error('category') is-invalid @enderror">
-                                        <option value="" selected>--Select Status--</option>
+                                    <select name="category[]" id="category"
+                                        class="custom-select @error('category') is-invalid @enderror" multiple="multiple">
+                                        <option value="" >--Select Status--</option>
                                         @foreach ($categories as $category )
                                             <option value="{{$category->id}}" >{{$category->name}}</option>
                                         @endforeach
@@ -112,6 +121,46 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="form-group col-12 mb-2">
+                                    <label for="2nddescription">Second Description</label>
+                                    <textarea name="2nddescription" id="snddescription" rows="10" cols="40"
+                                        class="form-control @error('2nddescription') is-invalid @enderror" placeholder="Description...">{{ isset($DashboardSetting) ? $DashboardSetting->about : old('about') }}</textarea>
+                                    @error('2nddescription')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12 mb-2">
+                                    <label for="3rddescription">Third Description</label>
+                                    <textarea name="thddescription" id="3rddescription" rows="10" cols="40"
+                                        class="form-control @error('3rddescription') is-invalid @enderror" placeholder="Description...">{{ isset($DashboardSetting) ? $DashboardSetting->about : old('about') }}</textarea>
+                                    @error('3rddescription')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12 mb-2">
+                                    <label for="quote">Quote <span>(If Any)</span></label>
+                                    <textarea name="quote" id="" rows="5" cols="40"
+                                        class="form-control @error('quote') is-invalid @enderror" placeholder="Description...">{{ isset($DashboardSetting) ? $DashboardSetting->about : old('about') }}</textarea>
+                                    @error('quote')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12 mb-2">
+                                    <label for="quoteby">Quote By</label>
+                                    <textarea name="quoteby" id="" rows="2" cols="40"
+                                        class="form-control @error('quoteby') is-invalid @enderror" placeholder="Quote By..."></textarea>
+                                    @error('quoteby')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-primary">Submit</button>
@@ -138,8 +187,117 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         $(document).ready(function() {
             $('.dropify').dropify();
+            $('#category').select2({
+                placeholder:'Select Category',
+            });
         });
+
         CKEDITOR.replace('description', {
+            toolbarGroups: [{
+                    "name": "styles",
+                    "groups": ["styles"]
+                },
+                {
+                    "name": "basicstyles",
+                    "groups": ["basicstyles"]
+                },
+
+                {
+                    "name": "paragraph",
+                    "groups": ["list", "blocks"]
+                },
+                {
+                    "name": "document",
+                    "groups": ["mode"]
+                },
+                {
+                    "name": "links",
+                    "groups": ["links"]
+                },
+                {
+                    "name": "insert",
+                    "groups": ["insert"]
+                },
+
+                {
+                    "name": "undo",
+                    "groups": ["undo"]
+                },
+            ],
+            // Remove the redundant buttons from toolbar groups defined above.
+            removeButtons: 'Source,contact_person_phone,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,PasteFromWord'
+        });
+        CKEDITOR.replace('2nddescription', {
+            toolbarGroups: [{
+                    "name": "styles",
+                    "groups": ["styles"]
+                },
+                {
+                    "name": "basicstyles",
+                    "groups": ["basicstyles"]
+                },
+
+                {
+                    "name": "paragraph",
+                    "groups": ["list", "blocks"]
+                },
+                {
+                    "name": "document",
+                    "groups": ["mode"]
+                },
+                {
+                    "name": "links",
+                    "groups": ["links"]
+                },
+                {
+                    "name": "insert",
+                    "groups": ["insert"]
+                },
+
+                {
+                    "name": "undo",
+                    "groups": ["undo"]
+                },
+            ],
+            // Remove the redundant buttons from toolbar groups defined above.
+            removeButtons: 'Source,contact_person_phone,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,PasteFromWord'
+        });
+        CKEDITOR.replace('3rddescription', {
+            toolbarGroups: [{
+                    "name": "styles",
+                    "groups": ["styles"]
+                },
+                {
+                    "name": "basicstyles",
+                    "groups": ["basicstyles"]
+                },
+
+                {
+                    "name": "paragraph",
+                    "groups": ["list", "blocks"]
+                },
+                {
+                    "name": "document",
+                    "groups": ["mode"]
+                },
+                {
+                    "name": "links",
+                    "groups": ["links"]
+                },
+                {
+                    "name": "insert",
+                    "groups": ["insert"]
+                },
+
+                {
+                    "name": "undo",
+                    "groups": ["undo"]
+                },
+            ],
+            // Remove the redundant buttons from toolbar groups defined above.
+            removeButtons: 'Source,contact_person_phone,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,PasteFromWord'
+        });
+        CKEDITOR.replace('quote', {
             toolbarGroups: [{
                     "name": "styles",
                     "groups": ["styles"]

@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::resource('/',HomeController::class);
+Route::get('e',[HomeController::class,'index2']);
 Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
     Route::get('post/{id}',[HomeController::class,'postShow'])->name('post.show');
     Route::get('all-post',[HomeController::class,'allPost'])->name('all.post');

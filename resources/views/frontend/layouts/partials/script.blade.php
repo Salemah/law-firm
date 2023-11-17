@@ -1,6 +1,6 @@
-{{-- boostrap cdn --}}
+{{--
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-{{-- boostrap cdn end --}}
+
 <script
           type="module"
           src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -11,7 +11,7 @@
     const nav_header = document.querySelector(".header");
 
     const toggleNavbar = () => {
-        // alert("Plz Subscribe ");
+
         nav_header.classList.toggle("active");
     };
 
@@ -50,4 +50,18 @@
            }
        });
 </script>
-@stack('script')
+@stack('script') --}}
+<script src="{{ asset('frontend/js/jquery.js')}}"></script>
+<script src="{{ asset('frontend/js/popper.min.js')}}"></script>
+<script src="{{ asset('frontend/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('frontend/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+<script src="{{ asset('frontend/js/jquery.fancybox.js')}}"></script>
+<script src="{{ asset('frontend/js/appear.js')}}"></script>
+<script src="{{ asset('frontend/js/parallax.min.js')}}"></script>
+<script src="{{ asset('frontend/js/tilt.jquery.min.js')}}"></script>
+<script src="{{ asset('frontend/js/jquery.paroller.min.js')}}"></script>
+<script src="{{ asset('frontend/js/owl.js')}}"></script>
+<script src="{{ asset('frontend/js/wow.js')}}"></script>
+<script src="{{ asset('frontend/js/nav-tool.js')}}"></script>
+<script src="{{ asset('frontend/js/jquery-ui.js')}}"></script>
+<script src="{{ asset('frontend/js/script.js')}}"></script>
