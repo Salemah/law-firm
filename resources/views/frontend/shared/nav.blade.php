@@ -120,11 +120,11 @@
                                     <li><a href="family_law.html">Family Law</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown"><a href="#">Blog</a>
-                                <ul>
+                            <li ><a href="{{route('home.all.post')}}">Articles</a>
+                                {{-- <ul>
                                     <li><a href="{{route('home.all.post')}}">Our Blog</a></li>
                                     <li><a href="{{route('home.all.post')}}">Blog Detail</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             {{-- <li><a href="contact.html">Contact us</a></li> --}}
                             <li>    @if (Route::has('login'))
@@ -145,7 +145,7 @@
 
                     <!-- Btn Box -->
                     <div class="btn-box">
-                        <a href="contact.html" class="theme-btn btn-style-one"><span class="txt">Contact US</span></a>
+                        <a href="{{ route('home.contact') }}" class="theme-btn btn-style-one"><span class="txt">Contact US</span></a>
                     </div>
 
                     <!-- Phone Box -->
@@ -184,7 +184,7 @@
 
                     <!-- Btn Box -->
                     <div class="btn-box">
-                        <a href="contact.html" class="theme-btn btn-style-two"><span class="txt">Contact US</span></a>
+                        <a href="{{ route('home.contact') }}" class="theme-btn btn-style-two"><span class="txt">Contact US</span></a>
                     </div>
 
                     <!-- Mobile Navigation Toggler -->

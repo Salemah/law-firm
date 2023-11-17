@@ -61,8 +61,8 @@
     <div class="page-wrapper">
 
         <!-- Preloader -->
-        <div class="preloader" style=" background-image:url({{ asset('../frontend/images/icons/preloader.svg') }})">
-        </div>
+        {{-- <div class="preloader" style=" background-image:url({{ asset('../frontend/images/icons/preloader.svg') }})">
+        </div> --}}
 
         <!-- Main Header-->
         @include('frontend.shared.nav')
