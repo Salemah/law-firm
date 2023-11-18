@@ -153,10 +153,20 @@
                             @enderror
                         </div>
                         <div class="form-group col-12 mb-2">
-                            <label for="copyright">Address</label>
+                            <label for="copyright">Copyright</label>
                             <textarea name="copyright" id="copyright" rows="10" cols="40"
                                 class="form-control @error('copyright') is-invalid @enderror" placeholder="Copyright...">{{ isset($DashboardSetting) ? $DashboardSetting->copyright : old('copyright') }}</textarea>
                             @error('copyright')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-12 mb-2">
+                            <label for="website">Website</label>
+                            <textarea name="website" id="website" rows="2" cols="40"
+                                class="form-control @error('website') is-invalid @enderror" placeholder="Website...">{{ isset($DashboardSetting) ? $DashboardSetting->website : old('website') }}</textarea>
+                            @error('website')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

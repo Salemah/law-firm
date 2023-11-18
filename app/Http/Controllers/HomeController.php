@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cased;
 use App\Models\Category;
+use App\Models\company;
 use App\Models\DashboardSetting;
 use App\Models\Post;
 use App\Models\Slider;
@@ -123,6 +125,28 @@ class HomeController extends Controller
         try {
             $dashboardSettings =  DashboardSetting::first();
             return view('frontend.contact.contact',compact('dashboardSettings'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
+    public function cases()
+    {
+        try {
+            $dashboardSettings =  DashboardSetting::first();
+            $cases =  cased::paginate(12);
+            $companies =  company::get();
+            return view('frontend.post.cases',compact('dashboardSettings', 'cases', 'companies'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
+    public function casesDetails(Request $request)
+    {
+        try {
+            $dashboardSettings =  DashboardSetting::first();
+            $case =  cased::find($request->id);
+
+            return view('frontend.post.case-details',compact('dashboardSettings', 'case'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

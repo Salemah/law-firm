@@ -69,6 +69,8 @@ class DashboardSettingController extends Controller
             $data->linkedin = $request->linkedin;
             $data->twitter = $request->twitter;
             $data->address = $request->address;
+            $data->copyright = $request->copyright;
+            $data->website= $request->website;
 
             if (!$request->id) {
 

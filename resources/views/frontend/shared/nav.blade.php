@@ -1,67 +1,7 @@
-{{--
-        <header class="header">
-            <img src="{{ asset('image/logo.png') }}" alt="logo" class="logo" />
 
-            <nav class="navbar">
-                <ul class="navbar-list">
-                    <li><a class="navbar-link" href="#">Home</a></li>
-                    <li><a class="navbar-link" href="#">About</a></li>
-                    <li><a class="navbar-link" href="#">Services</a></li>
-                    <li><a class="navbar-link" href="#">Gallery</a></li>
-                    <li>
-                        <a class="navbar-link" href="https://www.instagram.com/thapatechnical/"
-                            target="_blank">Contact</a>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="mobile-navbar-btn">
-                <ion-icon name="menu-outline" class="mobile-nav-icon"></ion-icon>
-                <ion-icon name="close-outline" class="mobile-nav-icon"></ion-icon>
-            </div>
-        </header>
-
-
-
-     --}}
      @php
         $dashboard_settings = \Illuminate\Support\Facades\DB::table('dashboard_settings')->first();
     @endphp
-{{-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container">
-        <a class="navbar-brand" href="#"><img src="{{ asset('/image/dashboard/'.$dashboard_settings->logo) }}" style="width:40px" alt="logo"
-                class="logo" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav  mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('home.all.post')}}">Articles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('home.contact')}}">Contact</a>
-                </li>
-
-                <li class="nav-item">
-                    @if (Route::has('login'))
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="nav-link">Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}" class="nav-link">Log in</a>
-
-
-                        @endauth
-                @endif
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav> --}}
 
 
 <header class="main-header header-style-one">
@@ -102,13 +42,13 @@
                                     <li><a href="our_team.html">Our Team</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown"><a href="#">Cases</a>
-                                <ul>
+                            <li ><a href="{{route('home.cases')}}">Cases</a>
+                                {{-- <ul>
                                     <li><a href="case.html">Case Style 01</a></li>
                                     <li><a href="case-2.html">Case Style 02</a></li>
                                     <li><a href="case-3.html">Case Style 03</a></li>
                                     <li><a href="case-details.html">Case Detail</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             <li class="dropdown"><a href="#">Our Services</a>
                                 <ul>
@@ -202,7 +142,7 @@
         <div class="close-btn"><span class="icon flaticon-multiply"></span></div>
 
         <nav class="menu-box">
-            <div class="nav-logo"><a href="{{url('/')}}"><img src="frontend/images/logo-2.png" alt="" title=""></a></div>
+            <div class="nav-logo"><a href="{{url('/')}}"><img src="{{ asset('/image/dashboard/'.$dashboard_settings->logo) }}" alt="" title=""></a></div>
             <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
         </nav>
     </div><!-- End Mobile Menu -->
