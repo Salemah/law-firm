@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\AboutUs;
 use App\Models\cased;
 use App\Models\Category;
+use App\Models\Client;
 use App\Models\company;
 use App\Models\DashboardSetting;
 use App\Models\legalarea;
 use App\Models\MakeUsUnique;
 use App\Models\Post;
+use App\Models\Question;
 use App\Models\Slider;
 use App\Models\Team;
 use Illuminate\Http\Request;
@@ -27,8 +29,10 @@ class HomeController extends Controller
             $sliders = Slider::where('status',1)->get();
             $teams = Team::where('status',1)->get();
             $legalareas = legalarea::get();
+            $questions = Question::take(3)->get();
+            $clients = Client::get();
 
-            return view('frontend.home',compact('posts', 'legalareas','teams','sliders'));
+            return view('frontend.home',compact('clients','questions','posts', 'legalareas','teams','sliders'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

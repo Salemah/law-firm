@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\Casecontroller;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Companycontroller;
 use App\Http\Controllers\DashboardSettingController;
 use App\Http\Controllers\HomeController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\LegalAreacontroller;
 use App\Http\Controllers\MakeUsUniqueController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -75,8 +77,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
         Route::get('status/update/{id}', [Companycontroller::class, 'statusUpdate'])->name('update.status');
     });
+    Route::resource('question', QuestionController::class)->middleware(['auth', 'verified']);
+    Route::group(['prefix' => 'question', 'as' => 'question.'], function () {
+        Route::get('status/update/{id}', [QuestionController::class, 'statusUpdate'])->name('update.status');
+    });
     Route::resource('aboutus', AboutUsController::class)->middleware(['auth', 'verified']);
     Route::resource('makeusunique', MakeUsUniqueController::class)->middleware(['auth', 'verified']);
+    Route::resource('client', ClientController::class)->middleware(['auth', 'verified']);
+    Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
+        Route::get('status/update/{id}', [ClientController::class, 'statusUpdate'])->name('update.status');
+    });
 
 });
 Route::get('/dashboard', function () {
