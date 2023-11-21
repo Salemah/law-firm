@@ -3,7 +3,7 @@
 @section('title', 'About Us')
 @section('content')
    <!-- Page Title -->
-    <section class="page-title" style="background-image:url(images/background/1.jpg)">
+    <section class="page-title" style="background-image:url({{URL::asset('frontend/images/background/1.jpg')}})">
     	<div class="auto-container">
 			<h1>Our Team</h1>
 			<ul class="page-breadcrumb">
@@ -13,11 +13,6 @@
         </div>
     </section>
     <!-- End Page Title -->
-
-
-
-
-
 	<!-- Team Section -->
 	<section class="team-section">
 		<div class="auto-container">
