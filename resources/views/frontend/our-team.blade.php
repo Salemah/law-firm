@@ -1,69 +1,57 @@
-@push('css')
-<style>
-    .img-area img{
-        border-radius: 60px 20px 60px 20px !important;
-    }
-</style>
-@endpush
+@extends('frontend.master')
 
-<section id="team">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <div class="sec-heading text-center">
-
-                </div>
-            </div>
+@section('title', 'About Us')
+@section('content')
+   <!-- Page Title -->
+    <section class="page-title" style="background-image:url(images/background/1.jpg)">
+    	<div class="auto-container">
+			<h1>Our Team</h1>
+			<ul class="page-breadcrumb">
+				<li><a href="{{URL('/')}}">home</a></li>
+				<li>Team</li>
+			</ul>
         </div>
-    </div>
-    <div class="testimonial-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="team-slider owl-carousel">
-
-                            @foreach ($teams as $team)
-                                <div class="single-box text-center">
-                                    <div class="img-area"><img alt="" style="height: 220px;" class="img-fluid move-animation" src="{{ asset('image/team/' . $team->image) }}"></div>
-                                    <div class="info-area">
-                                        <h4>{{$team->name}}</h4>
-                                        <p>{!!$team->details!!}.</p>
-                                    </div>
-                                </div>
-                            @endforeach
+    </section>
+    <!-- End Page Title -->
 
 
-                        <div class="single-box text-center">
-                            <div class="img-area"><img alt="" class="img-fluid move-animation" src="https://i.postimg.cc/vmCM14qL/2.png"></div>
-                            <div class="info-area">
-                                <h4>Person's Name</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, ullam.</p><a href="#">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="single-box text-center">
-                            <div class="img-area"><img alt="" class="img-fluid move-animation" src="https://i.postimg.cc/TYTxWM9S/3.png"></div>
-                            <div class="info-area">
-                                <h4>Person's Name</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, ullam.</p><a href="#">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="single-box text-center">
-                            <div class="img-area"><img alt="" class="img-fluid move-animation" src="https://i.postimg.cc/593GTHB7/4.png"></div>
-                            <div class="info-area">
-                                <h4>Person's Name</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, ullam.</p><a href="#">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="single-box text-center">
-                            <div class="img-area"><img alt="" class="img-fluid move-animation" src="https://i.postimg.cc/tJCrp53r/5.png"></div>
-                            <div class="info-area">
-                                <h4>Person's Name</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, ullam.</p><a href="#">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
+
+
+	<!-- Team Section -->
+	<section class="team-section">
+		<div class="auto-container">
+			<!-- Sec Title -->
+			<div class="sec-title centered">
+				<h2>Our Professional Team</h2>
+			</div>
+			<div class="row clearfix">
+
+                @foreach ($teams as $team)
+<div class="team-block col-lg-3 col-md-6 col-sm-12">
+					<div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+						<div class="image" >
+							<img src="{{URL::asset('/image/team/'.$team->image)}}" alt="{{$team->image}}" />
+						</div>
+						<div class="lower-box">
+							<h5><a href="{{route('home.aboutus')}}">{{$team->name}}</a></h5>
+							<div class="designation">{{$team->positions}}</div>
+							<a class="arrow flaticon-right-arrow-3" href="{{route('home.aboutus')}}"></a>
+						</div>
+					</div>
+				</div>
+                @endforeach
+				<!-- Team Block -->
+
+
+
+			</div>
+		</div>
+	</section>
+	<!-- End Team Section -->
+
+
+
+
+
+@endsection

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutUs;
 use App\Models\cased;
 use App\Models\Category;
 use App\Models\company;
 use App\Models\DashboardSetting;
 use App\Models\legalarea;
+use App\Models\MakeUsUnique;
 use App\Models\Post;
 use App\Models\Slider;
 use App\Models\Team;
@@ -137,6 +139,7 @@ class HomeController extends Controller
             $dashboardSettings =  DashboardSetting::first();
             $cases =  cased::paginate(12);
             $companies =  company::get();
+
             return view('frontend.post.cases',compact('dashboardSettings', 'cases', 'companies'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
@@ -149,6 +152,28 @@ class HomeController extends Controller
             $case =  cased::find($request->id);
 
             return view('frontend.post.case-details',compact('dashboardSettings', 'case'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
+    public function aboutus(Request $request)
+    {
+        try {
+            $aboutus =  AboutUs::first();
+            $uniques =  MakeUsUnique::take(3)->get();
+            $companies =  company::get();
+            $teams =  Team::get();
+            return view('frontend.aboutus',compact('aboutus', 'uniques', 'companies', 'teams'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
+    public function ourteam(Request $request)
+    {
+        try {
+            $teams =  Team::get();
+
+            return view('frontend.our-team',compact('teams'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

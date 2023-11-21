@@ -72,6 +72,17 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="positions"><b>Position</b><span class="text-danger">*</span></label>
+                                    <input type="text" name="positions" id="positions"
+                                        class="form-control @error('positions') is-invalid @enderror"
+                                        value="{{ old('positions') }}" placeholder="Enter Post Positions">
+                                    @error('positions')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
 
 
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">

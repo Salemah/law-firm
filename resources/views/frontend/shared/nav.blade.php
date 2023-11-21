@@ -38,8 +38,8 @@
                             </li>
                             <li class="dropdown"><a href="#">About</a>
                                 <ul>
-                                    <li><a href="about.html">About us</a></li>
-                                    <li><a href="our_team.html">Our Team</a></li>
+                                    <li><a href="{{route('home.aboutus')}}">About us</a></li>
+                                    <li><a href="{{route('home.ourteam')}}">Our Team</a></li>
                                 </ul>
                             </li>
                             <li ><a href="{{route('home.cases')}}">Cases</a>

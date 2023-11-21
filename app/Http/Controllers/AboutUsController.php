@@ -136,7 +136,7 @@ class AboutUsController extends Controller
     {
         if ($request->ajax()) {
             try {
-                $post = aoutus::findOrFail($id);
+                $post = AboutUs::findOrFail($id);
                 if ($post) {
                     $post->delete();
                     return response()->json([

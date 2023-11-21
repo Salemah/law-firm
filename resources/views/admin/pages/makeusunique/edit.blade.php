@@ -1,19 +1,8 @@
 @extends('admin.dashboard.master')
 
-@section('name', 'Team')
+@section('title', 'Make Us Unique')
 
-@push('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
-        integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-        .dropify-wrapper .dropify-message p {
-            font-size: initial;
-        }
-    </style>
-@endpush
 
 @section('breadcumb')
 
@@ -26,10 +15,10 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Team</li>
+                        <li class="breadcrumb-item active">Make Us Unique</li>
                         <li class="breadcrumb-item active">Edit</li>
                         <li class="breadcrumb-item active"><a class="btn btn-sm btn-success text-white"
-                                href="{{ route('admin.team.index') }}">
+                                href="{{ route('admin.makeusunique.index') }}">
                                 <i class="fas fa-arrow-left"></i> back
                             </a></li>
                     </ol>
@@ -46,7 +35,7 @@
         <!-- Alert -->
         @include('admin.dashboard.layouts.partials.alert')
 
-        <form action="{{ route('admin.team.update', $team->id) }}" enctype="multipart/form-data" method="post">
+        <form action="{{ route('admin.makeusunique.update', $post->id) }}" enctype="multipart/form-data" method="post">
             @csrf
             @method('PUT')
             <div class="row">
@@ -55,64 +44,40 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-12  col-md-6 mb-2">
-                                    <label for="image">Image<span class="text-danger">*</span></label>
-                                    <input type="file" id="image"
-                                        data-default-file="{{ asset('image/team/' . $team->image) }}"
-                                        data-height="290"class="dropify form-control @error('image') is-invalid @enderror"
-                                        name="image">
-                                    @error('image')
+                                    <label for="icon">Icon<span class="text-danger">*</span></label>
+                                    <input type="text" id="icon"
+                                value="{{$post->icon}}"
+                                        class="form-control @error('icon') is-invalid @enderror"
+                                        name="icon">
+                                    @error('icon')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
+
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
-                                    <label for="name"><b>Name</b><span class="text-danger">*</span></label>
-                                    <input type="text" name="name" id="name"
-                                        class="form-control @error('name') is-invalid @enderror" value="{{ $team->name }}"
-                                        placeholder="Enter team Name">
-                                    @error('name')
-                                        <span class="alert text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                {{-- <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
-                                    <label for="positions"><b>Position</b><span class="text-danger">*</span></label>
-                                    <input type="text" name="positions" id="positions"
-                                        class="form-control @error('positions') is-invalid @enderror"
-                                        value="{{ $team->positions }}" placeholder="Enter Post Positions">
-                                    @error('positions')
-                                        <span class="alert text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div> --}}
-                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
-                                    <label for="status"><b>Status</b><span class="text-danger">*</span></label>
-                                    <select name="status" id="status"
-                                        class="custom-select @error('status') is-invalid @enderror">
-                                        <option value="">--Select Status--</option>
-                                        <option value="1" {{ $team->status == 1 ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ $team->status == 0 ? 'selected' : '' }}>Inactive</option>
-                                    </select>
-                                    @error('status')
+                                    <label for="title"><b>Name</b><span class="text-danger">*</span></label>
+                                    <input type="text" name="title" id="title"
+                                        class="form-control @error('title') is-invalid @enderror"
+                                        value="{{ $post->title }}" placeholder="Enter About Us Name">
+                                    @error('title')
                                         <span class="alert text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                                 <div class="form-group col-12 mb-2">
-                                    <label for="details">Details</label>
-                                    <textarea name="details" id="details" rows="10" cols="40"
-                                        class="form-control @error('details') is-invalid @enderror" placeholder="details..."> {{ $team->details }}</textarea>
-                                    @error('details')
+                                    <label for="description">Description</label>
+                                    <textarea name="description" id="description" rows="10" cols="40"
+                                        class="form-control @error('description') is-invalid @enderror" placeholder="Description..."> {{ $post->description }}</textarea>
+                                    @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                             </div>
@@ -138,8 +103,9 @@
     <script>
         $(document).ready(function() {
             $('.dropify').dropify();
+
         });
-        CKEDITOR.replace('details', {
+        CKEDITOR.replace('description', {
             toolbarGroups: [{
                     "name": "styles",
                     "groups": ["styles"]
@@ -174,6 +140,7 @@
             // Remove the redundant buttons from toolbar groups defined above.
             removeButtons: 'Source,contact_person_phone,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,PasteFromWord'
         });
+
     </script>
     <script></script>
 @endpush

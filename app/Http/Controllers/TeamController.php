@@ -81,6 +81,7 @@ class TeamController extends Controller
                 $data->image = $filename;
             }
 
+            $data->positions = $request->positions;
             $data->name = $request->name;
             $data->details = $request->details;
             $data->status = $request->status;
@@ -120,12 +121,12 @@ class TeamController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'image' => 'required',
             'name' => 'required',
         ]);
         try {
 
-            $data = Team ::findOrFail($id);
+
+            $data = Team::findOrFail($id);
 
             if ($request->file('image')) {
                 $file = $request->file('image');
@@ -135,6 +136,7 @@ class TeamController extends Controller
             }
 
             $data->name = $request->name;
+            $data->positions = $request->positions;
             $data->details = $request->details;
             $data->status = $request->status;
 

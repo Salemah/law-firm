@@ -1,6 +1,6 @@
 @extends('admin.dashboard.master')
 
-@section('title', 'Team')
+@section('title', 'Make Us Unique')
 
 @push('css')
 
@@ -33,8 +33,8 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Team</li>
-            <li class="breadcrumb-item active"><a class="btn btn-sm btn-success text-white" href="{{ route('admin.team.create') }}">
+            <li class="breadcrumb-item active">Make Us Unique</li>
+            <li class="breadcrumb-item active"><a class="btn btn-sm btn-success text-white" href="{{ route('admin.makeusunique.create') }}">
                 <i class="fa fa-plus"></i> Create
             </a></li>
           </ol>
@@ -61,10 +61,7 @@
                                     <thead class="table-light fw-semibold">
                                         <tr class="align-middle table">
                                             <th width="1%">#</th>
-                                            <th width="40%">Name</th>
-                                            <th width="10%">Position</th>
-                                            <th width="24%">Details</th>
-                                            <th width="15%">Status</th>
+                                            <th width="50%">Title</th>
                                             <th width="10%">Action</th>
                                         </tr>
                                     </thead>
@@ -113,15 +110,14 @@
                 pagingType: "full_numbers",
                 // dom: "<'row'<'col-sm-2'l><'col-sm-7 text-center'B><'col-sm-3'f>>tipr",
                 ajax: {
-                    url: "{{route('admin.team.index')}}",
+                    url: "{{route('admin.makeusunique.index')}}",
                     type: "get"
                 },
                 columns: [
                     {data: "DT_RowIndex",      name: "DT_RowIndex",       orderable: false,  searchable: false},
-                    {data: 'name',             name: 'name',              orderable: true,   searchable: true},
-                    {data: 'positions',             name: 'positions',              orderable: true,   searchable: true},
-                    {data: 'details',             name: 'details', orderable: true,   searchable: true},
-                    {data: 'status',           name: 'status'},
+                    {data: 'title',             name: 'title',              orderable: true,   searchable: true},
+                    // {data: 'category',             name: 'category', orderable: true,   searchable: true},
+                    // {data: 'status',           name: 'status'},
                     //only those have manage_user permission will get access
 
                     {data: 'action', name: 'action', orderable: false, searchable: false}
@@ -146,7 +142,7 @@
 
         // Delete Button
         function deleteItem(id) {
-            var url = '{{ route("admin.team.destroy",":id") }}';
+            var url = '{{ route("admin.makeusunique.destroy",":id") }}';
             $.ajax({
                 type: "DELETE",
                 url: url.replace(':id', id),
@@ -184,27 +180,6 @@
             });
         };
 
-        // Status Change
-        function statusChange(id) {
-            var url = '{{ route("admin.team.update.status",":id") }}';
-            $.ajax({
-                type: "GET",
-                url: url.replace(':id', id),
-                success: function (resp) {
-                   // Reloade DataTable
-                    $('#table').DataTable().ajax.reload();
-                    if(resp == "active"){
-                        toastr.success('This status has been changed to Publish.');
-                        return false;
-                    }else{
-                        toastr.error('This status has been changed to Un Publish.');
-                        return false;
-                    }
-                }, // success end
-                error: function (error) {
-                   // location.reload();
-                } // Error
-            })
-        }
+
     </script>
 @endpush
