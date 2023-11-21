@@ -37,7 +37,7 @@ class PostController extends Controller
                     ->addColumn('category', function ($post) {
                         $ids = explode(',', $post->category_id);
                     $items =Category::whereIn('id', $ids)->pluck('name')->toArray();
-                   
+
                     if ($items) {
                         $itemName = implode(',', $items);
                         return $items;
@@ -111,6 +111,7 @@ class PostController extends Controller
             $data->quote = $request->quote;
             $data->quoteby = $request->quoteby;
             $data->status = $request->status;
+            $data->created_by = Auth::User()->id;
 
             $data->save();
 
@@ -171,6 +172,7 @@ class PostController extends Controller
             $data->quote = $request->quote;
             $data->quoteby = $request->quoteby;
             $data->status = $request->status;
+            $data->created_by = Auth::User()->id;
             $data->update();
 
             return redirect()->route('admin.post.index')->with('message', 'Update successfull.');

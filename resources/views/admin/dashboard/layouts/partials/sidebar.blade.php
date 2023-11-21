@@ -125,14 +125,24 @@
                         <i class="nav-icon fas fa-copy"></i>
                         <p>Legal Area</p>
                     </a>
-
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="{{ route('admin.company.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>Company</p>
                     </a>
-
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('admin.aboutus.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>About Us</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('admin.makeusunique.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>Make Us Unique</p>
+                    </a>
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">

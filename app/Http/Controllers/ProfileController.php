@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,29 @@ class ProfileController extends Controller
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+    }
+    public function editUser(Request $request)
+    {
+        $user =Auth::user();
+        return view('admin.pages.profile.edit', compact('user'));
+    }
+    public function UserUpdate(Request $request)
+    {
+
+
+        $user = User::find($request->user_id);
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $filename = time() . $file->getClientOriginalName();
+            $file->move(public_path('/image/user'), $filename);
+            $user->image = $filename;
+        }
+        $user->description = $request->description;
+        $user->facebook = $request->facebook;
+        $user->linkedin = $request->linkedin;
+        $user->twitter = $request->twitter;
+         $user->update();
+        return redirect()->route('profile.edit.user')->with('message', 'Update successfull.');
     }
 
     /**

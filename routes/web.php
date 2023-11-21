@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\Casecontroller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Companycontroller;
 use App\Http\Controllers\DashboardSettingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LegalAreacontroller;
+use App\Http\Controllers\MakeUsUniqueController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SliderController;
@@ -71,6 +73,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
         Route::get('status/update/{id}', [Companycontroller::class, 'statusUpdate'])->name('update.status');
     });
+    Route::resource('aboutus', AboutUsController::class)->middleware(['auth', 'verified']);
+    Route::resource('makeusunique', MakeUsUniqueController::class)->middleware(['auth', 'verified']);
+
 });
 Route::get('/dashboard', function () {
     return view('admin.dashboard.master');
@@ -80,6 +85,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/edit/user/{id?}', [ProfileController::class, 'editUser'])->name('profile.edit.user');
+    Route::post('/profile/user/update', [ProfileController::class, 'UserUpdate'])->name('user.update');
 });
 
 require __DIR__ . '/auth.php';

@@ -93,7 +93,7 @@
                         <div class="box-inner">
                             <span class="icon flaticon-smartphone-1"></span>
                             Call US Today!
-                            <strong>+61 3 8376 6284</strong>
+                            <strong>{{$dashboard_settings->phone}}</strong>
                         </div>
                     </div>
 

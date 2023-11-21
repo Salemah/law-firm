@@ -81,7 +81,7 @@
     </section>
     <!-- End Clients Section -->
 
-    <!-- CTA Section -->
+    {{-- <!-- CTA Section -->
     <section class="cta-section">
         <div class="auto-container">
             <div class="inner-container">
@@ -99,6 +99,6 @@
             </div>
         </div>
     </section>
-    <!-- End CTA Section -->
+    <!-- End CTA Section --> --}}
 
 @endsection

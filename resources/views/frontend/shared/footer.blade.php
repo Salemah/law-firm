@@ -152,14 +152,14 @@
                         <div class="footer-column col-lg-7 col-md-6 col-sm-12">
                             <div class="footer-widget logo-widget">
                                 <div class="logo">
-                                    <a href="index.html"><img src="frontend/images/footer-logo.png" alt="" /></a>
+                                    <a href="{{URL('/')}}"><img src="{{ asset('/image/dashboard/'.$dashboard_settings->logo) }}" alt="" /></a>
                                 </div>
-                                <div class="text">Quis autem vel eum iure reprehenderit aui ea voluptate velit esse molestiae consequatur, vel illum qui dolorem.</div>
+                                <div class="text">{!!$dashboard_settings->about!!}</div>
                                 <!-- Social Nav -->
                                 <ul class="social-nav">
-                                    <li><a href="#"><span class="fa fa-facebook-f"></span></a></li>
-                                    <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                    <li><a href="#"><span class="fa fa-linkedin"></span></a></li>
+                                    <li><a href="{{$dashboard_settings->facebook}}"><span class="fa fa-facebook-f"></span></a></li>
+                                    <li><a href="{{$dashboard_settings->twitter}}"><span class="fa fa-twitter"></span></a></li>
+                                    <li><a href="{{$dashboard_settings->linkedin}}"><span class="fa fa-linkedin"></span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -169,11 +169,11 @@
                             <div class="footer-widget links-widget">
                                 <h5>Useful links</h5>
                                 <ul class="footer-list">
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">News</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="{{URL('/')}}">Home</a></li>
+                                    <li><a href="{{route('home.cases')}}">About Us</a></li>
+                                    <li><a href="{{route('home.cases')}}">Case</a></li>
+                                    <li><a href="{{route('home.all.post')}}">Articles</a></li>
+                                    <li><a href="{{ route('home.contact') }}">Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -192,19 +192,19 @@
                                 <ul>
                                     <li>
                                         <span class="icon flaticon-call-1"></span>
-                                        <a href="tel:+61-3-8376-6284">+61 3 8376 6284</a>
+                                        <a href="tel:+61-3-8376-6284">{{$dashboard_settings->phone}}</a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <span class="icon flaticon-call-1"></span>
                                         <a href="tel:+00-9-0000-9999">+00 9 0000 9999</a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <span class="icon flaticon-email-2"></span>
-                                        <a href="mailto:Info@counsellawfirm.com">Info@counsellawfirm.com</a>
+                                        <a href="mailto:{{$dashboard_settings->email}}">{{$dashboard_settings->email}}</a>
                                     </li>
                                     <li>
                                         <span class="icon flaticon-maps-and-flags"></span>
-                                        21 King Street Melbourne, <br> 3000, Australia
+                                        {{$dashboard_settings->address}}
                                     </li>
                                 </ul>
                             </div>
@@ -214,7 +214,7 @@
                         <div class="footer-column col-lg-6 col-md-6 col-sm-12">
                             <div class="footer-widget newsletter-widget">
                                 <h5>Subscribe Now</h5>
-                                <div class="text">Quis autem vel eum iure reprehenderit aui ea voluptate.</div>
+                                {{-- <div class="text">Quis autem vel eum iure reprehenderit aui ea voluptate.</div> --}}
                                 <div class="newsletter-form">
                                     <form method="post" action="https://html.designingmedia.com/counsel-law/contact.html">
                                         <div class="form-group">
@@ -234,7 +234,7 @@
     </div>
     <div class="footer-bottom">
         <div class="auto-container">
-            <div class="copyright">Copyright 2021, Counsel Law Firm. All Rights Reserved.</div>
+            <div class="copyright">Copyright {{Carbon\Carbon::now()->format('Y')}}, {{$dashboard_settings->copyright}}. All Rights Reserved.</div>
         </div>
     </div>
 </footer>

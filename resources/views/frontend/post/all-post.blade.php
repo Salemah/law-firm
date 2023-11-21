@@ -415,7 +415,7 @@
     </div>
 
     <!-- Facts Section three -->
-    <section class="facts-section-three" style="background-image: url(images/background/1.jpg);">
+    {{-- <section class="facts-section-three" style="background-image: url(images/background/1.jpg);">
 
         <div class="auto-container">
             <div class="fact-counter-style-three">
@@ -468,10 +468,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Clients Section -->
-    <section class="clients-section">
+    {{-- <section class="clients-section">
         <div class="auto-container">
             <!-- Sec Title -->
             <div class="sec-title centered">
@@ -539,7 +539,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End CTA Section -->
 
 @endsection

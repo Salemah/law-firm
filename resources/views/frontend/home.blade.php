@@ -16,8 +16,8 @@
         <!-- Social Nav -->
         <ul class="social-nav">
             <li class="facebook"><a href="{{ $dashboard_settings->facebook }}"><span class="fa fa-facebook-f"></span></a></li>
-            <li class="twitter"><a href="{{ $dashboard_settings->facebook }}"><span class="fa fa-twitter"></span></a></li>
-            <li class="linkedin"><a href="{{ $dashboard_settings->facebook }}"><span class="fa fa-linkedin"></span></a></li>
+            <li class="twitter"><a href="{{ $dashboard_settings->twitter }}"><span class="fa fa-twitter"></span></a></li>
+            <li class="linkedin"><a href="{{ $dashboard_settings->linkedin }}"><span class="fa fa-linkedin"></span></a></li>
         </ul>
         <div class="main-slider-carousel owl-carousel owl-theme">
 
@@ -27,13 +27,13 @@
                     <!-- Content Column -->
                     <div class="content-column">
                         <div class="inner-column">
-                            <div class="title">Counsel LAw Firm</div>
+                            <div class="title">AL RAHIM CONSULTENCY</div>
                             <h1>Best LAw Firm <br> Since 1968</h1>
                             <div class="text">Quis autem velo eum iure reprehenderit rui in ea voluatacera suam nihil
                                 molestiae conseuatur vel illum.</div>
                             <div class="btns-box">
-                                <a href="contact.html" class="theme-btn btn-style-one"><span class="txt">Free
-                                        Consultation <i class="arrow flaticon-right"></i></span></a>
+                                <a href="{{ route('home.contact') }}" class="theme-btn btn-style-one"><span
+                                        class="txt">Consultation <i class="arrow flaticon-right"></i></span></a>
                             </div>
                         </div>
                     </div>
@@ -47,13 +47,13 @@
                     <!-- Content Column -->
                     <div class="content-column">
                         <div class="inner-column">
-                            <div class="title">Counsel LAw Firm</div>
+                            <div class="title">AL RAHIM CONSULTENCY</div>
                             <h1>Best LAw Firm <br> Since 1968</h1>
                             <div class="text">Quis autem velo eum iure reprehenderit rui in ea voluatacera suam nihil
                                 molestiae conseuatur vel illum.</div>
                             <div class="btns-box">
-                                <a href="contact.html" class="theme-btn btn-style-one"><span class="txt">Free
-                                        Consultation <i class="arrow flaticon-right"></i></span></a>
+                                <a href="{{ route('home.contact') }}" class="theme-btn btn-style-one"><span
+                                        class="txt">Consultation <i class="arrow flaticon-right"></i></span></a>
                             </div>
                         </div>
                     </div>
@@ -67,13 +67,13 @@
                     <!-- Content Column -->
                     <div class="content-column">
                         <div class="inner-column">
-                            <div class="title">Counsel LAw Firm</div>
+                            <div class="title">AL RAHIM CONSULTENCY</div>
                             <h1>Best LAw Firm <br> Since 1968</h1>
                             <div class="text">Quis autem velo eum iure reprehenderit rui in ea voluatacera suam nihil
                                 molestiae conseuatur vel illum.</div>
                             <div class="btns-box">
-                                <a href="contact.html" class="theme-btn btn-style-one"><span class="txt">Free
-                                        Consultation <i class="arrow flaticon-right"></i></span></a>
+                                <a href="{{ route('home.contact') }}" class="theme-btn btn-style-one"><span
+                                        class="txt">Consultation <i class="arrow flaticon-right"></i></span></a>
                             </div>
                         </div>
                     </div>
@@ -91,6 +91,7 @@
         <div class="auto-container">
             <div class="inner-container">
                 <div class="row clearfix">
+
 
                     <!-- Services Block -->
                     <div class="services-block col-lg-6 col-md-12 col-sm-12">
@@ -174,7 +175,8 @@
                         <div class="inner-column">
                             <!-- Sec Title -->
                             <div class="sec-title">
-                                <h2>Welcome to The Counsel LAw Firm</h2>
+                                <h2>Welcome to The <br>
+                                    AL RAHIM CONSULTENCY</h2>
                                 <div class="text">Nemo enim ipsam voluptatem quia voluptas sit asperaut odit aut fugit,
                                     quia voluptas sit asperaut sed quia consequuntur magni dolor eos qui ratione voluptatem
                                     sequi nesciunt aorro quisuest, rui dolorem ipsum nuia dolor.</div>
@@ -186,9 +188,11 @@
                                 <li>Ratione voluptatem sequi nesciunt nerue porro.</li>
                             </ul>
                             <div class="btns-box">
-                                <a href="contact.html" class="theme-btn btn-style-two"><span class="txt">Get a quote
+                                <a href="{{ route('home.contact') }}" class="theme-btn btn-style-two"><span
+                                        class="txt">Get a quote
                                         <i class="arrow flaticon-right"></i></span></a>
-                                <a href="contact.html" class="theme-btn btn-style-three"><span class="txt">Read more
+                                <a href="{{ route('home.contact') }}" class="theme-btn btn-style-three"><span
+                                        class="txt">Read more
                                         <i class="arrow flaticon-right"></i></span></a>
                             </div>
                         </div>
@@ -201,14 +205,15 @@
     <!-- End Welcome Section -->
 
     <!-- Counter Section -->
-    <section class="counter-section">
+    {{-- <section class="counter-section">
         <div class="image-layer" style="background-image: url(images/background/1.jpg)"></div>
         <div class="auto-container">
             <!-- Sec Title -->
             <div class="sec-title light centered">
                 <h2>20 YEars OF experience in Legal cases field</h2>
                 <div class="text">Renrehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum
-                    <br> aui dolorem eum fugiat quo voluptas nulla pariatur</div>
+                    <br> aui dolorem eum fugiat quo voluptas nulla pariatur
+                </div>
             </div>
 
             <div class="fact-counter">
@@ -279,7 +284,7 @@
             </div>
 
         </div>
-    </section>
+    </section> --}}
     <!-- End Counter Section -->
 
     <!-- Practice Section -->
@@ -291,8 +296,18 @@
             </div>
             <div class="inner-container">
                 <div class="clearfix">
-
-                    <!-- Practice Block -->
+                    @foreach ($legalareas as $legalarea)
+                       <!-- Practice Block -->
+                    <div class="practice-block col-lg-3 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <div class="{{$legalarea->icon}}"></div>
+                            <h5><a href="corporate_law.html">{{$legalarea->name}}</a></h5>
+                            <div class="text">{{$legalarea->description	}}</div>
+                            <a class="arrow flaticon-right-arrow-3" href="#"></a>
+                        </div>
+                    </div>
+                    @endforeach
+                    {{-- <!-- Practice Block -->
                     <div class="practice-block col-lg-3 col-md-6 col-sm-12">
                         <div class="inner-box">
                             <div class="icon flaticon-car-1"></div>
@@ -370,7 +385,7 @@
                             <div class="text">Quis autem velo eum iure suam nihil molestiae</div>
                             <a class="arrow flaticon-right-arrow-3" href="corporate_law.html"></a>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>
@@ -455,7 +470,8 @@
 
                     <!-- Default Form -->
                     <div class="default-form">
-                        <form method="post" action="https://html.designingmedia.com/counsel-law/contact.html">
+                        <form method="post"
+                            action="https://html.designingmedia.com/counsel-law/{{ route('home.contact') }}">
                             <div class="row clearfix">
 
                                 <div class="col-lg-6 col-md-6 col-sm-12 form-group">
@@ -677,7 +693,7 @@
     <!-- End Clients Section -->
 
     <!-- CTA Section -->
-    <section class="cta-section">
+    {{-- <section class="cta-section">
         <div class="auto-container">
             <div class="inner-container">
                 <div class="image">
@@ -685,7 +701,7 @@
                 </div>
                 <div class="content">
                     <h2>Speak With Our <br> Experts Today!</h2>
-                    <a href="contact.html" class="theme-btn btn-style-two"><span class="txt">Get a quote <i
+                    <a href="{{ route('home.contact') }}" class="theme-btn btn-style-two"><span class="txt">Get a quote <i
                                 class="arrow flaticon-right"></i></span></a>
                 </div>
                 <div class="hammer-image">
@@ -693,7 +709,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End CTA Section -->
 
 @endsection

@@ -159,18 +159,16 @@
                             <!-- Blog Author Box -->
                             <div class="blog-author-box">
                                 <div class="author-inner">
-                                    <div class="thumb"><img src="{{ asset('frontend/images/resource/author-8.jpg') }}"
+                                    <div class="thumb"><img src="{{ asset('/image/user/'.$post->User->image) }}"
                                             alt=""></div>
-                                    <h4 class="name">CHRISTINE EVE</h4>
-                                    <div class="text">Lorem ipsum is simply free text used by copytyping. Neque porro est
-                                        qui dolorem ipsum quia quaed veritatis et quasi architecto beatae vitae dicta sunt
-                                        explicabo.</div>
+                                    <h4 class="name">{{$post->User->name}}</h4>
+                                    <div class="text">{!!$post->User->description!!}</div>
                                     <ul class="social-icon clearfix">
-                                        <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                        <li><a href="{{$post->User->facebook}}"><i class="fa fa-facebook-f"></i></a></li>
                                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="{{$post->User->twitter}}"><i class="fa fa-twitter"></i></a></li>
                                         <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="{{$post->User->linkedin}}"><i class="fa fa-linkedin"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -349,7 +347,7 @@
         </div>
     </div>
 
-    <!-- Facts Section three -->
+    {{-- <!-- Facts Section three -->
     <section class="facts-section-three" style="background-image: url(images/background/1.jpg);">
 
         <div class="auto-container">
@@ -403,79 +401,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
-    <!-- Clients Section -->
-    <section class="clients-section">
-        <div class="auto-container">
-            <!-- Sec Title -->
-            <div class="sec-title centered">
-                <h2>TRUSTED COMPANIES</h2>
-                <div class="text">Nemo enim ipsam voluptatem quia voluptas sit asper aut odit aut fugit, sed quia
-                    consequuntur magni doloreos <br> qui ratione voluptatem sequi nesciunt aorro ruisea</div>
-            </div>
-            <div class="inner-container">
-                <div class="sponsors-outer">
-                    <!--Sponsors Carousel-->
-                    <ul class="sponsors-carousel owl-carousel owl-theme">
-                        <li class="slide-item">
-                            <figure class="image-box"><a href="#"><img src="images/clients/1.png"
-                                        alt=""></a></figure>
-                        </li>
-                        <li class="slide-item">
-                            <figure class="image-box"><a href="#"><img src="images/clients/2.png"
-                                        alt=""></a></figure>
-                        </li>
-                        <li class="slide-item">
-                            <figure class="image-box"><a href="#"><img src="images/clients/3.png"
-                                        alt=""></a></figure>
-                        </li>
-                        <li class="slide-item">
-                            <figure class="image-box"><a href="#"><img src="images/clients/4.png"
-                                        alt=""></a></figure>
-                        </li>
-                        <li class="slide-item">
-                            <figure class="image-box"><a href="#"><img src="images/clients/1.png"
-                                        alt=""></a></figure>
-                        </li>
-                        <li class="slide-item">
-                            <figure class="image-box"><a href="#"><img src="images/clients/2.png"
-                                        alt=""></a></figure>
-                        </li>
-                        <li class="slide-item">
-                            <figure class="image-box"><a href="#"><img src="images/clients/3.png"
-                                        alt=""></a></figure>
-                        </li>
-                        <li class="slide-item">
-                            <figure class="image-box"><a href="#"><img src="images/clients/4.png"
-                                        alt=""></a></figure>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Clients Section -->
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="auto-container">
-            <div class="inner-container">
-                <div class="image">
-                    <img src="images/resource/cta.jpg" alt="" />
-                </div>
-                <div class="content">
-                    <h2>Speak With Our <br> Experts Today!</h2>
-                    <a href="contact.html" class="theme-btn btn-style-two"><span class="txt">Get a quote <i
-                                class="arrow flaticon-right"></i></span></a>
-                </div>
-                <div class="hammer-image">
-                    <img src="images/resource/hammer.png" alt="" />
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End CTA Section -->
+
 
 
 @endsection
