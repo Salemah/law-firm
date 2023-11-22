@@ -45,7 +45,7 @@
 			<div class="contact-form">
 
 				<!--Contact Form-->
-				<form method="post" action="https://html.designingmedia.com/counsel-law/sendemail.php" id="contact-form">
+				<form method="post" action="#" id="">
 					<div class="row clearfix">
 
 						<div class="col-lg-4 col-md-6 col-sm-12 form-group">
