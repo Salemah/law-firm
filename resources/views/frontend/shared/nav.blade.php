@@ -11,7 +11,7 @@
 
             <div class="pull-left logo-box">
                 {{-- <div class="logo"><a href="{{url('/')}}"><img src="{{ asset('frontend/images/logo.png')}}" alt="" title=""></a></div> --}}
-                <div class="logo"><a href="{{url('/')}}"><img src="{{ asset('/image/dashboard/'.$dashboard_settings->logo) }}" style="width: 100%;height:70px" alt="" title=""></a></div>
+                <div class="logo"><a href="{{url('/')}}"><img src="{{ asset('/image/dashboard/'.$dashboard_settings->logo) }}" style="width: 40vh;height:70px" alt="" title=""></a></div>
             </div>
 
             <div class="nav-outer clearfix">
