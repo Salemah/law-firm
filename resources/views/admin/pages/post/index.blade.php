@@ -4,22 +4,12 @@
 
 @push('css')
 
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    {{-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css" rel="stylesheet"> --}}
 
-    <style>
-        #table_filter, #table_paginate {
-            float: right;
-        }
 
-        .dataTable {
-            width: 100% !important;
-            margin-bottom: 20px !important;
-        }
-
-        .table-responsive {
-            overflow-x: hidden !important;
-        }
-    </style>
 @endpush
 
 @section('breadcumb')
@@ -80,9 +70,7 @@
 @endsection
 @push('script')
 
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-
+    
     <!-- sweetalert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -101,7 +89,7 @@
                 order: [],
                 lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 processing: true,
-                responsive: false,
+                responsive: true,
                 serverSide: true,
                 language: {
                     processing: '<i class="ace-icon fa fa-spinner fa-spin orange bigger-500" style="font-size:60px;margin-top:50px;"></i>'

@@ -79,9 +79,6 @@
 
 @endsection
 @push('script')
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-
     <!-- sweetalert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -102,7 +99,7 @@
                     [10, 25, 50, 100, "All"]
                 ],
                 processing: true,
-                responsive: false,
+                responsive: true,
                 serverSide: true,
                 language: {
                     processing: '<i class="ace-icon fa fa-spinner fa-spin orange bigger-500" style="font-size:60px;margin-top:50px;"></i>'
