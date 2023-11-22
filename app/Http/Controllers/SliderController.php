@@ -64,6 +64,10 @@ class SliderController extends Controller
     {
         $request->validate([
             'image' => 'required',
+            'title' => 'required',
+            'shorttitle' => 'required',
+            'details' => 'required',
+            'status' => 'required',
         ]);
         try {
 
@@ -77,6 +81,7 @@ class SliderController extends Controller
             }
 
             $data->title = $request->title;
+            $data->shorttitle = $request->shorttitle;
             $data->details = $request->details;
             $data->status = $request->status;
 
@@ -115,7 +120,10 @@ class SliderController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'image' => 'required',
+            'title' => 'required',
+            'shorttitle' => 'required',
+            'details' => 'required',
+            'status' => 'required',
         ]);
         try {
 
@@ -129,6 +137,7 @@ class SliderController extends Controller
             }
 
             $data->title = $request->title;
+            $data->shorttitle = $request->shorttitle;
             $data->details = $request->details;
             $data->status = $request->status;
 

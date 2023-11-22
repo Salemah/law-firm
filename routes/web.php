@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\WelcomeSectionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,6 +84,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     });
     Route::resource('aboutus', AboutUsController::class)->middleware(['auth', 'verified']);
     Route::resource('makeusunique', MakeUsUniqueController::class)->middleware(['auth', 'verified']);
+    Route::resource('welcomesection', WelcomeSectionController::class)->middleware(['auth', 'verified']);
     Route::resource('client', ClientController::class)->middleware(['auth', 'verified']);
     Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
         Route::get('status/update/{id}', [ClientController::class, 'statusUpdate'])->name('update.status');

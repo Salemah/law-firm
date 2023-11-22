@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MakeUsUnique;
+use App\Models\WelcomeSection;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-class MakeUsUniqueController extends Controller
+
+class WelcomeSectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,20 +15,25 @@ class MakeUsUniqueController extends Controller
     {
         try {
             if ($request->ajax()) {
-                // $posts = Post::with('category')->get();
-                $posts = MakeUsUnique::get();
-                return DataTables::of($posts)
+                $sliders = WelcomeSection::get();
+
+                return DataTables::of($sliders)
                     ->addIndexColumn()
+                    ->addColumn('image', function ($slider) {
+                        $url = asset('/image/welcome/' . $slider->image);
+                        return '<img src="' . $url . '" border="0" width="40"  align="center" />';
+                    })
+
                     ->addColumn('action', function ($post) {
                         return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                  <a href="' . route('admin.makeusunique.edit', $post->id) . '" class="btn btn-sm btn-success text-white" style="cursor:pointer" title="Edit"><i class="fas fa-edit"></i></a>
+                                  <a href="' . route('admin.welcomesection.edit', $post->id) . '" class="btn btn-sm btn-success text-white" style="cursor:pointer" title="Edit"><i class="fas fa-edit"></i></a>
                                   <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm(' . $post->id . ')" title="Delete"><i class="fas fa-trash-alt"></i></a>
                             </div>';
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['image', 'action'])
                     ->make(true);
             }
-            return view('admin.pages.makeusunique.index');
+            return view('admin.pages.welcomesection.index');
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -39,7 +45,7 @@ class MakeUsUniqueController extends Controller
     public function create()
     {
         try {
-            return view('admin.pages.makeusunique.create');
+            return view('admin.pages.welcomesection.create');
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -51,20 +57,29 @@ class MakeUsUniqueController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'image' => 'required',
             'title' => 'required',
-            'icon' => 'required',
             'description' => 'required',
+
         ]);
         try {
 
-            $data = new MakeUsUnique();
+            $data = new WelcomeSection();
 
-            $data->icon = $request->icon;
-            $data->title = $request->title;
+            if ($request->file('image')) {
+                $file = $request->file('image');
+                $filename = time() . $file->getClientOriginalName();
+                $file->move(public_path('/image/welcome'), $filename);
+                $data->image = $filename;
+            }
+
+            $data->name = $request->title;
             $data->description = $request->description;
+            $data->point = $request->points;
+
             $data->save();
 
-            return redirect()->route('admin.makeusunique.index')->with('message', 'Create successfull.');
+            return redirect()->route('admin.welcomesection.index')->with('message', 'Create successfull.');
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -84,8 +99,8 @@ class MakeUsUniqueController extends Controller
     public function edit(string $id)
     {
         try {
-            $post = MakeUsUnique::findOrFail($id);
-            return view('admin.pages.makeusunique.edit', compact('post'));
+            $slider = WelcomeSection::findOrFail($id);
+            return view('admin.pages.welcomesection.edit', compact('slider'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -97,19 +112,27 @@ class MakeUsUniqueController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'title' => 'required',
-            'icon' => 'required',
-            'description' => 'required',
+            'title' => 'required','description' => 'required',
+
         ]);
         try {
 
-            $data = MakeUsUnique::findOrFail($id);
-            $data->icon = $request->icon;
-            $data->title = $request->title;
-            $data->description = $request->description;
-            $data->update();
-            return redirect()->route('admin.makeusunique.index')->with('message', 'Update successfull.');
+            $data = WelcomeSection::findOrFail($id);
 
+            if ($request->file('image')) {
+                $file = $request->file('image');
+                $filename = time() . $file->getClientOriginalName();
+                $file->move(public_path('/image/welcome'), $filename);
+                $data->image = $filename;
+            }
+
+            $data->name = $request->title;
+            $data->description = $request->description;
+            $data->point = $request->points;
+
+            $data->update();
+
+            return redirect()->route('admin.welcomesection.index')->with('message', 'Update successfull.');
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -122,12 +145,12 @@ class MakeUsUniqueController extends Controller
     {
         if ($request->ajax()) {
             try {
-                $post = MakeUsUnique::findOrFail($id);
+                $post = WelcomeSection::findOrFail($id);
                 if ($post) {
                     $post->delete();
                     return response()->json([
                         'success' => true,
-                        'message' => 'Unique Deleted Successfully.',
+                        'message' => 'Section Deleted Successfully.',
                     ]);
                 }
             } catch (\Exception $exception) {
@@ -135,4 +158,5 @@ class MakeUsUniqueController extends Controller
             }
         }
     }
+
 }

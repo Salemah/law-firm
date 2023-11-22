@@ -1,11 +1,11 @@
 @extends('admin.dashboard.master')
 
-@section('title', 'Slider')
+@section('title', 'Welcome Section')
 
 @push('css')
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
-   
+
 @endpush
 
 @section('breadcumb')
@@ -19,9 +19,9 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Slider</li>
+                        <li class="breadcrumb-item active">Welcome Section</li>
                         <li class="breadcrumb-item active"><a class="btn btn-sm btn-success text-white"
-                                href="{{ route('admin.slider.create') }}">
+                                href="{{ route('admin.welcomesection.create') }}">
                                 <i class='bx bx-plus'></i> Create
                             </a></li>
                     </ol>
@@ -49,9 +49,8 @@
                                         <tr class="align-middle table">
                                             <th>#</th>
                                             <th>Name</th>
-                                            <th>Title</th>
                                             <th>Description</th>
-                                            <th>Status</th>
+
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -98,7 +97,7 @@
                 pagingType: "full_numbers",
                 // dom: "<'row'<'col-sm-2'l><'col-sm-7 text-center'B><'col-sm-3'f>>tipr",
                 ajax: {
-                    url: "{{ route('admin.slider.index') }}",
+                    url: "{{ route('admin.welcomesection.index') }}",
                     type: "get"
                 },
                 columns: [{
@@ -107,29 +106,21 @@
                         orderable: false,
                         searchable: false
                     },
+
                     {
-                        data: 'image',
-                        name: 'image',
+                        data: 'name',
+                        name: 'name',
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: 'title',
-                        name: 'title',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'details',
-                        name: 'details',
+                        data: 'description',
+                        name: 'description',
                         orderable: true,
                         searchable: true
                     },
 
-                    {
-                        data: 'status',
-                        name: 'status'
-                    },
+
                     //only those have manage_user permission will get access
 
                     {
@@ -159,7 +150,7 @@
 
         // Delete Button
         function deleteItem(id) {
-            var url = '{{ route('admin.slider.destroy', ':id') }}';
+            var url = '{{ route('admin.welcomesection.destroy', ':id') }}';
             $.ajax({
                 type: "DELETE",
                 url: url.replace(':id', id),
@@ -182,42 +173,8 @@
             })
         }
 
-        // Status Change Confirm Alert
-        function showStatusChangeAlert(id) {
-            event.preventDefault();
-            swal({
-                title: `Are you sure?`,
-                text: "You want to update the status?.",
-                buttons: true,
-                infoMode: true,
-            }).then((willStatusChange) => {
-                if (willStatusChange) {
-                    statusChange(id);
-                }
-            });
-        };
 
-        // Status Change
-        function statusChange(id) {
-            var url = '{{ route('admin.slider.update.status', ':id') }}';
-            $.ajax({
-                type: "GET",
-                url: url.replace(':id', id),
-                success: function(resp) {
-                    // Reloade DataTable
-                    $('#table').DataTable().ajax.reload();
-                    if (resp == "active") {
-                        toastr.success('This status has been changed to Publish.');
-                        return false;
-                    } else {
-                        toastr.error('This status has been changed to Un Publish.');
-                        return false;
-                    }
-                }, // success end
-                error: function(error) {
-                    // location.reload();
-                } // Error
-            })
-        }
+
+
     </script>
 @endpush

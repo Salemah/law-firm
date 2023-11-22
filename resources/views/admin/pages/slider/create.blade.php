@@ -71,8 +71,19 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                                    @enderror
                                </div>
                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
-                                   <label for="details"><b>details</b><span class="text-danger">*</span></label>
-                                   <input type="text" id="details" class=" form-control @error('details') is-invalid @enderror" name="details">
+                                   <label for="shorttitle"><b>Short Title</b><span class="text-danger">*</span></label>
+                                   {{-- <input type="text" id="shorttitle" class=" form-control @error('shorttitle') is-invalid @enderror" name="shorttitle"> --}}
+                                   <textarea class="form-control" id="shorttitle" name="shorttitle" rows="3"></textarea>
+                                   @error('shorttitle')
+                                   <span class="alert text-danger" role="alert">
+                                       <strong>{{ $message }}</strong>
+                                   </span>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                   <label for="details"><b>Details</b><span class="text-danger">*</span></label>
+                                   {{-- <input type="text" id="details" class=" form-control @error('details') is-invalid @enderror" name="details"> --}}
+                                  <textarea class="form-control" id="details" name="details" rows="3"></textarea>
                                    @error('details')
                                    <span class="alert text-danger" role="alert">
                                        <strong>{{ $message }}</strong>

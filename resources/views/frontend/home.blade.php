@@ -21,36 +21,40 @@
         </ul>
         <div class="main-slider-carousel owl-carousel owl-theme">
 
-            <div class="slide" style="background-image: url(frontend/images/main-slider/image-1.jpg)">
+            @foreach ($sliders as $slider)
+                <div class="slide" style="background-image: url({{URL::asset('/image/slider/'.$slider->image)}})">
+                    <div class="auto-container">
+
+                        <!-- Content Column -->
+                        <div class="content-column">
+                            <div class="inner-column">
+                                <div class="title">{{$slider->title}}
+                                </div>
+                                <h1>{{$slider->shorttitle}}</h1>
+                                <div class="text">{{$slider->details}} .</div>
+                                <div class="btns-box">
+                                    <a href="{{ route('home.contact') }}" class="theme-btn btn-style-one"><span
+                                            class="txt">Consultation <i class="arrow flaticon-right"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            @endforeach
+
+
+            {{-- <div class="slide" style="background-image: url(frontend/images/main-slider/image-1.jpg)">
                 <div class="auto-container">
 
                     <!-- Content Column -->
                     <div class="content-column">
                         <div class="inner-column">
                             <div class="title">A LEGAL CONSULTANCY PLATFORM
-</div>
-                            <h1>ARC - Your Trusted Legal Navigator</h1>
-                            <div class="text">Guiding Your Legal Journey with Expertise and Integrity, Where Solutions Meet Excellence .</div>
-                            <div class="btns-box">
-                                <a href="{{ route('home.contact') }}" class="theme-btn btn-style-one"><span
-                                        class="txt">Consultation <i class="arrow flaticon-right"></i></span></a>
                             </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="slide" style="background-image: url(frontend/images/main-slider/image-1.jpg)">
-                <div class="auto-container">
-
-                    <!-- Content Column -->
-                    <div class="content-column">
-                         <div class="inner-column">
-                            <div class="title">A LEGAL CONSULTANCY PLATFORM
-</div>
                             <h1>ARC - Your Trusted Legal Navigator</h1>
-                            <div class="text">Guiding Your Legal Journey with Expertise and Integrity, Where Solutions Meet Excellence .</div>
+                            <div class="text">Guiding Your Legal Journey with Expertise and Integrity, Where Solutions
+                                Meet Excellence .</div>
                             <div class="btns-box">
                                 <a href="{{ route('home.contact') }}" class="theme-btn btn-style-one"><span
                                         class="txt">Consultation <i class="arrow flaticon-right"></i></span></a>
@@ -66,11 +70,12 @@
 
                     <!-- Content Column -->
                     <div class="content-column">
-                         <div class="inner-column">
+                        <div class="inner-column">
                             <div class="title">A LEGAL CONSULTANCY PLATFORM
-</div>
+                            </div>
                             <h1>ARC - Your Trusted Legal Navigator</h1>
-                            <div class="text">Guiding Your Legal Journey with Expertise and Integrity, Where Solutions Meet Excellence .</div>
+                            <div class="text">Guiding Your Legal Journey with Expertise and Integrity, Where Solutions
+                                Meet Excellence .</div>
                             <div class="btns-box">
                                 <a href="{{ route('home.contact') }}" class="theme-btn btn-style-one"><span
                                         class="txt">Consultation <i class="arrow flaticon-right"></i></span></a>
@@ -79,7 +84,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 
@@ -161,7 +166,7 @@
                     <div class="image-column col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-column">
                             <div class="image titlt" data-tilt data-tilt-max="2">
-                                <img src="{{ URL::asset('frontend/images/resource/welcome.jpg') }}" alt="" />
+                                <img src="{{ URL::asset('/image/welcome/'.$welcome->image) }}" alt="" />
                             </div>
                             {{-- <div class="case-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                                 1500<sup>+</sup>
@@ -175,17 +180,18 @@
                         <div class="inner-column">
                             <!-- Sec Title -->
                             <div class="sec-title">
-                                <h2>Welcome to The <br>
-                                    AL RAHIM CONSULTENCY</h2>
-                                <div class="text">Nemo enim ipsam voluptatem quia voluptas sit asperaut odit aut fugit,
-                                    quia voluptas sit asperaut sed quia consequuntur magni dolor eos qui ratione voluptatem
-                                    sequi nesciunt aorro quisuest, rui dolorem ipsum nuia dolor.</div>
+                                <h2>{{$welcome->name}}</h2>
+                                <div class="text">{!!$welcome->description!!}</div>
                             </div>
                             <ul class="list-style-one">
-                                <li>Velit esse quam nihil molestiae consequatur, velillu. </li>
-                                <li>Qui dolorem eum fugiat quo voluptas nulla pariatur. </li>
-                                <li>Aspernatur aut odit aut fugit commodo luis cursus.</li>
-                                <li>Ratione voluptatem sequi nesciunt nerue porro.</li>
+                                @php
+                                    $lists =  explode(',',$welcome->point);
+                                @endphp
+                                @foreach ($lists as $list)
+<li>{{$list}}</li>
+                                @endforeach
+
+
                             </ul>
                             <div class="btns-box">
                                 {{-- <a href="{{ route('home.contact') }}" class="theme-btn btn-style-two"><span
@@ -334,11 +340,11 @@
                         <div class="testimonial-block">
                             <div class="inner-box">
                                 <div class="author-image">
-                                    <img src="{{URL::asset('/image/client/'.$client->image)}}" alt="" />
+                                    <img src="{{ URL::asset('/image/client/' . $client->image) }}" alt="" />
                                 </div>
                                 <span class="quote-icon flaticon-quote-1"></span>
-                                <div class="text">{!!$client->description!!}</div>
-                                <div class="name">{{$client->name}}</div>
+                                <div class="text">{!! $client->description !!}</div>
+                                <div class="name">{{ $client->name }}</div>
                             </div>
                         </div>
                     @endforeach

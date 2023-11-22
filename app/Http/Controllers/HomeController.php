@@ -14,6 +14,7 @@ use App\Models\Post;
 use App\Models\Question;
 use App\Models\Slider;
 use App\Models\Team;
+use App\Models\WelcomeSection;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -31,8 +32,9 @@ class HomeController extends Controller
             $legalareas = legalarea::get();
             $questions = Question::take(3)->get();
             $clients = Client::get();
+            $welcome = WelcomeSection::first();
 
-            return view('frontend.home',compact('clients','questions','posts', 'legalareas','teams','sliders'));
+            return view('frontend.home',compact('welcome','clients','questions','posts', 'legalareas','teams','sliders'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

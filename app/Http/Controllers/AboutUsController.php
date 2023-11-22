@@ -106,7 +106,7 @@ class AboutUsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'image' => 'required',
+          
             'description' => 'required',
         ]);
         try {

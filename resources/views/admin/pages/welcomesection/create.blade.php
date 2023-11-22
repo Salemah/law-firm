@@ -1,6 +1,6 @@
 @extends('admin.dashboard.master')
 
-@section('title', 'Slider')
+@section('title', 'Welcome Section')
 
 @push('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
@@ -25,9 +25,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Slider</li>
-            <li class="breadcrumb-item active">Edit</li>
-            <li class="breadcrumb-item active"><a class="btn btn-sm btn-success text-white" href="{{ route('admin.slider.index') }}">
+            <li class="breadcrumb-item active">Welcome Section</li>
+            <li class="breadcrumb-item active">Create</li>
+            <li class="breadcrumb-item active"><a class="btn btn-sm btn-success text-white" href="{{ route('admin.welcomesection.index') }}">
                 <i class="fas fa-arrow-left"></i> back
             </a></li>
           </ol>
@@ -44,9 +44,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
    <!-- Alert -->
    @include('admin.dashboard.layouts.partials.alert')
 
-   <form action="{{ route('admin.slider.update',$slider->id) }}" enctype="multipart/form-data" method="POST">
+   <form action="{{ route('admin.welcomesection.store') }}" enctype="multipart/form-data" method="POST">
        @csrf
-       @method('PUT')
        <div class="row">
            <div class="col-md-12">
                <div class="card">
@@ -54,8 +53,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                        <div class="row">
                             <div class="form-group col-12  col-md-12 mb-2">
                                 <label for="image">Image<span class="text-danger">*</span></label>
-                                <input type="file" id="image"
-                                data-default-file="{{ asset('image/slider/' . $slider->image) }}"  data-height="290"class="dropify form-control @error('image') is-invalid @enderror" name="image">
+                                <input type="file" id="image" data-height="290"class="dropify form-control @error('image') is-invalid @enderror" name="image">
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -65,66 +63,34 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                    <label for="title"><b>Title</b><span class="text-danger">*</span></label>
-                                   <input type="text" id="title"
-                                   value="{{$slider->title}}"class=" form-control @error('title') is-invalid @enderror" name="title">
+                                   <input type="text" id="title" class=" form-control @error('title') is-invalid @enderror" name="title">
                                    @error('title')
                                    <span class="alert text-danger" role="alert">
                                        <strong>{{ $message }}</strong>
                                    </span>
                                    @enderror
                                </div>
-                                {{-- <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
-                                   <label for="shorttitle"><b>Short Title</b><span class="text-danger">*</span></label>
-                                   <input type="text" id="shorttitle" value="" class=" form-control @error('shorttitle') is-invalid @enderror" name="shorttitle">
-                                   @error('shorttitle')
+                               <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                   <label for="description"><b>Description</b><span class="text-danger">*</span></label>
+                                   {{-- <input type="text" id="description" class=" form-control @error('description') is-invalid @enderror" name="description"> --}}
+                                   <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                   @error('description')
                                    <span class="alert text-danger" role="alert">
                                        <strong>{{ $message }}</strong>
                                    </span>
                                    @enderror
                                </div>
                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
-                                   <label for="details"><b>details</b><span class="text-danger">*</span></label>
-                                   <input type="text" id="details" value="" class=" form-control @error('details') is-invalid @enderror" name="details">
-                                   @error('details')
-                                   <span class="alert text-danger" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                   </span>
-                                   @enderror
-                               </div> --}}
-                               <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
-                                   <label for="shorttitle"><b>Short Title</b><span class="text-danger">*</span></label>
-                                   {{-- <input type="text" id="shorttitle" class=" form-control @error('shorttitle') is-invalid @enderror" name="shorttitle"> --}}
-                                   <textarea class="form-control" id="shorttitle" name="shorttitle" rows="3">{{$slider->shorttitle}}</textarea>
-                                   @error('shorttitle')
+                                   <label for="points"><b>Point</b><span class="text-danger">*</span></label>
+                                   {{-- <input type="text" id="points" class=" form-control @error('points') is-invalid @enderror" name="points"> --}}
+                                  <textarea class="form-control" id="points" name="points" rows="3"></textarea>
+                                   @error('points')
                                    <span class="alert text-danger" role="alert">
                                        <strong>{{ $message }}</strong>
                                    </span>
                                    @enderror
                                </div>
-                               <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
-                                   <label for="details"><b>Details</b><span class="text-danger">*</span></label>
-                                   {{-- <input type="text" id="details" class=" form-control @error('details') is-invalid @enderror" name="details"> --}}
-                                  <textarea class="form-control" id="details" name="details" rows="3">{{$slider->details}}</textarea>
-                                   @error('details')
-                                   <span class="alert text-danger" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                   </span>
-                                   @enderror
-                               </div>
-                               <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
-                                <label for="status"><b>Status</b><span class="text-danger">*</span></label>
-                                <select name="status" id="status"
-                                    class="custom-select @error('status') is-invalid @enderror">
-                                    <option value="">--Select Status--</option>
-                                    <option value="1" {{$slider->status == 1 ? 'selected' : ''}}>Active</option>
-                                    <option value="0" {{$slider->status == 0 ? 'selected' : ''}}>Inactive</option>
-                                </select>
-                                @error('status')
-                                    <span class="alert text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                               
                        </div>
                        <div class="form-group">
                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
