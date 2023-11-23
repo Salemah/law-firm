@@ -127,6 +127,12 @@
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
+                    <a href="{{ route('admin.sublegalarea.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>Sub Legal Area</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
                     <a href="{{ route('admin.company.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>Company</p>

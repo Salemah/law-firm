@@ -13,6 +13,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SubLegalAreaController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\WelcomeSectionController;
 use Illuminate\Support\Facades\Route;
@@ -89,6 +90,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
         Route::get('status/update/{id}', [ClientController::class, 'statusUpdate'])->name('update.status');
     });
+    Route::resource('sublegalarea', SubLegalAreaController::class)->middleware(['auth', 'verified']);
 
 });
 Route::get('/dashboard', function () {
