@@ -13,6 +13,7 @@ use App\Models\MakeUsUnique;
 use App\Models\Post;
 use App\Models\Question;
 use App\Models\Slider;
+use App\Models\SubLegalArea;
 use App\Models\Team;
 use App\Models\WelcomeSection;
 use Illuminate\Http\Request;
@@ -180,6 +181,27 @@ class HomeController extends Controller
             $teams =  Team::get();
 
             return view('frontend.our-team',compact('teams'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
+    public function ourservice(Request $request)
+    {
+        try {
+            $legalareas =  legalarea::get();
+
+            return view('frontend.legal-area',compact('legalareas'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
+    public function ourservicesub(Request $request)
+    {
+        try {
+            $legalareas =  SubLegalArea::where('legal_area_id', $request->id)->get();
+            $legal =  legalarea::where('id', $request->id)->first();
+
+            return view('frontend.sub-legal-area',compact('legalareas', 'legal'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

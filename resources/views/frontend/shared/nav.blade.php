@@ -50,15 +50,8 @@
                                     <li><a href="case-details.html">Case Detail</a></li>
                                 </ul> --}}
                             </li>
-                            <li class="dropdown"><a href="#">Our Services</a>
-                                <ul>
-                                    <li><a href="services_style_01.html">Services Style 01</a></li>
-                                    <li><a href="services_style_02.html">Services Style 02</a></li>
-                                    <li><a href="corporate_law.html">Corporate Law</a></li>
-                                    <li><a href="real_estate_law.html">Real Estate Law</a></li>
-                                    <li><a href="insurance_law.html">Insurance Law</a></li>
-                                    <li><a href="family_law.html">Family Law</a></li>
-                                </ul>
+                            <li><a href="{{route('home.ourservice')}}">Our Services</a>
+
                             </li>
                             <li ><a href="{{route('home.all.post')}}">Articles</a>
                                 {{-- <ul>
