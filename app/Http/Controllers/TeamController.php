@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\legalarea;
+use App\Models\SubLegalArea;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use DataTables;
@@ -55,7 +57,8 @@ class TeamController extends Controller
     public function create()
     {
         try {
-            return view('admin.pages.team.create');
+            $legalareas = legalarea::get();
+            return view('admin.pages.team.create',compact('legalareas'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -82,6 +85,9 @@ class TeamController extends Controller
             }
 
             $data->positions = $request->positions;
+            $data->legal_area_id = $request->legal_area_id;
+            $data->sub_legal_area_id= $request->sub_legal_area_id;
+            $data->fees= $request->fees;
             $data->name = $request->name;
             $data->details = $request->details;
             $data->status = $request->status;
@@ -109,7 +115,9 @@ class TeamController extends Controller
     {
         try {
             $team =  Team::findOrFail($id);
-            return view('admin.pages.team.edit',compact('team'));
+            $legalareas = legalarea::get();
+            $sublegalareas = SubLegalArea::get();
+            return view('admin.pages.team.edit',compact('team', 'legalareas', 'sublegalareas'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -137,6 +145,9 @@ class TeamController extends Controller
 
             $data->name = $request->name;
             $data->positions = $request->positions;
+            $data->legal_area_id = $request->legal_area_id;
+            $data->sub_legal_area_id = $request->sub_legal_area_id;
+            $data->fees = $request->fees;
             $data->details = $request->details;
             $data->status = $request->status;
 
@@ -185,4 +196,14 @@ class TeamController extends Controller
             return $exception->getMessage();
         }
     }
+    public function SubLegalAreaSearch(Request $request)
+    {
+        $result = SubLegalArea::query()
+            ->where('legal_area_id', "$request->legal_area_id")
+            ->where('name', 'LIKE', "%{$request->search}%")
+            ->get(['name', 'id']);
+
+        return $result;
+    }
+
 }

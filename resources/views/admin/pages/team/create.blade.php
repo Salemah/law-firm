@@ -3,15 +3,26 @@
 @section('name', 'Team')
 
 @push('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
-integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
-crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
+        integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
         .dropify-wrapper .dropify-message p {
             font-size: initial;
         }
     </style>
+@endpush
+@push('script')
+    <script>
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            }
+        });
+    </script>
 @endpush
 
 @section('breadcumb')
@@ -54,7 +65,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                             <div class="row">
                                 <div class="form-group col-12  col-md-6 mb-2">
                                     <label for="image">Image<span class="text-danger">*</span></label>
-                                    <input type="file" id="image" data-height="290"class="dropify form-control @error('image') is-invalid @enderror" name="image">
+                                    <input type="file" id="image"
+                                        data-height="290"class="dropify form-control @error('image') is-invalid @enderror"
+                                        name="image">
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -64,8 +77,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                     <label for="name"><b>Name</b><span class="text-danger">*</span></label>
                                     <input type="text" name="name" id="name"
-                                        class="form-control @error('name') is-invalid @enderror"
-                                        value="{{ old('name') }}" placeholder="Enter Post Name">
+                                        class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                        placeholder="Enter Post Name">
                                     @error('name')
                                         <span class="alert text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -78,6 +91,47 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                                         class="form-control @error('positions') is-invalid @enderror"
                                         value="{{ old('positions') }}" placeholder="Enter Post Positions">
                                     @error('positions')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="fees"><b>Fees</b><span class="text-danger">*</span></label>
+                                    <input type="text" name="fees" id="fees"
+                                        class="form-control @error('fees') is-invalid @enderror"
+                                        value="{{ old('fees') }}" placeholder="Enter Post fees">
+                                    @error('fees')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="legal_area_id"><b>Legal Area</b><span class="text-danger">*</span></label>
+                                    <select name="legal_area_id" id="legal_area_id"
+                                        class="custom-select @error('legal_area_id') is-invalid @enderror">
+                                        <option value="">--Select Legal Area--</option>
+                                        @foreach ($legalareas as $legalarea)
+                                            <option value="{{ $legalarea->id}}">{{ $legalarea->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('legal_area_id')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="sub_legal_area_id"><b>Sub Legal Area</b><span class="text-danger">*</span></label>
+                                    <select name="sub_legal_area_id" id="sub_legal_area_id"
+                                        class="custom-select @error('sub_legal_area_id') is-invalid @enderror">
+                                        <option value="">--Select Sub Legal Area--</option>
+                                        {{-- @foreach ($legalareas as $legalarea)
+                                            <option value="{{ $legalarea->id}}">{{ $legalarea->name}}</option>
+                                        @endforeach --}}
+                                    </select>
+                                    @error('sub_legal_area_id')
                                         <span class="alert text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -135,7 +189,37 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         $(document).ready(function() {
             $('.dropify').dropify();
+            $('#legal_area_id').select2();
+
+            $('#sub_legal_area_id').select2({
+            ajax: {
+                url: '{{route('admin.team.sublegalarea')}}',
+                dataType: 'json',
+                type: "POST",
+                data: function (params) {
+                    var query = {
+                        search: params.term,
+                        legal_area_id: $('#legal_area_id').val()
+                    }
+                    return query;
+                },
+                processResults: function (data) {
+                    console.log();
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.name,
+                                value: item.id,
+                                id: item.id,
+                            }
+                        })
+                    };
+                }
+            }
         });
+        });
+
         CKEDITOR.replace('details', {
             toolbarGroups: [{
                     "name": "styles",

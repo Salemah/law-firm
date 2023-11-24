@@ -14,7 +14,15 @@
         }
     </style>
 @endpush
-
+@push('script')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            }
+        });
+    </script>
+@endpush
 @section('breadcumb')
 
     <div class="content-header ">
@@ -72,6 +80,52 @@
                                         class="form-control @error('name') is-invalid @enderror" value="{{ $team->name }}"
                                         placeholder="Enter team Name">
                                     @error('name')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="fees"><b>Fees</b><span class="text-danger">*</span></label>
+                                    <input type="text" name="fees" id="fees"
+                                        class="form-control @error('fees') is-invalid @enderror"
+                                        value="{{ $team->fees}}" placeholder="Enter Post fees">
+                                    @error('fees')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="legal_area_id"><b>Legal Area</b><span class="text-danger">*</span></label>
+                                    <select name="legal_area_id" id="legal_area_id"
+                                        class="custom-select @error('legal_area_id') is-invalid @enderror">
+                                        <option value="">--Select Legal Area--</option>
+                                        @foreach ($legalareas as $legalarea)
+                                            <option value="{{ $legalarea->id }}"
+                                                @if ($team->legal_area_id == $legalarea->id) selected @endif>{{ $legalarea->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('legal_area_id')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="sub_legal_area_id"><b>Sub Legal Area</b><span
+                                            class="text-danger">*</span></label>
+                                    <select name="sub_legal_area_id" id="sub_legal_area_id"
+                                        class="custom-select @error('sub_legal_area_id') is-invalid @enderror">
+                                        <option value="">--Select Sub Legal Area--</option>
+                                         @foreach ($sublegalareas as $sublegalarea)
+                                            <option value="{{ $sublegalarea->id }}"
+                                                @if ($team->sub_legal_area_id == $sublegalarea->id) selected @endif>{{ $sublegalarea->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('sub_legal_area_id')
                                         <span class="alert text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

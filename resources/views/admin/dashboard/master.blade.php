@@ -309,7 +309,7 @@ to get the desired effect
     @yield('content')
 
     @include('frontend.shared.footer') --}}
-
+  
     @include('admin.dashboard.layouts.script')
 </body>
 </html>

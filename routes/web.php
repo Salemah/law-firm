@@ -66,6 +66,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     });
     //TEAM
     Route::resource('team', TeamController::class)->middleware(['auth', 'verified']);
+    Route::post('sub-legal-area-search',[ TeamController::class,'SubLegalAreaSearch'])->name('team.sublegalarea');
     Route::group(['prefix' => 'team', 'as' => 'team.'], function () {
         Route::get('status/update/{id}', [TeamController::class, 'statusUpdate'])->name('update.status');
     });
