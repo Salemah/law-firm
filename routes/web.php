@@ -13,6 +13,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SlotController;
 use App\Http\Controllers\SubLegalAreaController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\WelcomeSectionController;
@@ -45,6 +46,7 @@ Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
     Route::get('our-service', [HomeController::class, 'ourservice'])->name('ourservice');
     Route::get('our-service-sub/{id?}', [HomeController::class, 'ourservicesub'])->name('ourservice.sub');
     Route::get('our-team-area-wise/{id?}', [HomeController::class, 'ourteamAreaWise'])->name('ourteam.area.wise');
+    Route::get('view-shedule/{id?}', [HomeController::class, 'ViewShedule'])->name('view.shedule');
 });
 // Category
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -79,6 +81,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::group(['prefix' => 'leagal-area', 'as' => 'leagal-area.'], function () {
         Route::get('status/update/{id}', [LegalAreacontroller::class, 'statusUpdate'])->name('update.status');
     });
+
+
+    Route::resource('slot', SlotController::class)->middleware(['auth', 'verified']);
+    Route::group(['prefix' => 'slot', 'as' => 'slot.'], function () {
+        Route::get('status/update/{id}', [SlotController::class, 'statusUpdate'])->name('update.status');
+    });
+
+
     Route::resource('company', Companycontroller::class)->middleware(['auth', 'verified']);
     Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
         Route::get('status/update/{id}', [Companycontroller::class, 'statusUpdate'])->name('update.status');

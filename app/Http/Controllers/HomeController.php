@@ -13,6 +13,7 @@ use App\Models\MakeUsUnique;
 use App\Models\Post;
 use App\Models\Question;
 use App\Models\Slider;
+use App\Models\Slot;
 use App\Models\SubLegalArea;
 use App\Models\Team;
 use App\Models\WelcomeSection;
@@ -212,6 +213,16 @@ class HomeController extends Controller
             $Teams =  Team::whereJsonContains('sub_legal_area_id', $request->id)->get();
             $sublegalarea =  SubLegalArea::with('LegalArea')->where('id', $request->id)->first();
             return view('frontend.team-legal-area-wise',compact('Teams', 'sublegalarea'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
+    public function ViewShedule(Request $request)
+    {
+        try {
+            $slots =  Slot::where('team_id', $request->id)->get();
+
+            return view('frontend.slot',compact('slots'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

@@ -1,14 +1,14 @@
 @extends('frontend.master')
 
-@section('title', 'About Us')
+@section('title', 'Appointment Shedule')
 @section('content')
     <!-- Page Title -->
     <section class="page-title" style="background-image:url({{ URL::asset('frontend/images/background/1.jpg') }})">
         <div class="auto-container">
-            <h1>Our {{$sublegalarea->LegalArea->name}} Team</h1>
+            <h1>  Appointment Shedule</h1>
             <ul class="page-breadcrumb">
                 <li><a href="{{ URL('/') }}">home</a></li>
-                <li>{{$sublegalarea->LegalArea->name}} Team</li>
+                <li>Appointment Shedule</li>
             </ul>
         </div>
     </section>
@@ -21,9 +21,15 @@
                 <h2>Our Professional Team</h2>
             </div>
             <div class="row clearfix">
-                @foreach ($Teams as $team)
+                @foreach ($slots as $team)
                     <div class="team-block col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                        <div>
+                            {{$team->day}}
+                        </div>
+                        <div>
+                            {{Carbon\Carbon::parse($team->time)->format('g:i A')}}
+                        </div>
+                        {{-- <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                             <div class="image">
                                 <img src="{{ URL::asset('/image/team/' . $team->image) }}" alt="{{ $team->image }}" />
                             </div>
@@ -32,7 +38,7 @@
                                 <div class="designation">{{ $team->positions }}</div>
                                 <a class="arrow flaticon-right-arrow-3" href="{{ route('home.view.shedule',$team->id) }}"></a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 @endforeach
                 <!-- Team Block -->
