@@ -85,8 +85,8 @@ class TeamController extends Controller
             }
 
             $data->positions = $request->positions;
-            $data->legal_area_id = $request->legal_area_id;
-            $data->sub_legal_area_id= $request->sub_legal_area_id;
+            $data->legal_area_id = json_encode( $request->legal_area_id);
+            $data->sub_legal_area_id= json_encode( $request->sub_legal_area_id);
             $data->fees= $request->fees;
             $data->name = $request->name;
             $data->details = $request->details;
@@ -145,8 +145,8 @@ class TeamController extends Controller
 
             $data->name = $request->name;
             $data->positions = $request->positions;
-            $data->legal_area_id = $request->legal_area_id;
-            $data->sub_legal_area_id = $request->sub_legal_area_id;
+            $data->legal_area_id = json_encode( $request->legal_area_id);
+            $data->sub_legal_area_id = json_encode( $request->sub_legal_area_id);
             $data->fees = $request->fees;
             $data->details = $request->details;
             $data->status = $request->status;

@@ -206,5 +206,15 @@ class HomeController extends Controller
             return redirect()->back()->with('error', $exception->getMessage());
         }
     }
+    public function ourteamAreaWise(Request $request)
+    {
+        try {
+            $Teams =  Team::whereJsonContains('sub_legal_area_id', $request->id)->get();
+            $sublegalarea =  SubLegalArea::with('LegalArea')->where('id', $request->id)->first();
+            return view('frontend.team-legal-area-wise',compact('Teams', 'sublegalarea'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
 
 }

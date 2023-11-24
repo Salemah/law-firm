@@ -85,11 +85,22 @@
                                         </span>
                                     @enderror
                                 </div>
-                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="positions"><b>Position</b><span class="text-danger">*</span></label>
+                                    <input type="text" name="positions" id="positions"
+                                        class="form-control @error('positions') is-invalid @enderror"
+                                        value="{{ $team->positions }}" placeholder="Enter Post Positions">
+                                    @error('positions')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                     <label for="fees"><b>Fees</b><span class="text-danger">*</span></label>
                                     <input type="text" name="fees" id="fees"
-                                        class="form-control @error('fees') is-invalid @enderror"
-                                        value="{{ $team->fees}}" placeholder="Enter Post fees">
+                                        class="form-control @error('fees') is-invalid @enderror" value="{{ $team->fees }}"
+                                        placeholder="Enter Post fees">
                                     @error('fees')
                                         <span class="alert text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -98,12 +109,17 @@
                                 </div>
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                     <label for="legal_area_id"><b>Legal Area</b><span class="text-danger">*</span></label>
-                                    <select name="legal_area_id" id="legal_area_id"
+                                    <select name="legal_area_id[]" id="legal_area_id" multiple="multiple"
                                         class="custom-select @error('legal_area_id') is-invalid @enderror">
                                         <option value="">--Select Legal Area--</option>
                                         @foreach ($legalareas as $legalarea)
                                             <option value="{{ $legalarea->id }}"
-                                                @if ($team->legal_area_id == $legalarea->id) selected @endif>{{ $legalarea->name }}
+                                                 @php
+                                                    $ids = explode(',',$team->legal_area_id) @endphp
+                                                @foreach ($ids as $id)
+                                                {{ $id == $legalarea->id ? 'selected' : '' }}
+                                                @endforeach
+                                                >{{ $legalarea->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -116,12 +132,16 @@
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                     <label for="sub_legal_area_id"><b>Sub Legal Area</b><span
                                             class="text-danger">*</span></label>
-                                    <select name="sub_legal_area_id" id="sub_legal_area_id"
+                                    <select name="sub_legal_area_id[]" id="sub_legal_area_id" multiple="multiple"
                                         class="custom-select @error('sub_legal_area_id') is-invalid @enderror">
                                         <option value="">--Select Sub Legal Area--</option>
-                                         @foreach ($sublegalareas as $sublegalarea)
+                                        @foreach ($sublegalareas as $sublegalarea)
                                             <option value="{{ $sublegalarea->id }}"
-                                                @if ($team->sub_legal_area_id == $sublegalarea->id) selected @endif>{{ $sublegalarea->name }}
+                                                @php
+                                                    $ids = explode(',',$team->sub_legal_area_id) @endphp
+                                                @foreach ($ids as $id)
+                                                {{ $id == $sublegalarea->id ? 'selected' : '' }}
+                                                @endforeach>{{ $sublegalarea->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -148,7 +168,8 @@
                                         class="custom-select @error('status') is-invalid @enderror">
                                         <option value="">--Select Status--</option>
                                         <option value="1" {{ $team->status == 1 ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ $team->status == 0 ? 'selected' : '' }}>Inactive</option>
+                                        <option value="0" {{ $team->status == 0 ? 'selected' : '' }}>Inactive
+                                        </option>
                                     </select>
                                     @error('status')
                                         <span class="alert text-danger" role="alert">
@@ -192,6 +213,8 @@
     <script>
         $(document).ready(function() {
             $('.dropify').dropify();
+            $('#sub_legal_area_id').select2();
+            $('#legal_area_id').select2();
         });
         CKEDITOR.replace('details', {
             toolbarGroups: [{

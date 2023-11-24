@@ -109,8 +109,8 @@
                                 </div>
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                     <label for="legal_area_id"><b>Legal Area</b><span class="text-danger">*</span></label>
-                                    <select name="legal_area_id" id="legal_area_id"
-                                        class="custom-select @error('legal_area_id') is-invalid @enderror">
+                                    <select name="legal_area_id[]" id="legal_area_id"
+                                        class="custom-select @error('legal_area_id') is-invalid @enderror" multiple="multiple">
                                         <option value="">--Select Legal Area--</option>
                                         @foreach ($legalareas as $legalarea)
                                             <option value="{{ $legalarea->id}}">{{ $legalarea->name}}</option>
@@ -124,8 +124,8 @@
                                 </div>
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                     <label for="sub_legal_area_id"><b>Sub Legal Area</b><span class="text-danger">*</span></label>
-                                    <select name="sub_legal_area_id" id="sub_legal_area_id"
-                                        class="custom-select @error('sub_legal_area_id') is-invalid @enderror">
+                                    <select name="sub_legal_area_id[]" id="sub_legal_area_id"
+                                        class="custom-select @error('sub_legal_area_id') is-invalid @enderror" multiple="multiple">
                                         <option value="">--Select Sub Legal Area--</option>
                                         {{-- @foreach ($legalareas as $legalarea)
                                             <option value="{{ $legalarea->id}}">{{ $legalarea->name}}</option>
