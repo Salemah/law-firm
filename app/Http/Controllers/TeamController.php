@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\legalarea;
 use App\Models\SubLegalArea;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\Hash;
+
 class TeamController extends Controller
 {
     /**
@@ -58,7 +61,8 @@ class TeamController extends Controller
     {
         try {
             $legalareas = legalarea::get();
-            return view('admin.pages.team.create',compact('legalareas'));
+            $sublegalareas = SubLegalArea::get();
+            return view('admin.pages.team.create',compact('legalareas', 'sublegalareas'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -94,6 +98,19 @@ class TeamController extends Controller
 
             $data->save();
 
+            $user=  new User();
+            // if ($request->file('image')) {
+            //     $files = $request->file('image');
+            //     $filenames = time() . $files->getClientOriginalName();
+            //     $files->move(public_path('/image/user'), $filenames);
+            //     $user->image = $filenames;
+            // }
+            $user->name = $request->name;
+            $user->email  = $request->email;
+
+            $user->password  = Hash::make($request->password);
+
+            $user->save();
             return redirect()->route('admin.team.index')->with('message', 'Create successfull.');
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());

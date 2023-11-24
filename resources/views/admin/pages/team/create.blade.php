@@ -127,9 +127,9 @@
                                     <select name="sub_legal_area_id[]" id="sub_legal_area_id"
                                         class="custom-select @error('sub_legal_area_id') is-invalid @enderror" multiple="multiple">
                                         <option value="">--Select Sub Legal Area--</option>
-                                        {{-- @foreach ($legalareas as $legalarea)
-                                            <option value="{{ $legalarea->id}}">{{ $legalarea->name}}</option>
-                                        @endforeach --}}
+                                        @foreach ($sublegalareas as $sublegalarea)
+                                            <option value="{{ $sublegalarea->id}}">{{ $sublegalarea->name}}</option>
+                                        @endforeach
                                     </select>
                                     @error('sub_legal_area_id')
                                         <span class="alert text-danger" role="alert">
@@ -163,6 +163,28 @@
                                         </span>
                                     @enderror
                                 </div>
+                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="email"><b>Email</b><span class="text-danger">*</span></label>
+                                    <input type="email" name="email" id="email"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        value="{{ old('email') }}" placeholder="Enter Post User Name">
+                                    @error('email')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="password"><b>Password</b><span class="text-danger">*</span></label>
+                                    <input type="password" name="password" id="password"
+                                        class="form-control @error('password') is-invalid @enderror"
+                                        value="{{ old('password') }}" placeholder="Enter Post password">
+                                    @error('password')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-primary">Submit</button>
@@ -191,33 +213,7 @@
             $('.dropify').dropify();
             $('#legal_area_id').select2();
 
-            $('#sub_legal_area_id').select2({
-            ajax: {
-                url: '{{route('admin.team.sublegalarea')}}',
-                dataType: 'json',
-                type: "POST",
-                data: function (params) {
-                    var query = {
-                        search: params.term,
-                        legal_area_id: $('#legal_area_id').val()
-                    }
-                    return query;
-                },
-                processResults: function (data) {
-                    console.log();
-                    // Transforms the top-level key of the response object from 'items' to 'results'
-                    return {
-                        results: $.map(data, function (item) {
-                            return {
-                                text: item.name,
-                                value: item.id,
-                                id: item.id,
-                            }
-                        })
-                    };
-                }
-            }
-        });
+            $('#sub_legal_area_id').select2();
         });
 
         CKEDITOR.replace('details', {
