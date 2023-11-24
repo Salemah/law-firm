@@ -29,7 +29,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Dashboard</h1>
+                    <h1 class="m-0 text-dark">Team</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -115,7 +115,7 @@
                                         @foreach ($legalareas as $legalarea)
                                             <option value="{{ $legalarea->id }}"
                                                  @php
-                                                    $ids = explode(',',$team->legal_area_id) @endphp
+                                                    $ids = json_decode($team->legal_area_id) @endphp
                                                 @foreach ($ids as $id)
                                                 {{ $id == $legalarea->id ? 'selected' : '' }}
                                                 @endforeach
@@ -138,7 +138,8 @@
                                         @foreach ($sublegalareas as $sublegalarea)
                                             <option value="{{ $sublegalarea->id }}"
                                                 @php
-                                                    $ids = explode(',',$team->sub_legal_area_id) @endphp
+
+                                                    $ids = json_decode($team->sub_legal_area_id) @endphp
                                                 @foreach ($ids as $id)
                                                 {{ $id == $sublegalarea->id ? 'selected' : '' }}
                                                 @endforeach>{{ $sublegalarea->name }}
@@ -202,7 +203,7 @@
                                     <label for="password"><b>Password</b><span class="text-danger">*</span></label>
                                     <input type="password" name="password" id="password"
                                         class="form-control @error('password') is-invalid @enderror"
-                                        value="{{ $user->password }}" placeholder="Enter Post password">
+                                        value="" placeholder="Enter Post password">
                                     @error('password')
                                         <span class="alert text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
