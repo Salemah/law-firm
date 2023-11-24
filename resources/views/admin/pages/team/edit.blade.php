@@ -187,6 +187,28 @@
                                         </span>
                                     @enderror
                                 </div>
+                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="email"><b>Email</b><span class="text-danger">*</span></label>
+                                    <input type="email" name="email" id="email"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        value="{{ $user->email }}" placeholder="Enter Post User Name">
+                                    @error('email')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="password"><b>Password</b><span class="text-danger">*</span></label>
+                                    <input type="password" name="password" id="password"
+                                        class="form-control @error('password') is-invalid @enderror"
+                                        value="{{ $user->password }}" placeholder="Enter Post password">
+                                    @error('password')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-primary">Submit</button>

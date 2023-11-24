@@ -78,7 +78,19 @@ class TeamController extends Controller
             'name' => 'required',
         ]);
         try {
+            $user =  new User();
+            // if ($request->file('image')) {
+            //     $files = $request->file('image');
+            //     $filenames = time() . $files->getClientOriginalName();
+            //     $files->move(public_path('/image/user'), $filenames);
+            //     $user->image = $filenames;
+            // }
+            $user->name = $request->name;
+            $user->email  = $request->email;
 
+            $user->password  = Hash::make($request->password);
+
+            $user->save();
             $data = new Team();
 
             if ($request->file('image')) {
@@ -95,22 +107,10 @@ class TeamController extends Controller
             $data->name = $request->name;
             $data->details = $request->details;
             $data->status = $request->status;
-
+            $data->user_id = $user->id;
             $data->save();
 
-            $user=  new User();
-            // if ($request->file('image')) {
-            //     $files = $request->file('image');
-            //     $filenames = time() . $files->getClientOriginalName();
-            //     $files->move(public_path('/image/user'), $filenames);
-            //     $user->image = $filenames;
-            // }
-            $user->name = $request->name;
-            $user->email  = $request->email;
 
-            $user->password  = Hash::make($request->password);
-
-            $user->save();
             return redirect()->route('admin.team.index')->with('message', 'Create successfull.');
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
@@ -134,7 +134,8 @@ class TeamController extends Controller
             $team =  Team::findOrFail($id);
             $legalareas = legalarea::get();
             $sublegalareas = SubLegalArea::get();
-            return view('admin.pages.team.edit',compact('team', 'legalareas', 'sublegalareas'));
+            $user = User::find($team->user_id);
+            return view('admin.pages.team.edit',compact('user','team', 'legalareas', 'sublegalareas'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -149,6 +150,7 @@ class TeamController extends Controller
             'name' => 'required',
         ]);
         try {
+
 
 
             $data = Team::findOrFail($id);
@@ -169,6 +171,19 @@ class TeamController extends Controller
             $data->status = $request->status;
 
             $data->update();
+            $user = User::find($data->user_id);
+            // if ($request->file('image')) {
+            //     $files = $request->file('image');
+            //     $filenames = time() . $files->getClientOriginalName();
+            //     $files->move(public_path('/image/user'), $filenames);
+            //     $user->image = $filenames;
+            // }
+            $user->name = $request->name;
+            $user->email  = $request->email;
+
+            $user->password  = Hash::make($request->password);
+
+            $user->update();
 
             return redirect()->route('admin.team.index')->with('message', 'Create successfull.');
         } catch (\Exception $exception) {
