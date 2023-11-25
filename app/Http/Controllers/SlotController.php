@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Slot;
 use App\Models\Team;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -22,6 +23,9 @@ class SlotController extends Controller
                     ->addIndexColumn()
                     ->addColumn('name', function ($Category) {
                         return $Category->Team->name;
+                    })
+                    ->addColumn('from_time', function ($Category) {
+                        return Carbon::parse($Category->from_time)->format('g:i A');
                     })
 
 
@@ -74,16 +78,94 @@ class SlotController extends Controller
             // $data->day                =       $request->day;
             // $data->from_time                =       $request->from_time;
             // $data->save();
-            foreach ($request->days as $key => $day) {
+            if(count($request->from_time_saturday)>1){
 
+                foreach ($request->from_time_saturday as $key => $day) {
                 $List = new Slot();
-                $List->team_id =$request->team_id;
+                $List->team_id = $request->team_id;
                 $user = Team::find($request->team_id);
                 $List->user_id = $user->user_id;
-                $List->day = $day;
-                $List->from_time = $request->from_time[$key];
+                $List->day = 'Saturday';
+                $List->from_time = $day;
                 $List->save();
+                }
             }
+            if(count($request->from_time_sunday) >1){
+                foreach ($request->from_time_sunday as $key => $day) {
+                $List = new Slot();
+                $List->team_id = $request->team_id;
+                $user = Team::find($request->team_id);
+                $List->user_id = $user->user_id;
+                $List->day = 'Sunday';
+                $List->from_time = $day;
+                $List->save();
+                }
+            }
+            if(count($request->from_time_monday) >1){
+                foreach ($request->from_time_monday as $key => $day) {
+                $List = new Slot();
+                $List->team_id = $request->team_id;
+                $user = Team::find($request->team_id);
+                $List->user_id = $user->user_id;
+                $List->day = 'Monday';
+                $List->from_time = $day;
+                $List->save();
+                }
+            }
+            if(count($request->from_time_tuesday) >1){
+                foreach ($request->from_time_tuesday as $key => $day) {
+                $List = new Slot();
+                $List->team_id = $request->team_id;
+                $user = Team::find($request->team_id);
+                $List->user_id = $user->user_id;
+                $List->day = 'Tuesday';
+                $List->from_time = $day;
+                $List->save();
+                }
+            }
+            if(count($request->from_time_wednesday) >1){
+                foreach ($request->from_time_wednesday as $key => $day) {
+                $List = new Slot();
+                $List->team_id = $request->team_id;
+                $user = Team::find($request->team_id);
+                $List->user_id = $user->user_id;
+                $List->day = 'Wednesday';
+                $List->from_time = $day;
+                $List->save();
+                }
+            }
+            if(count($request->from_time_thursday) >1){
+                foreach ($request->from_time_thursday as $key => $day) {
+                $List = new Slot();
+                $List->team_id = $request->team_id;
+                $user = Team::find($request->team_id);
+                $List->user_id = $user->user_id;
+                $List->day = 'Thursday';
+                $List->from_time = $day;
+                $List->save();
+                }
+            }
+            if(count($request->from_time_friday) >1){
+                foreach ($request->from_time_friday as $key => $day) {
+                $List = new Slot();
+                $List->team_id = $request->team_id;
+                $user = Team::find($request->team_id);
+                $List->user_id = $user->user_id;
+                $List->day = 'friday';
+                $List->from_time = $day;
+                $List->save();
+                }
+            }
+            // foreach ($request->days as $key => $day) {
+
+            //     $List = new Slot();
+            //     $List->team_id =$request->team_id;
+            //     $user = Team::find($request->team_id);
+            //     $List->user_id = $user->user_id;
+            //     $List->day = $day;
+            //     $List->from_time = $request->from_time[$key];
+            //     $List->save();
+            // }
 
             return redirect()->route('admin.slot.index')
                 ->with('message', ' Created Successfully');

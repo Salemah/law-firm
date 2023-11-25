@@ -73,6 +73,7 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
+      
         $request->validate([
             'image' => 'required',
             'name' => 'required',
