@@ -7,6 +7,7 @@ use App\Models\cased;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\company;
+use App\Models\contact;
 use App\Models\DashboardSetting;
 use App\Models\legalarea;
 use App\Models\MakeUsUnique;
@@ -167,6 +168,11 @@ class HomeController extends Controller
     }
     public function aboutus(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'icon' => 'required',
+        ]);
         try {
             $aboutus =  AboutUs::first();
             $uniques =  MakeUsUnique::take(3)->get();
@@ -229,6 +235,27 @@ class HomeController extends Controller
 
 
             return view('frontend.slot',compact('slots', 'team', 'orders'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
+    public function ContactMessageInsert(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'message' => 'required',
+        ]);
+        try {
+            $message =  new contact();
+            $message->name = $request->username;
+            $message->email= $request->email;
+            $message->phone = $request->phone;
+            $message->description = $request->message;
+            $message->save();
+
+            return redirect()->back()->with('message', 'successfull.');
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

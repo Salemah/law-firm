@@ -47,6 +47,7 @@ Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
     Route::get('our-service-sub/{id?}', [HomeController::class, 'ourservicesub'])->name('ourservice.sub');
     Route::get('our-team-area-wise/{id?}', [HomeController::class, 'ourteamAreaWise'])->name('ourteam.area.wise');
     Route::get('view-shedule/{id?}', [HomeController::class, 'ViewShedule'])->name('view.shedule');
+    Route::post('contact-message/{id?}', [HomeController::class, 'ContactMessageInsert'])->name('contact.message');
 });
 // Category
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
