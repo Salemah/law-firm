@@ -189,7 +189,8 @@ class SlotController extends Controller
     {
         try {
             $category = Slot::findOrFail($id);
-            return view('admin.pages.slot.edit', compact('category'));
+            $teams = Team::get();
+            return view('admin.pages.slot.edit', compact('category', 'teams'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -202,8 +203,7 @@ class SlotController extends Controller
     {
         $request->validate([
             'team_id'            =>      'required',
-            'user_id'            =>      'required',
-            'day'            =>      'required',
+
             'from_time'            =>      'required',
             // 'user_id'            =>      'required',
         ]);
@@ -211,8 +211,8 @@ class SlotController extends Controller
         try {
             $data = Slot::findOrFail($id);
             $data->team_id                 =       $request->team_id;
-            $data->user_id                =       $request->user_id;
-            $data->day                =       $request->day;
+            $user = Team::find($request->team_id);
+            $data->user_id = $user->user_id;
             $data->from_time                =       $request->from_time;
             $data->update();
 
