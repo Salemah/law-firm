@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DemoMail;
 use App\Models\AboutUs;
 use App\Models\cased;
 use App\Models\Category;
@@ -20,6 +21,7 @@ use App\Models\Team;
 use App\Models\WelcomeSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -254,6 +256,16 @@ class HomeController extends Controller
             $message->phone = $request->phone;
             $message->description = $request->message;
             $message->save();
+            $mailData = [
+                'title' => 'Mail from Arc',
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'username' => $request->username,
+                'body' => $request->message,
+            ];
+
+            Mail::to('arc.law.contact@gmail.com')->send(new DemoMail($mailData));
+
 
             return redirect()->back()->with('message', 'successfull.');
         } catch (\Exception $exception) {
