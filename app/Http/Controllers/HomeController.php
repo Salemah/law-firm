@@ -18,6 +18,7 @@ use App\Models\SubLegalArea;
 use App\Models\Team;
 use App\Models\WelcomeSection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -221,8 +222,13 @@ class HomeController extends Controller
     {
         try {
             $slots =  Slot::where('team_id', $request->id)->get();
+            $team = Team::find($request->id);
+            $orders = Slot::orderBy('created_at')->get()->groupBy(function ($data) {
+                return $data->day;
+            });;
 
-            return view('frontend.slot',compact('slots'));
+
+            return view('frontend.slot',compact('slots', 'team', 'orders'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }

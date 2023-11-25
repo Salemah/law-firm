@@ -5,7 +5,7 @@
     <!-- Page Title -->
     <section class="page-title" style="background-image:url({{ URL::asset('frontend/images/background/1.jpg') }})">
         <div class="auto-container">
-            <h1>  Appointment Shedule</h1>
+            <h1> Appointment Shedule</h1>
             <ul class="page-breadcrumb">
                 <li><a href="{{ URL('/') }}">home</a></li>
                 <li>Appointment Shedule</li>
@@ -18,16 +18,20 @@
         <div class="auto-container">
             <!-- Sec Title -->
             <div class="sec-title centered">
-                <h2>Our Professional Team</h2>
+                <h2>{{ $team->name }}</h2>
             </div>
             <div class="row clearfix">
-                @foreach ($slots as $team)
-                    <div class="team-block col-lg-3 col-md-6 col-sm-12">
+                @foreach ($orders as $day => $teams)
+                    <div class="team-block col-3">
                         <div>
-                            {{$team->day}}
+                            <h4  class="mb-2"> <b>{{ $day }}</b></h4>
+                            @foreach ($teams as $team)
+                                <div class=""><button class="btn btn-sm btn-success my-2" title="Click To Appoinment">{{ Carbon\Carbon::parse($team->from_time)->format('g:i A') }}</button></div>
+                            @endforeach
+
                         </div>
                         <div>
-                            {{Carbon\Carbon::parse($team->time)->format('g:i A')}}
+
                         </div>
                         {{-- <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                             <div class="image">
