@@ -136,6 +136,7 @@
       }(document, 'script', 'facebook-jssdk'));
     </script>
     @include('frontend.layouts.partials.script')
+    @yield('script')
 </body>
 
 <!-- Mirrored from html.designingmedia.com/counsel-law/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Nov 2023 15:27:32 GMT -->

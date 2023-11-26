@@ -19,6 +19,7 @@ use App\Models\Slot;
 use App\Models\SubLegalArea;
 use App\Models\Team;
 use App\Models\WelcomeSection;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -267,10 +268,27 @@ class HomeController extends Controller
             Mail::to('arc.law.contact@gmail.com')->send(new DemoMail($mailData));
 
 
-            return redirect()->back()->with('message', 'successfull.');
+            return redirect()->back()->with('message', 'We Received Your Message . Thank You.');
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
+    }
+    public function SlotData(Request $request)
+    {
+        $query = Slot::with('Team')->find($request->id);
+        $time = Carbon::parse($query->from_time)->format('g:i A');
+        if (!$query) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Not Found, Please Try Again...',
+            ], 422);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $query,
+            'time' => $time,
+        ]);
     }
 
 }

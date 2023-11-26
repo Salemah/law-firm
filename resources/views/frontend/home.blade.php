@@ -123,8 +123,6 @@
                             </div>
                         </div>
                     @endforeach
-
-
                 </div>
             </div>
         </div>
@@ -317,8 +315,17 @@
 
                     <!-- Default Form -->
                     <div class="default-form">
-                        <form method="post"
-                            action="https://html.designingmedia.com/counsel-law/{{ route('home.contact') }}">
+                             @if (session('message'))
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ session('message') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+                           <form method="post" action="{{ route('home.contact.message') }}" id="" method="POST">
+                    @csrf
                             <div class="row clearfix">
 
                                 <div class="col-lg-6 col-md-6 col-sm-12 form-group">
@@ -330,13 +337,7 @@
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                    <select class="custom-select-box">
-                                        <option>Practice Area</option>
-                                        <option>Area 01</option>
-                                        <option>Area 02</option>
-                                        <option>Area 03</option>
-                                        <option>Area 04</option>
-                                    </select>
+                                    <input type="email" name="email" placeholder="Email" required>
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12 form-group">

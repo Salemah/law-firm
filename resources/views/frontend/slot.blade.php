@@ -24,9 +24,13 @@
                 @foreach ($orders as $day => $teams)
                     <div class="team-block col-3">
                         <div>
-                            <h4  class="mb-2"> <b>{{ $day }}</b></h4>
+                            <h4 class="mb-2"> <b>{{ $day }}</b></h4>
                             @foreach ($teams as $team)
-                                <div class=""><button class="btn btn-sm btn-success my-2" title="Click To Appoinment">{{ Carbon\Carbon::parse($team->from_time)->format('g:i A') }}</button></div>
+                                <div class=""><button class="btn btn-sm btn-success my-2 appointment-modal"
+                                        data-id="{{ $team->id }}"
+                                        id="appointment-modal"
+                                        title="Click To Appoinment">{{ Carbon\Carbon::parse($team->from_time)->format('g:i A') }}</button>
+                                </div>
                             @endforeach
 
                         </div>
@@ -55,7 +59,72 @@
     <!-- End Team Section -->
 
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Appointment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   <div class="row">
+                    <div class="col-6">
+                        <p >CONSULTANT : <span id="team-name"></span></p>
+                    </div>
+                    <div class="col-6">
+                        <p > DAY : <span id="day"></span></p>
+                    </div>
+                    <div class="col-6">
+                        <p > Time : <span id="time"></span></p>
+                    </div>
+                     <div class="col-12 form-group">
+                                    <textarea name="message"  placeholder="Message"></textarea>
+                                </div>
+                   </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
+
+@endsection
+@section('script')
+    <script>
+        $(".appointment-modal").click(function() {
+            let Id = $(this).data('id');
+			// $('#hidden-id').removeAttr("disabled");
+			// $('#hidden-id').val(Id);
+
+             $.ajax({
+                type: "GET",
+                url: "{{route('home.slot.data')}}",
+                dataType: 'json',
+                data: { "id": Id },
+                success: function (resp) {
+                    console.log(resp.data.team.name);
+
+                    $('#team-name').html(resp.data.team.name);
+                    $('#day').html(resp.data.day);
+                    $('#time').html(resp.time);
+                   // Reloade DataTable
+                    $('#exampleModal').modal('show');
+                }, // success end
+                error: function (error) {
+                    location.reload();
+                } // Error
+            })
+
+            // data-toggle="modal" data-target="#exampleModal"
+        });
+    </script>
 @endsection
