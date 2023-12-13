@@ -22,7 +22,12 @@
         <div class="main-slider-carousel owl-carousel owl-theme">
 
             @foreach ($sliders as $slider)
-                <div class="slide" style="background-image: url({{ URL::asset('/image/slider/' . $slider->image) }})">
+                <div class="slide" style="background-image: url({{ URL::asset('/image/slider/' . $slider->image) }});height: 100%;
+width: 100%;
+/* extended code */
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center center;">
                     <div class="auto-container">
 
                         <!-- Content Column -->
