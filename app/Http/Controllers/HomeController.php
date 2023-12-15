@@ -232,7 +232,7 @@ class HomeController extends Controller
         try {
             $slots =  Slot::where('team_id', $request->id)->get();
             $team = Team::find($request->id);
-            $orders = Slot::orderBy('created_at')->get()->groupBy(function ($data) {
+            $orders = Slot::where('team_id', $request->id)->get()->groupBy(function ($data) {
                 return $data->day;
             });;
 
