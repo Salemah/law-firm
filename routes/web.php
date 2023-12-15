@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AppoinmentController;
 use App\Http\Controllers\Casecontroller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
@@ -49,7 +50,9 @@ Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
     Route::get('view-shedule/{id?}', [HomeController::class, 'ViewShedule'])->name('view.shedule');
     Route::post('contact-message/{id?}', [HomeController::class, 'ContactMessageInsert'])->name('contact.message');
     Route::get('slot-data/{id?}', [HomeController::class, 'SlotData'])->name('slot.data');
+
 });
+Route::post('appointment/save', [AppoinmentController::class, 'AppointmentSave'])->name('appointment.save');
 // Category
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('category', CategoryController::class)->middleware(['auth', 'verified']);
@@ -108,7 +111,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     });
     Route::resource('sublegalarea', SubLegalAreaController::class)->middleware(['auth', 'verified']);
 
+
 });
+// Route::get('send-mail', [MailController::class, 'index']);
 Route::get('/dashboard', function () {
     return view('admin.dashboard.master');
 })->middleware(['auth', 'verified'])->name('dashboard');

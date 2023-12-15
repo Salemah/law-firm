@@ -29,6 +29,7 @@
     <title>
         @yield('title')
     </title>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
     @php
         $dashboard_settings = \Illuminate\Support\Facades\DB::table('dashboard_settings')->first();
     @endphp

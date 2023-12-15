@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AppointmentMail;
 use App\Mail\DemoMail;
 use App\Models\AboutUs;
+use App\Models\Appoiinment;
 use App\Models\cased;
 use App\Models\Category;
 use App\Models\Client;
@@ -235,9 +237,10 @@ class HomeController extends Controller
             $orders = Slot::where('team_id', $request->id)->get()->groupBy(function ($data) {
                 return $data->day;
             });;
+            $appointments = Appoiinment::get();
 
 
-            return view('frontend.slot',compact('slots', 'team', 'orders'));
+            return view('frontend.slot',compact('slots', 'team', 'orders', 'appointments'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -277,6 +280,30 @@ class HomeController extends Controller
     {
         $query = Slot::with('Team')->find($request->id);
         $time = Carbon::parse($query->from_time)->format('g:i A');
+
+
+        // Get the current date
+        $currentDate = Carbon::now();
+
+        // Find the next occurrence of the specified day name
+        $nextDate = $currentDate->next($query->day);
+
+        // If the next occurrence is today and it has already passed, get the occurrence for next week
+        if ($nextDate->isPast()) {
+            $nextDate = $currentDate->next($query->day);
+        }
+
+        // Format the date as per your requirements
+        $formattedDate = $nextDate->format('d-m-Y');
+        $appointment = Appoiinment::where('date', $formattedDate)->first();
+
+        if($appointment){
+            return response()->json([
+                'status' => 'error',
+                'data' => $query,
+                'time' => $time,
+            ]);
+        }
         if (!$query) {
             return response()->json([
                 'status' => 'error',
