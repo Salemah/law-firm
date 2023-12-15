@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
-use Spatie\Permission\PermissionServiceProvider;
+
 
 return [
 
@@ -170,7 +170,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-        PermissionServiceProvider::class,
+
     ])->toArray(),
 
     /*
