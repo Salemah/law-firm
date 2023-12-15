@@ -64,7 +64,7 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header " style="background-color: #E1A122;color:white;">
                     <h5 class="modal-title" id="exampleModalLabel">Appointment</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -72,17 +72,17 @@
                 </div>
                 <div class="modal-body">
                    <div class="row">
-                    <div class="col-6">
+                    <div class="col-12 text-center " style="color: black;font-weight:bold;">
                         <p >CONSULTANT : <span id="team-name"></span></p>
                     </div>
                     <div class="col-6">
-                        <p > DAY : <span id="day"></span></p>
+                        <p > DAY : <span id="day"  class="text-primary"></span></p>
                     </div>
                     <div class="col-6">
-                        <p > Time : <span id="time"></span></p>
+                        <p > TIME : <span id="time" class="text-primary"></span></p>
                     </div>
                      <div class="col-12 form-group">
-                                    <textarea name="message"  placeholder="Message"></textarea>
+                                    <textarea rows="4" name="message" class="form-control"  placeholder="Message" style="border:1px solid black"></textarea>
                                 </div>
                    </div>
                 </div>
