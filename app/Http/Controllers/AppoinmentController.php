@@ -39,8 +39,7 @@ class AppoinmentController extends Controller
             }
 
             // Format the date as per your requirements
-
-
+            $formattedDate = $nextDate->format('d-m-Y');
 
 
 
@@ -49,9 +48,10 @@ class AppoinmentController extends Controller
             $message->team_id = $request->team_id;
             $message->user_id= Auth::user()->id;
             $message->message = $request->message;
-            $message->date= $nextDate->format('d-m-Y');
+            $message->date=$formattedDate;
+            $message->time= $slot->from_time;
             $message->save();
-            
+
 
             $user = User::find(Auth::user()->id);
 

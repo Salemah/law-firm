@@ -28,9 +28,29 @@
                         <div>
                             <h4 class="mb-2"> <b>{{ $day }}</b></h4>
                             @foreach ($teams as $team)
-                                <div class=""><button class="btn btn-sm btn-success my-2 appointment-modal"
-                                        data-id="{{ $team->id }}" id="appointment-modal"
-                                        title="Click To Appoinment">{{ Carbon\Carbon::parse($team->from_time)->format('g:i A') }}</button>
+                                <div class="">
+                                    <button class="btn btn-sm btn-success my-2 appointment-modal"
+                                        data-id="{{ $team->id }}" id="appointment-modal" title="Click To Appoinment"
+                                        @foreach ($appointments as $appointment)
+                                         @php
+                                              $currentDate = Carbon\Carbon::now();
+
+                                                // Find the next occurrence of the specified day name
+                                                $nextDate = $currentDate->next($team->day);
+
+                                                // If the next occurrence is today and it has already passed, get the occurrence for next week
+                                                if ($nextDate->isPast()) {
+                                                    $nextDate = $currentDate->next($team->day);
+                                                }
+
+                                                // Format the date as per your requirements
+                                                $formattedDate = $nextDate->format('d-m-Y');
+                                         @endphp
+                                         @if ($appointment->date == $formattedDate && $team->from_time == $appointment->time )
+                                             disabled
+                                         @endif @endforeach>
+
+                                        {{ Carbon\Carbon::parse($team->from_time)->format('g:i A') }} {{$formattedDate}}</button>
                                 </div>
                             @endforeach
 
@@ -52,7 +72,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <form id="branch_insert_update" accept-charset="utf-8" enctype="multipart/form-data" method="post"
@@ -119,24 +139,24 @@
                     "id": Id
                 },
                 success: function(resp) {
-                  if(resp.status=='error'){
-                     Swal.fire(
+                    if (resp.status == 'error') {
+                        Swal.fire(
                             'Sorry',
                             'Sheduled Is Booked',
                             'error'
                         )
-                  }
-                  else{
-                    $('#team-name').html(resp.data.team.name);
-                    $('#slot_id').val(resp.data.id);
-                    $('#team_id').val(resp.data.team_id);
-                    $('#day').html(resp.data.day);
-                    $('#time').html(resp.time);
-                    // Reloade DataTable
-                    $('#exampleModal').modal('show');}
+                    } else {
+                        $('#team-name').html(resp.data.team.name);
+                        $('#slot_id').val(resp.data.id);
+                        $('#team_id').val(resp.data.team_id);
+                        $('#day').html(resp.data.day);
+                        $('#time').html(resp.time);
+                        // Reloade DataTable
+                        $('#exampleModal').modal('show');
+                    }
                 }, // success end
                 error: function(error) {
-                     location.reload();
+                    location.reload();
 
                 } // Error
             })
@@ -179,5 +199,3 @@
         });
     </script>
 @endsection
-
-

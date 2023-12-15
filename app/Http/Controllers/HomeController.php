@@ -295,7 +295,7 @@ class HomeController extends Controller
 
         // Format the date as per your requirements
         $formattedDate = $nextDate->format('d-m-Y');
-        $appointment = Appoiinment::where('date', $formattedDate)->first();
+        $appointment = Appoiinment::where('date', $formattedDate)->where('time', $query->from_time) ->first();
 
         if($appointment){
             return response()->json([
