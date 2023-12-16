@@ -53,6 +53,7 @@ Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
     Route::get('slot-data/{id?}', [HomeController::class, 'SlotData'])->name('slot.data');
 
 });
+Route::post('signin-process', [HomeController::class, 'SignInProcess'])->name('sign-in.process');
 Route::post('appointment/save', [AppoinmentController::class, 'AppointmentSave'])->name('appointment.save');
 // Category
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {

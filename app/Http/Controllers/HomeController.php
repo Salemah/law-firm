@@ -23,6 +23,7 @@ use App\Models\Team;
 use App\Models\WelcomeSection;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -116,6 +117,27 @@ class HomeController extends Controller
     public function update(Request $request, string $id)
     {
         //
+    }
+    public function SignInProcess(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            if (Auth::user()->hasAnyRole('admin')) {
+                return redirect(route('dashboard'));
+            } elseif (Auth::User()->hasAnyRole('team')) {
+                return redirect(route('dashboard'));
+            }  elseif (Auth::User()->hasanyrole('user') ) {
+                return redirect(route('dashboard'));
+            } else {
+                // return redirect(route('my-accounts'));
+            }
+        }
+        return redirect()->back()->with('failed', 'These credentials do not match our records.');
     }
 
     /**
