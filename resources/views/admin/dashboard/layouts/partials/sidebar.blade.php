@@ -185,10 +185,18 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                          {{-- @can('view team') --}}
                         <li class="nav-item">
                             <a href="{{ route('admin.dashboard-setting.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Dashboard Setting</p>
+                            </a>
+                        </li>
+                        {{-- @endcan --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.user_management') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>user_management</p>
                             </a>
                         </li>
                     </ul>

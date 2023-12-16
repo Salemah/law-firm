@@ -210,6 +210,22 @@
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="password"><b>Role</b><span class="text-danger">*</span></label>
+                                    <select name="user_role" class="form-control" required>
+										<option>Select One</option>
+                                        @foreach ($role_permissions as $role)
+										    <option value="{{$role->name}}" @if ($user->type ==$role->name ) selected
+
+                                            @endif>{{$role->name}}</option>
+                                        @endforeach
+									</select>
+                                    @error('user_role')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-primary">Submit</button>

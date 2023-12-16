@@ -17,6 +17,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SlotController;
 use App\Http\Controllers\SubLegalAreaController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\WelcomeSectionController;
 use Illuminate\Support\Facades\Route;
 
@@ -111,6 +112,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     });
     Route::resource('sublegalarea', SubLegalAreaController::class)->middleware(['auth', 'verified']);
 
+    //permission
+
+    Route::post('user_management/update', [UserManagementController::class, 'UserManagementAddUpdate'])->name('user_management.update');
+    Route::get('user_management/delete/{id}', [UserManagementController::class, 'UserMaagementDelete'])->name('user_management.delete');
+    Route::get('user_management', [UserManagementController::class, 'user_management'])->name('user_management');
+    Route::get('user_management_edit', [UserManagementController::class, 'UserEditData'])->name('user_management.edit');
+    Route::get('user_restiction/edit/{id?}', [UserManagementController::class, 'UserRectictions'])->name('user_restictions.edit');
+    Route::post('user_restiction/update', [UserManagementController::class, 'UserRectictionsUpdate'])->name('user_restictions.update');
+    Route::get('user_management/data', [UserManagementController::class, 'UserDataList'])->name('user_management.data');
+
+    Route::get('user_role_list', [UserManagementController::class, 'userRoleLists'])->name('user_role_list');
+    Route::get('user_role/{id?}', [UserManagementController::class, 'userRole'])->name('user-role');
+    Route::post('user_role/update', [UserManagementController::class, 'userRoleUpdate'])->name('user_role.update');
 
 });
 // Route::get('send-mail', [MailController::class, 'index']);

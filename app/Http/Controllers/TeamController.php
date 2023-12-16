@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class TeamController extends Controller
 {
@@ -62,7 +63,8 @@ class TeamController extends Controller
         try {
             $legalareas = legalarea::get();
             $sublegalareas = SubLegalArea::get();
-            return view('admin.pages.team.create',compact('legalareas', 'sublegalareas'));
+            $role_permissions = Role::with('permissions')->get();
+            return view('admin.pages.team.create',compact('legalareas', 'role_permissions', 'sublegalareas'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -73,7 +75,7 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-      
+
         $request->validate([
             'image' => 'required',
             'name' => 'required',
@@ -88,10 +90,11 @@ class TeamController extends Controller
             // }
             $user->name = $request->name;
             $user->email  = $request->email;
-
+            $user->type = $request->user_role;
             $user->password  = Hash::make($request->password);
 
             $user->save();
+            $user->syncRoles($request->user_role);
             $data = new Team();
 
             if ($request->file('image')) {
@@ -136,7 +139,8 @@ class TeamController extends Controller
             $legalareas = legalarea::get();
             $sublegalareas = SubLegalArea::get();
             $user = User::find($team->user_id);
-            return view('admin.pages.team.edit',compact('user','team', 'legalareas', 'sublegalareas'));
+            $role_permissions = Role::with('permissions')->get();
+            return view('admin.pages.team.edit',compact('user', 'role_permissions','team', 'legalareas', 'sublegalareas'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
