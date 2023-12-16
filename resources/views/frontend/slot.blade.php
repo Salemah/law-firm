@@ -31,6 +31,9 @@
                                 <div class="">
                                     <button class="btn btn-sm btn-success my-2 appointment-modal"
                                         data-id="{{ $team->id }}" id="appointment-modal" title="Click To Appoinment"
+                                       @php
+                                           $formattedDate = '';
+                                       @endphp
                                         @foreach ($appointments as $appointment)
                                          @php
                                               $currentDate = Carbon\Carbon::now();
