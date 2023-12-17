@@ -20,12 +20,15 @@ use App\Models\Slider;
 use App\Models\Slot;
 use App\Models\SubLegalArea;
 use App\Models\Team;
+use App\Models\User;
 use App\Models\WelcomeSection;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -138,6 +141,37 @@ class HomeController extends Controller
             }
         }
         return redirect()->back()->with('failed', 'These credentials do not match our records.');
+    }
+    public function SignUpProcess(Request $request)
+    {
+        // dd(12345);
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required|numeric|digits:11|unique:users',
+
+            'password' => 'required',
+            'password_confirmation' => 'required',
+        ]);
+
+        $user = new User();
+        $massage = 'New User Created successfully';
+
+        // $user->uuid = (string) Str::uuid();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+
+        if ($request->password != $request->password_confirmation) {
+            return Redirect::back()->with('failed', 'Password & Re-type Password Did Not Match.');
+        }
+        if (!empty($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->type = 'user';
+        $user->assignRole('user');
+        $user->save();
+        return redirect()->route('login')->with('message', 'Sign-up Successfully Completed!');
     }
 
     /**

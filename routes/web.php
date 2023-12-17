@@ -54,6 +54,7 @@ Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
 
 });
 Route::post('signin-process', [HomeController::class, 'SignInProcess'])->name('sign-in.process');
+Route::post('signUp-process', [HomeController::class, 'SignUpProcess'])->name('sign-Up.process');
 Route::post('appointment/save', [AppoinmentController::class, 'AppointmentSave'])->name('appointment.save');
 // Category
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
