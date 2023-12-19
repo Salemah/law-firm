@@ -50,7 +50,8 @@ Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
     Route::get('our-team-area-wise/{id?}', [HomeController::class, 'ourteamAreaWise'])->name('ourteam.area.wise');
     Route::get('view-shedule/{id?}', [HomeController::class, 'ViewShedule'])->name('view.shedule');
     Route::post('contact-message/{id?}', [HomeController::class, 'ContactMessageInsert'])->name('contact.message');
-    Route::get('slot-data/{id?}', [HomeController::class, 'SlotData'])->name('slot.data');
+    Route::get('slot-data/{id?}/{aptDate?}', [HomeController::class, 'SlotData'])->name('slot.data');
+    Route::get('slot/data/get', [HomeController::class, 'SlotDataGet'])->name('appointment.check');
 
 });
 Route::post('signin-process', [HomeController::class, 'SignInProcess'])->name('sign-in.process');

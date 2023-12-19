@@ -45,10 +45,10 @@ class AppoinmentController extends Controller
 
             $message =  new Appoiinment();
             $message->slot_id = $request->slot_id;
-            $message->team_id = $request->team_id;
+            $message->team_id = $request->team_idd;
             $message->user_id= Auth::user()->id;
             $message->message = $request->message;
-            $message->date=$formattedDate;
+            $message->date= $request->aptDate;
             $message->time= $slot->from_time;
             $message->save();
 

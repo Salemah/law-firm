@@ -334,6 +334,7 @@ class HomeController extends Controller
     }
     public function SlotData(Request $request)
     {
+        //dd($request->all());
         $query = Slot::with('Team')->find($request->id);
         $time = Carbon::parse($query->from_time)->format('g:i A');
 
@@ -350,7 +351,9 @@ class HomeController extends Controller
         }
 
         // Format the date as per your requirements
-        $formattedDate = $nextDate->format('d-m-Y');
+        // $formattedDate = $nextDate->format('d-m-Y');
+        $formattedDate = Carbon::parse($request->aptDate)->format('d-m-Y');
+
         $appointment = Appoiinment::where('date', $formattedDate)->where('time', $query->from_time) ->first();
 
         if($appointment){
