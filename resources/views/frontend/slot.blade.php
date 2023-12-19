@@ -89,14 +89,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-<<<<<<< HEAD
-                        <input type="text" name="slot_id" id="slot_id">
-                        <input type="hidden" name="team_id" id="team_id">
-=======
                         <input type="hidden" name="slot_id" id="slot_id">
                         <input type="hidden" name="team_idd" id="team_idd">
                         <input type="text" name="aptDate" id="aptDate">
->>>>>>> parent of c57ee33 (Revert "update")
                         <div class="row">
                             <div class="col-12 text-center " style="color: black;font-weight:bold;">
                                 <p>CONSULTANT : <span id="team-name"></span></p>
