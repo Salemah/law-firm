@@ -135,13 +135,6 @@
         });
     </script>
     <script>
-<<<<<<< HEAD
-        $(".appointment-modal").click(function() {
-            let Id = $(this).data('id');
-            // $('#hidden-id').removeAttr("disabled");
-            // $('#hidden-id').val(Id);
-
-=======
         $(function() {
             $("#datepicker").datepicker({
                 dateFormat: "dd-mm-yy",
@@ -205,7 +198,6 @@
             let Id = $(this).data('id');
             let aptDates = $(this).data('apt');
             alert(aptDates);
->>>>>>> parent of c57ee33 (Revert "update")
             $.ajax({
                 type: "GET",
                 url: "{{ route('home.slot.data') }}",

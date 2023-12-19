@@ -373,8 +373,6 @@ class HomeController extends Controller
             'time' => $time,
         ]);
     }
-<<<<<<< HEAD
-=======
     public function SlotDataGet(Request $request)
     {
         // dd($request->all());
@@ -423,6 +421,5 @@ $apt = Appoiinment::get();
             'apts' => $apt,
         ]);
     }
->>>>>>> parent of c57ee33 (Revert "update")
 
 }
