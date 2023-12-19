@@ -303,10 +303,6 @@
             });
         });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 38cdbcd (Revert "update")
         $('body').on('click', '#submitFormm', function() {
             var date = $("#datepicker").datepicker({
                 dateFormat: 'dd,MM,yyyy'
