@@ -50,6 +50,8 @@ class AppoinmentController extends Controller
             $message->message = $request->message;
             $message->date= $request->aptDate;
             $message->time= $slot->from_time;
+            $message->status= 'Pending';
+            $message->payement= null;
             $message->save();
 
 
@@ -75,7 +77,8 @@ class AppoinmentController extends Controller
                     'team' =>  $slot->Team->name,
                     'day' =>  $slot->day,
                     'message' =>  $message->message,
-                    'date' =>  $formattedDate,
+                    'date' =>  $request->aptDate,
+
                 ];
                 Mail::to($user->email)->send(new AppointmentMail($mailData));
           }

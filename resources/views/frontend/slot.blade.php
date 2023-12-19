@@ -5,10 +5,10 @@
     <style>
         .wrapper {
             /* max-width: 18rem;
-                        padding: 0 0.5rem;
-                        margin-left: auto;
-                        margin-right: auto;
-                        padding-top: 4rem; */
+                            padding: 0 0.5rem;
+                            margin-left: auto;
+                            margin-right: auto;
+                            padding-top: 4rem; */
         }
 
         .wrapper label {
@@ -152,19 +152,20 @@
     </section>
     <!-- End Page Title -->
     <!-- Team Section -->
-    <section class="team-section" style="background-image: url({{URL::asset('frontend/images/background/pattern-2.png')}})">
+    <section class="team-section" style="background-image: url({{ URL::asset('frontend/images/background/pattern-2.png') }})">
         <div class="auto-container">
             <!-- Sec Title -->
             <div class="sec-title centered">
-                <img class="mt-1" style="width: 30vh; border-radius:20px" src="{{ URL::asset('/image/team/' . $team->image) }}" alt="{{ $team->image }}" />
+                <img class="mt-1" style="width: 30vh; border-radius:20px"
+                    src="{{ URL::asset('/image/team/' . $team->image) }}" alt="{{ $team->image }}" />
                 <h2>{{ $team->name }}</h2>
 
             </div>
-              <section class="team-section my-2">
-        <div class="auto-container">
+            {{-- <section class="team-section my-2">
+                <div class="auto-container">
 
-        </div>
-    </section>
+                </div>
+            </section> --}}
             <input type="hidden" value="{{ $team->id }}" name="team_id" id="team_id">
             <div class="row ">
                 {{-- @foreach ($orders as $day => $teams)
@@ -208,7 +209,7 @@
                 <!-- Team Block -->
                 <div class="col-12 col-sm-12 col-md-12">
                     <div class="col-8">
-                         <label style="color:black">Select Date</label>
+                        <label style="color:black">Select Date</label>
                         <div class="wrapper">
                             <label for="datepicker" id="label ">Click here to Pick a Date
                                 <input type="text" id="datepicker" autocomplete="off">
@@ -328,14 +329,25 @@
                         for (var i = 0; i < obj.data.length; i++) {
                             var pp = new Date('7/10/2013 ' + obj.data[i].from_time).toLocaleTimeString()
                                 .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-                            console.log();
+                            var q = '';
+                            obj.apts.forEach(element => {
+                                if (obj.aptDate == element.date && obj.data[i].id == element
+                                    .slot_id) {
+                                    q = 'disabled';
+
+                                }
+                            });
+
                             appendString += '<div class="col-4 col-sm-6">' +
                                 '<button class="btn my-2 appointment-modal" style="background: #E1A122"' +
-                                'data-id="' + obj.data[i].id +'"'+
-                                'data-apt="' + obj.aptDate +'"'+
-                                'id="appointment-modal" title="Click To Appoinment">' + pp +
+
+                                'data-id="' + obj.data[i].id + '"' +
+                                'data-apt="' + obj.aptDate + '"' +
+                                'id="appointment-modal" title="Click To Appoinment"' +
+                                '' + q + '="disabled"' + '>' + pp +
                                 '</button>' +
                                 '</div>';
+                            console.log(q);
                         }
                     }
                     $('#tst').empty().append(appendString);
@@ -344,10 +356,9 @@
             });
 
         });
-         $('body').on('click', '.appointment-modal', function() {
+        $('body').on('click', '.appointment-modal', function() {
             let Id = $(this).data('id');
             let aptDates = $(this).data('apt');
-            alert(aptDates);
             $.ajax({
                 type: "GET",
                 url: "{{ route('home.slot.data') }}",
@@ -364,7 +375,7 @@
                             'Sheduled Is Booked',
                             'error'
                         );
-                         $('#tst').empty();
+                        $('#tst').empty();
                     } else {
                         $('#team-name').html(resp.data.team.name);
                         $('#slot_id').val(resp.data.id);
@@ -421,6 +432,5 @@
 
         //     // data-toggle="modal" data-target="#exampleModal"
         // });
-
     </script>
 @endsection

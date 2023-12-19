@@ -42,6 +42,9 @@
                             <p style=" margin: 0px 32px;padding-bottom: 25px;line-height: 2; font-size: 15px;">Your
                                 Message :{{ $mailData['message'] }}
                             </p>
+                            <p style=" margin: 0px 32px;padding-bottom: 25px;line-height: 2; font-size: 15px;">Your
+                                Status : <span style="color: red;font-weight:bolder">Pending</span>
+                            </p>
                             <p style=" margin: 0px 32px;padding-bottom: 25px;line-height: 2; font-size: 15px;width:80vh">
                             </p>
                             <h2 style="margin: 0px; padding-bottom: 25px;">Date: {{ $mailData['date'] }}</h2>
