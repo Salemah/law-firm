@@ -89,8 +89,14 @@
                         </button>
                     </div>
                     <div class="modal-body">
+<<<<<<< HEAD
                         <input type="text" name="slot_id" id="slot_id">
                         <input type="hidden" name="team_id" id="team_id">
+=======
+                        <input type="hidden" name="slot_id" id="slot_id">
+                        <input type="hidden" name="team_idd" id="team_idd">
+                        <input type="text" name="aptDate" id="aptDate">
+>>>>>>> parent of c57ee33 (Revert "update")
                         <div class="row">
                             <div class="col-12 text-center " style="color: black;font-weight:bold;">
                                 <p>CONSULTANT : <span id="team-name"></span></p>
@@ -129,11 +135,77 @@
         });
     </script>
     <script>
+<<<<<<< HEAD
         $(".appointment-modal").click(function() {
             let Id = $(this).data('id');
             // $('#hidden-id').removeAttr("disabled");
             // $('#hidden-id').val(Id);
 
+=======
+        $(function() {
+            $("#datepicker").datepicker({
+                dateFormat: "dd-mm-yy",
+                duration: "fast"
+            });
+        });
+
+        $('body').on('click', '#submitFormm', function() {
+            var date = $("#datepicker").datepicker({
+                dateFormat: 'dd,MM,yyyy'
+            }).val();
+            var teamId = $("#team_id").val();
+            var url = '{{ route('home.appointment.check') }}';
+            var appendString = "";
+            $.ajax({
+                url: url,
+                type: 'get',
+                data: {
+                    "date": date,
+                    "teamId": teamId
+                },
+                success: function(obj) {
+                    if (obj.data.length == 0) {
+                        Swal.fire(
+                            'Sorry',
+                            'No Shedule Available',
+                            'warning'
+                        );
+                    } else {
+                        for (var i = 0; i < obj.data.length; i++) {
+                            var pp = new Date('7/10/2013 ' + obj.data[i].from_time).toLocaleTimeString()
+                                .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+                                var q = '';
+                            obj.apts.forEach(element => {
+                                if(obj.aptDate == element.date && obj.data[i].id == element.slot_id )
+                                {
+                                    q = 'disabled';
+
+                                }
+                            });
+
+                            appendString += '<div class="col-4 col-sm-6">' +
+                                '<button class="btn my-2 appointment-modal" style="background: #E1A122"' +
+
+                                'data-id="' + obj.data[i].id +'"'+
+                                'data-apt="' + obj.aptDate +'"'+
+                                'id="appointment-modal" title="Click To Appoinment"'+
+                                ''+q+'="disabled"'+'>' + pp +
+                                '</button>' +
+                                '</div>';
+                                console.log(q);
+                        }
+                    }
+                    $('#tst').empty().append(appendString);
+                },
+                error: function(error) {}
+            });
+
+        });
+         $('body').on('click', '.appointment-modal', function() {
+            let Id = $(this).data('id');
+            let aptDates = $(this).data('apt');
+            alert(aptDates);
+>>>>>>> parent of c57ee33 (Revert "update")
             $.ajax({
                 type: "GET",
                 url: "{{ route('home.slot.data') }}",
