@@ -387,7 +387,6 @@ class HomeController extends Controller
         $day =Carbon::parse($request->date)->dayName;
 
         $query = Slot::with('Team')->where('day', $day)->where('team_id', $request->teamId)->get();
-$apt = Appoiinment::get();
         // dd($query);
         // $currentDate = Carbon::now();
 
@@ -421,7 +420,6 @@ $apt = Appoiinment::get();
             'status' => 'success',
             'data' => $query,
             'aptDate' => $request->date,
-            'apts' => $apt,
         ]);
     }
 

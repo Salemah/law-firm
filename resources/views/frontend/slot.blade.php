@@ -257,7 +257,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="slot_id" id="slot_id">
                         <input type="hidden" name="team_idd" id="team_idd">
-                        <input type="text" name="aptDate" id="aptDate">
+                        <input type="hidden" name="aptDate" id="aptDate">
                         <div class="row">
                             <div class="col-12 text-center " style="color: black;font-weight:bold;">
                                 <p>CONSULTANT : <span id="team-name"></span></p>
@@ -328,25 +328,14 @@
                         for (var i = 0; i < obj.data.length; i++) {
                             var pp = new Date('7/10/2013 ' + obj.data[i].from_time).toLocaleTimeString()
                                 .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-                                var q = '';
-                            obj.apts.forEach(element => {
-                                if(obj.aptDate == element.date && obj.data[i].id == element.slot_id )
-                                {
-                                    q = 'disabled';
-
-                                }
-                            });
-
+                            console.log();
                             appendString += '<div class="col-4 col-sm-6">' +
                                 '<button class="btn my-2 appointment-modal" style="background: #E1A122"' +
-
                                 'data-id="' + obj.data[i].id +'"'+
                                 'data-apt="' + obj.aptDate +'"'+
-                                'id="appointment-modal" title="Click To Appoinment"'+
-                                ''+q+'="disabled"'+'>' + pp +
+                                'id="appointment-modal" title="Click To Appoinment">' + pp +
                                 '</button>' +
                                 '</div>';
-                                console.log(q);
                         }
                     }
                     $('#tst').empty().append(appendString);
@@ -358,7 +347,6 @@
          $('body').on('click', '.appointment-modal', function() {
             let Id = $(this).data('id');
             let aptDates = $(this).data('apt');
-            alert(aptDates);
             $.ajax({
                 type: "GET",
                 url: "{{ route('home.slot.data') }}",
