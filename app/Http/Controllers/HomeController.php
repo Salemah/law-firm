@@ -334,7 +334,6 @@ class HomeController extends Controller
     }
     public function SlotData(Request $request)
     {
-        //dd($request->all());
         $query = Slot::with('Team')->find($request->id);
         $time = Carbon::parse($query->from_time)->format('g:i A');
 
@@ -351,9 +350,7 @@ class HomeController extends Controller
         }
 
         // Format the date as per your requirements
-        // $formattedDate = $nextDate->format('d-m-Y');
-        $formattedDate = Carbon::parse($request->aptDate)->format('d-m-Y');
-
+        $formattedDate = $nextDate->format('d-m-Y');
         $appointment = Appoiinment::where('date', $formattedDate)->where('time', $query->from_time) ->first();
 
         if($appointment){
@@ -374,52 +371,6 @@ class HomeController extends Controller
             'status' => 'success',
             'data' => $query,
             'time' => $time,
-        ]);
-    }
-    public function SlotDataGet(Request $request)
-    {
-        // dd($request->all());
-        // $query = Slot::with('Team')->find($request->id);
-        // $time = Carbon::parse($query->from_time)->format('g:i A');
-
-
-        // Get the current date
-        $day =Carbon::parse($request->date)->dayName;
-
-        $query = Slot::with('Team')->where('day', $day)->where('team_id', $request->teamId)->get();
-        // dd($query);
-        // $currentDate = Carbon::now();
-
-        // // Find the next occurrence of the specified day name
-        // $nextDate = $currentDate->next($query->day);
-
-        // // If the next occurrence is today and it has already passed, get the occurrence for next week
-        // if ($nextDate->isPast()) {
-        //     $nextDate = $currentDate->next($query->day);
-        // }
-
-        // // Format the date as per your requirements
-        // $formattedDate = $nextDate->format('d-m-Y');
-        // $appointment = Appoiinment::where('date', $formattedDate)->where('time', $query->from_time) ->first();
-
-        // if($appointment){
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'data' => $query,
-        //         'time' => $time,
-        //     ]);
-        // }
-        // if (!$query) {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => 'Not Found, Please Try Again...',
-        //     ], 422);
-        // }
-
-        return response()->json([
-            'status' => 'success',
-            'data' => $query,
-            'aptDate' => $request->date,
         ]);
     }
 
