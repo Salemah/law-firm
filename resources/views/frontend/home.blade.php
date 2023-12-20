@@ -12,7 +12,7 @@
 
 
     <!-- Banner Section -->
-    <section class="banner-section">
+    <section class="banner-section p-2">
         <!-- Social Nav -->
         <ul class="social-nav">
             <li class="facebook"><a href="{{ $dashboard_settings->facebook }}"><span class="fa fa-facebook-f"></span></a></li>
@@ -53,7 +53,7 @@ background-position: center center;">
     <!-- End Services Section -->
 
     <!-- Welcome Section -->
-    <section class="welcome-section" style="background-image: url(images/background/pattern-1.png)">
+    <section class="welcome-section p-2" style="background-image: url(images/background/pattern-1.png)">
         <div class="auto-container">
             <div class="inner-container">
                 <div class="clearfix">
@@ -109,7 +109,7 @@ background-position: center center;">
 
 
     <!-- Practice Section -->
-    <section class="practice-section" style="background-image: url(images/background/pattern-2.png)">
+    <section class="practice-section p-2" style="background-image: url(images/background/pattern-2.png)">
         <div class="auto-container">
             <!-- Sec Title -->
             <div class="sec-title centered">
@@ -134,7 +134,7 @@ background-position: center center;">
     </section>
     <!-- End Practice Section -->
     <!-- Team Section -->
-    <section class="team-section">
+    <section class="team-section p-2">
         <div class="auto-container">
             <!-- Sec Title -->
             <div class="sec-title centered">
@@ -164,7 +164,7 @@ background-position: center center;">
 
 
     <!-- Testimonail Section -->
-    <section class="testimonial-section" style="background-image: url(images/background/pattern-3.png)">
+    <section class="testimonial-section p-2" style="background-image: url(images/background/pattern-3.png)">
         <div class="auto-container">
             <!-- Sec Title -->
             <div class="sec-title centered">
@@ -193,7 +193,7 @@ background-position: center center;">
     <!-- End Testimonail Section -->
 
     <!-- Clients Section -->
-    <section class="clients-section">
+    <section class="clients-section p-2">
         <div class="auto-container">
             <!-- Sec Title -->
             <div class="sec-title centered">
@@ -244,7 +244,7 @@ background-position: center center;">
     </section>
     <!-- End Clients Section -->
     <!-- Fluid Section One -->
-    <section class="fluid-section-one mb-5">
+    <section class="fluid-section-one mb-5 p-2" >
         <div class="side-icon"><img src="frontend/images/icons/fluid-icon.png" alt="" /></div>
         <div class="outer-container clearfix">
             <!-- Image Column -->

@@ -2,7 +2,7 @@
 
 @extends('frontend.master')
 
-@section('title', 'Home Page')
+@section('title', 'Articles')
 @section('content')
     <!-- Page Title -->
     <section class="page-title style-two" style="background-image:url({{asset('frontend/images/background/1.jpg')}})">
@@ -28,9 +28,9 @@
                             <!-- News Block -->
                             <div class="news-block">
                                 <div class="inner-box">
-                                    <div class="image">
+                                    <div class="image" style="width: 70vh">
                                         <a href="{{route('home.post.show',$post->id)}}"><img src="{{ asset('image/post/' . $post->image) }}"
-                                                style="height: 70%" alt="" /></a>
+                                                style="height: 100%" alt="" /></a>
                                         <div class="category">Law</div>
                                         <ul class="post-meta">
                                             <li><a href="{{route('home.post.show',$post->id)}}"><span
@@ -47,7 +47,7 @@
                                         {{-- <div class="text">{!!$post->description!!}</div> --}}
                                         <div class="btn-box">
                                             <a href="{{route('home.post.show',$post->id)}}" class="theme-btn btn-style-two"><span
-                                                    class="txt">Learn More</span></a>
+                                                    class="txt">Read More</span></a>
                                         </div>
                                     </div>
                                 </div>

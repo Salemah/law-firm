@@ -74,7 +74,7 @@
 
 
     <!-- CTA Section -->
-    <section class="cta-section">
+    <section class="cta-section p-2">
         <div class="auto-container">
             <div class="inner-container">
                 <div class="image">

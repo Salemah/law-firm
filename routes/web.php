@@ -17,6 +17,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SlotController;
 use App\Http\Controllers\SubLegalAreaController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\WelcomeSectionController;
 use Illuminate\Support\Facades\Route;
@@ -48,7 +49,7 @@ Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
     Route::get('our-service', [HomeController::class, 'ourservice'])->name('ourservice');
     Route::get('our-service-sub/{id?}', [HomeController::class, 'ourservicesub'])->name('ourservice.sub');
     Route::get('our-team-area-wise/{id?}', [HomeController::class, 'ourteamAreaWise'])->name('ourteam.area.wise');
-    Route::get('view-shedule/{id?}', [HomeController::class, 'ViewShedule'])->name('view.shedule');
+
     Route::post('contact-message/{id?}', [HomeController::class, 'ContactMessageInsert'])->name('contact.message');
     Route::get('slot-data/{id?}/{aptDate?}', [HomeController::class, 'SlotData'])->name('slot.data');
     Route::get('slot/data/get', [HomeController::class, 'SlotDataGet'])->name('appointment.check');
@@ -139,7 +140,8 @@ Route::get('/dashboard', function () {
 // })->middleware(['auth', 'verified'])->name('user.dashboard');
 Route::middleware('auth')->group(function () {
     Route::get('/user/dashboard', [HomeController::class, 'UserDashboard'])->name('user.dashboard');
-
+    Route::get('view-shedule/{id?}', [HomeController::class, 'ViewShedule'])->name('home.view.shedule');
+    Route::get('my/appointment/{id?}', [UserController::class, 'myAppointment'])->name('my.appointment');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

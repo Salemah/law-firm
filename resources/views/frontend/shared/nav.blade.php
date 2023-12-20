@@ -103,7 +103,7 @@
             <!--Logo-->
             <div class="logo pull-left">
                 {{-- <a href="{{url('/')}}" title=""><img src="frontend/images/logo-small.png" alt="" title=""></a> --}}
-                <a href="{{url('/')}}" title=""><img src="{{ asset('/image/dashboard/'.$dashboard_settings->logo) }}" style="width: 20vh;height:70px" alt="" title=""></a>
+                <a href="{{url('/')}}" title=""><img src="{{ asset('/image/dashboard/'.$dashboard_settings->logo) }}" style="width: 15vh;" alt="" title=""></a>
             </div>
             <!--Right Col-->
             <div class="pull-right">
