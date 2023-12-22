@@ -16,7 +16,7 @@
             <li class="nav-item active show">
               <a href="{{route('my.appointment')}}" class="nav-link"><i class="typcn typcn-chart-area-outline"></i> My Appointment</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a href="#" class="nav-link with-sub"><i class="typcn typcn-document"></i> Pages</a>
               <nav class="az-menu-sub">
                 <a href="page-signin.html" class="nav-link">Sign In</a>
@@ -43,31 +43,31 @@
                   </div>
                 </div><!-- container -->
               </div>
-            </li>
+            </li> --}}
           </ul>
         </div><!-- az-header-menu -->
         <div class="az-header-right">
 
 
           <div class="dropdown az-profile-menu">
-            <a href="#" class="az-img-user"><img src="../img/faces/face1.jpg" alt=""></a>
+            <a href="#" class="az-img-user"><img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt=""></a>
             <div class="dropdown-menu">
               <div class="az-dropdown-header d-sm-none">
                 <a href="#" class="az-header-arrow"><i class="icon ion-md-arrow-back"></i></a>
               </div>
               <div class="az-header-profile">
                 <div class="az-img-user">
-                  <img src="../img/faces/face1.jpg" alt="">
+                  <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="">
                 </div><!-- az-img-user -->
                 <h6>Aziana Pechon</h6>
                 <span>Premium Member</span>
               </div><!-- az-header-profile -->
 
-              <a href="#" class="dropdown-item"><i class="typcn typcn-user-outline"></i> My Profile</a>
+              <a href="{{route('user.my.profile')}}" class="dropdown-item"><i class="typcn typcn-user-outline"></i> My Profile</a>
               <a href="{{route('user.profile.edit')}}" class="dropdown-item"><i class="typcn typcn-edit"></i> Edit Profile</a>
-              <a href="#" class="dropdown-item"><i class="typcn typcn-time"></i> Activity Logs</a>
-              <a href="#" class="dropdown-item"><i class="typcn typcn-cog-outline"></i> Account Settings</a>
-              <a href="page-signin.html" class="dropdown-item"><i class="typcn typcn-power-outline"></i> Sign Out</a>
+              {{-- <a href="#" class="dropdown-item"><i class="typcn typcn-time"></i> Activity Logs</a>
+              <a href="#" class="dropdown-item"><i class="typcn typcn-cog-outline"></i> Account Settings</a> --}}
+              <a href="{{route('logout')}}" class="dropdown-item"><i class="typcn typcn-power-outline"></i> Sign Out</a>
             </div><!-- dropdown-menu -->
           </div>
         </div><!-- az-header-right -->

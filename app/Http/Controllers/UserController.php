@@ -32,6 +32,17 @@ class UserController extends Controller
             return redirect()->back()->with('error', $exception->getMessage());
         }
     }
+    public function myProfile(Request $request)
+    {
+        try {
+
+            $user = User::find(Auth::user()->id);
+
+            return view('frontend.user.my.profile', compact('user'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+    }
     public function UserUpdate(Request $request)
     {
         $request->validate([
@@ -44,7 +55,7 @@ class UserController extends Controller
             // 'password_confirmation' => 'required',
 
         ]);
-        // try {
+        try {
 
             $user = User::find(Auth::user()->id);
             $user->name = $request->name;
@@ -52,11 +63,11 @@ class UserController extends Controller
             $user->phone = $request->phone;
             $user->address = $request->address;
             $user->save();
-            dd(55);
 
+            return redirect()->back()->with('message', 'Profile Update Successful');
             // return view('frontend.user.profile', compact('user'));
-        // } catch (\Exception $exception) {
-        //     return redirect()->back()->with('error', $exception->getMessage());
-        // }
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
     }
 }

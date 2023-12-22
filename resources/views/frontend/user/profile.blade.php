@@ -21,6 +21,14 @@
 
                     <div class="col-lg-12 col-xl-12 mg-t-20 mg-lg-t-0">
                         <div class="card card-table-one">
+                            @if (session('message'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{ session('message') }}</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
                             <div class="container rounded bg-white mt-5 mb-5">
                                 <form method="POST" action="{{ route('user.update') }}">
                                     @csrf
@@ -67,9 +75,9 @@
                                                     </div>
 
                                                     <div class="col-md-12">
-                                                        <label class="labels">Email</label><input
-                                                            type="email" class="form-control" name="email"
-                                                            placeholder="enter email id" value="{{ Auth::user()->email }}">
+                                                        <label class="labels">Email</label><input type="email"
+                                                            class="form-control" name="email" placeholder="enter email id"
+                                                            value="{{ Auth::user()->email }}">
                                                         @error('email')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -129,7 +137,7 @@
     </div><!-- az-content -->
 @endsection
 @section('script')
- <script>
+    <script>
         const pass_field = document.querySelector('.pass-key-reg');
         const showBtn = document.querySelector('.show-reg');
         showBtn.addEventListener('click', function() {

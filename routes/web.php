@@ -146,6 +146,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('/profile', [UserController::class, 'editProfile'])->name('profile.edit');
+        Route::get('/my/profile', [UserController::class, 'myProfile'])->name('my.profile');
         Route::post('/profile/user/update', [UserController::class, 'UserUpdate'])->name('update');
     });
 });
