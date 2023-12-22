@@ -142,6 +142,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/dashboard', [HomeController::class, 'UserDashboard'])->name('user.dashboard');
     Route::get('view-shedule/{id?}', [HomeController::class, 'ViewShedule'])->name('home.view.shedule');
     Route::get('my/appointment/{id?}', [UserController::class, 'myAppointment'])->name('my.appointment');
+    Route::get('my/appointment/data', [AppoinmentController::class, 'myAppointmentData'])->name('my.appointment.data');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -150,5 +151,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit/user/{id?}', [ProfileController::class, 'editUser'])->name('profile.edit.user');
     Route::post('/profile/user/update', [ProfileController::class, 'UserUpdate'])->name('user.update');
 });
+Route::group(['middleware' => ['role:admin|superadmin']], function () {
 
+});
 require __DIR__ . '/auth.php';

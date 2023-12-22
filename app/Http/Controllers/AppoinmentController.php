@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Response;
+use DataTables;
+
 class AppoinmentController extends Controller
 {
     //appointment.blade.php
@@ -46,19 +48,19 @@ class AppoinmentController extends Controller
             $message =  new Appoiinment();
             $message->slot_id = $request->slot_id;
             $message->team_id = $request->team_idd;
-            $message->user_id= Auth::user()->id;
+            $message->user_id = Auth::user()->id;
             $message->message = $request->message;
-            $message->date= $request->aptDate;
-            $message->time= $slot->from_time;
-            $message->status= 'Pending';
-            $message->payement= null;
+            $message->date = $request->aptDate;
+            $message->time = $slot->from_time;
+            $message->status = 'Pending';
+            $message->payment = null;
             $message->save();
 
 
             $user = User::find(Auth::user()->id);
 
-          if($user){
-            $dashboard = DashboardSetting::first();
+            if ($user) {
+                $dashboard = DashboardSetting::first();
 
 
                 // Output the result
@@ -71,7 +73,7 @@ class AppoinmentController extends Controller
                     'body' => $request->message,
                     'body' => $request->message,
                     'facebook' => $dashboard->facebook,
-                    'twitter' =>$dashboard->twitter,
+                    'twitter' => $dashboard->twitter,
                     'linkedin' => $dashboard->linkedin,
                     'slot' =>  Carbon::parse($slot->from_time)->format('g:i A'),
                     'team' =>  $slot->Team->name,
@@ -81,13 +83,50 @@ class AppoinmentController extends Controller
 
                 ];
                 Mail::to($user->email)->send(new AppointmentMail($mailData));
-          }
-            return response()->json(['success'=>'Appointment Complete']);
+            }
+            return response()->json(['success' => 'Appointment Complete']);
 
             // return redirect()->back()->with('message', 'We Received Your Message . Thank You.');
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()]);
             // return redirect()->back()->with('error', $exception->getMessage());
         }
+    }
+    public function myAppointmentData(Request $request)
+    {
+
+
+                $banks = Appoiinment::latest()->get();
+                dd($banks);
+                return DataTables::of($banks)
+                    ->addIndexColumn()
+                    ->addColumn('team', function ($banks) {
+
+                        return $banks->Team->name;
+                    })
+                    ->addColumn('time', function ($banks) {
+                        return Carbon::parse($banks->Slot->from_time)->format('g:i A');
+                    })
+                    ->addColumn('date', function ($banks) {
+                        return Carbon::parse($banks->date)->format('d/m/y');
+                    })
+                    ->addColumn('payment', function ($banks) {
+                        if ($banks->payment) {
+                            return '<span>Paid</span>';
+                        } else {
+                            return ' <strong style="color: red">DUE</strong>';
+                        }
+                    })
+                    ->addColumn('action', function ($banks) {
+                        return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a class="btn btn-sm btn-success text-white " style="cursor:pointer"
+                        href="#" title="Edit"><i class="bx bxs-edit"></i></a>
+
+                        <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm(' . $banks->id . ')" title="Delete"><i class="bx bxs-trash"></i></a>
+                            </div>';
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+
     }
 }

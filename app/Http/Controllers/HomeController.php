@@ -108,11 +108,12 @@ class HomeController extends Controller
     public function UserDashboard()
     {
         try {
-            $appointment = Appoiinment::where('user_id',Auth::user()->id)->get();
+            $appointments = Appoiinment::where('user_id',Auth::user()->id)->get();
             // $posts = Post::with('category')->where('status',1)->paginate(10);
             // $categorys = Category::latest()->take(3)->get();
             // $ltposts = Post::with('category')->where('status', 1)->latest()->take(3)->get();
-            return view('frontend.user.dashboard',compact('appointment'));
+
+            return view('frontend.user.dashboard',compact('appointments'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
