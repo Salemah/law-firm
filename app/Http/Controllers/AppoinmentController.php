@@ -95,38 +95,50 @@ class AppoinmentController extends Controller
     public function myAppointmentData(Request $request)
     {
 
+        $banks = Appoiinment::latest()->get();
 
-                $banks = Appoiinment::latest()->get();
-                dd($banks);
-                return DataTables::of($banks)
-                    ->addIndexColumn()
-                    ->addColumn('team', function ($banks) {
+        return DataTables::of($banks)
+            ->addIndexColumn()
+            ->addColumn('team', function ($banks) {
 
-                        return $banks->Team->name;
-                    })
-                    ->addColumn('time', function ($banks) {
-                        return Carbon::parse($banks->Slot->from_time)->format('g:i A');
-                    })
-                    ->addColumn('date', function ($banks) {
-                        return Carbon::parse($banks->date)->format('d/m/y');
-                    })
-                    ->addColumn('payment', function ($banks) {
-                        if ($banks->payment) {
-                            return '<span>Paid</span>';
-                        } else {
-                            return ' <strong style="color: red">DUE</strong>';
-                        }
-                    })
-                    ->addColumn('action', function ($banks) {
-                        return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                return $banks->Team->name;
+            })
+            ->addColumn('time', function ($banks) {
+                return Carbon::parse($banks->Slot->from_time)->format('g:i A');
+            })
+            ->addColumn('date', function ($banks) {
+                return Carbon::parse($banks->date)->format('d/m/y');
+            })
+            ->addColumn('payment', function ($banks) {
+                if ($banks->payment) {
+                    return '<span>Paid</span>';
+                } else {
+                    return ' <strong style="color: red">DUE</strong>';
+                }
+            })
+            ->addColumn('action', function ($banks) {
+                return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
                         <a class="btn btn-sm btn-success text-white " style="cursor:pointer"
                         href="#" title="Edit"><i class="bx bxs-edit"></i></a>
 
                         <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm(' . $banks->id . ')" title="Delete"><i class="bx bxs-trash"></i></a>
                             </div>';
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+    public function myAppointmentDelete(Request $request)
+    {
+        if ($request->ajax()) {
+            try {
+                Appoiinment::findOrFail($request->id)->delete();
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Appointment Deleted Successfully.',
+                ]);
+            } catch (\Exception $exception) {
+                return redirect()->back()->with('error', $exception->getMessage());
+            }
+        }
     }
 }

@@ -60,7 +60,7 @@
                                             <th class="text-center">Date</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Payment</th>
-                                            <th class="text-center"">Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -78,11 +78,11 @@
                                                         <strong style="color: red">DUE</strong>
                                                     @endif
                                                 </td>
-                                                <td>{{ $appointment->status }}</td>
+                                                <td class="text-center"><a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm({{ $appointment->id }})" title="Delete"><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td>No Appointment Available</td>
+                                                <td colspan="7" class="text-center">No Appointment Available</td>
 
                                             </tr>
                                         @endforelse
@@ -100,13 +100,54 @@
     </div><!-- az-content -->
 @endsection
 @section('script')
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
         // new DataTable('#example');
         $('#example').DataTable({
                 processing: true,
                 responsive: true,
-                serverSide: false,
+                serverSide: true,
 
             });
+             // delete Confirm
+        function showDeleteConfirm(id) {
+            event.preventDefault();
+            swal({
+                title: `Are you sure you want to delete this record?`,
+                text: "If you delete this, it will be gone forever.",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    deleteItem(id);
+                }
+            });
+        };
+
+        // Delete Button
+        function deleteItem(id) {
+            var url = '{{ route("my.appointment.delete",":id") }}';
+            $.ajax({
+                type: "get",
+                url: url.replace(':id', id),
+                success: function (resp) {
+                    console.log(resp);
+                    // Reloade DataTable
+                    $('#example').DataTable().ajax.reload();
+                    if (resp.success === true) {
+                        // show toast message
+                        toastr.success(resp.message);
+                    } else if (resp.errors) {
+                        toastr.error(resp.errors[0]);
+                    } else {
+                        toastr.error(resp.message);
+                    }
+                }, // success end
+                error: function (error) {
+                    // location.reload();
+                } // Error
+            })
+        }
     </script>
 @endsection

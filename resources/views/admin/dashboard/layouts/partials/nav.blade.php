@@ -34,9 +34,9 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="{{route('profile.edit.user')}}" class="dropdown-item">Profile</a>
           <div class="dropdown-divider"></div>
-          <a href="{{route('profile.edit')}}" class="dropdown-item">
+          {{-- <a href="{{route('profile.edit')}}" class="dropdown-item"> --}}
             Update Password
-          </a>
+          {{-- </a> --}}
           <div class="dropdown-divider"></div>
           {{-- <a href="#" class="dropdown-item">
             <!-- Message Start -->

@@ -138,10 +138,12 @@ Route::get('/dashboard', function () {
 // Route::get('user/dashboard', function () {
 //     return view('admin.dashboard.master');
 // })->middleware(['auth', 'verified'])->name('user.dashboard');
+
 Route::middleware('auth')->group(function () {
     Route::get('/user/dashboard', [HomeController::class, 'UserDashboard'])->name('user.dashboard');
     Route::get('view-shedule/{id?}', [HomeController::class, 'ViewShedule'])->name('home.view.shedule');
     Route::get('my/appointment/{id?}', [UserController::class, 'myAppointment'])->name('my.appointment');
+    Route::get('my/appointment/delete/{id?}', [AppoinmentController::class, 'myAppointmentDelete'])->name('my.appointment.delete');
     Route::get('my/appointment/data', [AppoinmentController::class, 'myAppointmentData'])->name('my.appointment.data');
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
