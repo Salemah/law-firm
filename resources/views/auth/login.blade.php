@@ -80,7 +80,8 @@
                 </div>
             @endif
             <header>WELCOME TO ARC</header>
-            <form method="POST" action="{{ route('sign-in.process') }}">
+           <div class="" style="">
+             <form method="POST" action="{{ route('sign-in.process') }}">
                 @csrf
                 <div class="field">
                     <span class="fa fa-user"></span>
@@ -104,6 +105,7 @@
                     <input type="submit" value="LOGIN">
                 </div>
             </form>
+           </div>
             {{-- <div class="login">
                Or login with
             </div>

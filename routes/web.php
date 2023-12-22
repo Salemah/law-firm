@@ -60,6 +60,7 @@ Route::post('signUp-process', [HomeController::class, 'SignUpProcess'])->name('s
 Route::post('appointment/save', [AppoinmentController::class, 'AppointmentSave'])->name('appointment.save');
 // Category
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+        Route::group(['middleware' => ['role:admin|superadmin|team']], function () {
     Route::resource('category', CategoryController::class)->middleware(['auth', 'verified']);
     Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
         Route::get('status/update/{id}', [CategoryController::class, 'statusUpdate'])->name('update.status');
@@ -129,7 +130,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('user_role_list', [UserManagementController::class, 'userRoleLists'])->name('user_role_list');
     Route::get('user_role/{id?}', [UserManagementController::class, 'userRole'])->name('user-role');
     Route::post('user_role/update', [UserManagementController::class, 'userRoleUpdate'])->name('user_role.update');
-
+    });
 });
 // Route::get('send-mail', [MailController::class, 'index']);
 Route::get('/dashboard', function () {
