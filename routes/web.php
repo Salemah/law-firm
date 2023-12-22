@@ -143,13 +143,18 @@ Route::middleware('auth')->group(function () {
     Route::get('view-shedule/{id?}', [HomeController::class, 'ViewShedule'])->name('home.view.shedule');
     Route::get('my/appointment/{id?}', [UserController::class, 'myAppointment'])->name('my.appointment');
     Route::get('my/appointment/data', [AppoinmentController::class, 'myAppointmentData'])->name('my.appointment.data');
+
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        Route::get('/profile', [UserController::class, 'editProfile'])->name('profile.edit');
+        Route::post('/profile/user/update', [UserController::class, 'UserUpdate'])->name('update');
+    });
 });
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::get('/profile', [ProfileController::class, 'editProfile'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/edit/user/{id?}', [ProfileController::class, 'editUser'])->name('profile.edit.user');
-    Route::post('/profile/user/update', [ProfileController::class, 'UserUpdate'])->name('user.update');
+    // Route::post('/profile/user/update', [ProfileController::class, 'UserUpdate'])->name('user.update');
 });
 Route::group(['middleware' => ['role:admin|superadmin']], function () {
 

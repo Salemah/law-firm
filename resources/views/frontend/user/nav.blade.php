@@ -47,7 +47,7 @@
           </ul>
         </div><!-- az-header-menu -->
         <div class="az-header-right">
-          
+
 
           <div class="dropdown az-profile-menu">
             <a href="#" class="az-img-user"><img src="../img/faces/face1.jpg" alt=""></a>
@@ -64,7 +64,7 @@
               </div><!-- az-header-profile -->
 
               <a href="#" class="dropdown-item"><i class="typcn typcn-user-outline"></i> My Profile</a>
-              <a href="#" class="dropdown-item"><i class="typcn typcn-edit"></i> Edit Profile</a>
+              <a href="{{route('user.profile.edit')}}" class="dropdown-item"><i class="typcn typcn-edit"></i> Edit Profile</a>
               <a href="#" class="dropdown-item"><i class="typcn typcn-time"></i> Activity Logs</a>
               <a href="#" class="dropdown-item"><i class="typcn typcn-cog-outline"></i> Account Settings</a>
               <a href="page-signin.html" class="dropdown-item"><i class="typcn typcn-power-outline"></i> Sign Out</a>
