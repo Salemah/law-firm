@@ -12,7 +12,7 @@
                 {{-- <div class="logo"><a href="{{url('/')}}"><img src="{{ asset('frontend/images/logo.png')}}" alt="" title=""></a></div> --}}
                 <div class="logo"><a href="{{ url('/') }}"><img
                             src="{{ asset('/image/dashboard/' . $dashboard_settings->logo) }}"
-                            style="width: 30vh;height:12vh" alt="" title=""></a></div>
+                            style="width: 36vh;" alt="" title=""></a></div>
             </div>
 
             <div class="nav-outer clearfix">
@@ -113,9 +113,9 @@
             <!--Logo-->
             <div class="logo pull-left">
                 {{-- <a href="{{url('/')}}" title=""><img src="frontend/images/logo-small.png" alt="" title=""></a> --}}
-                <a href="{{ url('/') }}" title=""><img
-                        src="{{ asset('/image/dashboard/' . $dashboard_settings->logo) }}" style="width: 15vh;"
-                        alt="" title=""></a>
+                {{-- <a href="{{ url('/') }}" title=""><img
+                        src="{{ asset('/image/dashboard/' . $dashboard_settings->logo) }}" style="width: 10vh;"
+                        alt="" title=""></a> --}}
             </div>
             <!--Right Col-->
             <div class="pull-right">
@@ -148,9 +148,9 @@
         <div class="close-btn"><span class="icon flaticon-multiply"></span></div>
 
         <nav class="menu-box">
-            <div class="nav-logo"><a href="{{ url('/') }}"><img
-                        src="{{ asset('/image/dashboard/' . $dashboard_settings->logo) }}" alt=""
-                        title=""></a></div>
+            {{-- <div class="nav-logo"><a href="{{ url('/') }}"><img
+                        src="{{ asset('/image/dashboard/' . $dashboard_settings->logo) }}"style="width: 5vh;" alt=""
+                        title=""></a></div> --}}
             <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
             </div>
         </nav>
