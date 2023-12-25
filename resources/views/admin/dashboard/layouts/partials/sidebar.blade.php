@@ -3,7 +3,7 @@
 @endphp
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{URL('/')}}" class="brand-link">
+    <a href="{{ URL('/') }}" class="brand-link">
         <img src="{{ asset('/image/dashboard/' . $dashboard_settings->logo) }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">{{ Auth::user()->name }}</span>
@@ -129,6 +129,13 @@
 
                 </li>
                 <li class="nav-item has-treeview">
+                    <a href="{{ route('admin.payment.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>Payment</p>
+                    </a>
+
+                </li>
+                <li class="nav-item has-treeview">
                     <a href="{{ route('admin.legalarea.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>Legal Area</p>
@@ -185,7 +192,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                          {{-- @can('view team') --}}
+                        {{-- @can('view team') --}}
                         <li class="nav-item">
                             <a href="{{ route('admin.dashboard-setting.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -208,10 +215,12 @@
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('logout')}}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="typcn typcn-power-outline"></i> Sign Out</a>
+                    <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                            ></i> Sign Out</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </nav>

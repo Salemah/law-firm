@@ -108,6 +108,17 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="google_meet"><b>Google Meet</b><span class="text-danger">*</span></label>
+                                    <input type="text" name="google_meet" id="google_meet"
+                                        class="form-control @error('google_meet') is-invalid @enderror"
+                                        value="{{ old('google_meet') }}" placeholder="Enter Meet Link">
+                                    @error('google_meet')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                     <label for="legal_area_id"><b>Legal Area</b><span class="text-danger">*</span></label>
                                     <select name="legal_area_id[]" id="legal_area_id"
                                         class="custom-select @error('legal_area_id') is-invalid @enderror" multiple="multiple">
@@ -225,9 +236,13 @@
     <script>
         $(document).ready(function() {
             $('.dropify').dropify();
-            $('#legal_area_id').select2();
+            $('#legal_area_id').select2({
+                placeholder:'Select Legal Area',
+            });
 
-            $('#sub_legal_area_id').select2();
+            $('#sub_legal_area_id').select2({
+                placeholder:'Select Sub Legal Area',
+            });
         });
 
         CKEDITOR.replace('details', {

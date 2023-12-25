@@ -79,6 +79,7 @@ class TeamController extends Controller
         $request->validate([
             'image' => 'required',
             'name' => 'required',
+            'google_meet' => 'required',
         ]);
         try {
             $user =  new User();
@@ -111,6 +112,7 @@ class TeamController extends Controller
             $data->name = $request->name;
             $data->details = $request->details;
             $data->status = $request->status;
+            $data->meet = $request->google_meet;
             $data->user_id = $user->id;
             $data->save();
 
@@ -174,6 +176,7 @@ class TeamController extends Controller
             $data->fees = $request->fees;
             $data->details = $request->details;
             $data->status = $request->status;
+            $data->meet = $request->google_meet;
 
             $data->update();
             $user = User::find($data->user_id);

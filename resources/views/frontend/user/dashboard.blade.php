@@ -70,7 +70,7 @@
                                                 <td class="text-center">{{ $appointment->Team->name }}</td>
                                                 <td class="text-center">{{ Carbon\Carbon::parse($appointment->Slot->from_time)->format('g:i A') }}</td>
                                                 <td class="text-center">{{ Carbon\Carbon::parse($appointment->date)->format('d/m/y') }}</td>
-                                                <td class="text-center">77</td>
+                                                <td class="text-center">{{ $appointment->status }}</td>
                                                 <td class="text-center">
                                                     @if ($appointment->payment)
                                                         <span>Paid</span>
@@ -78,7 +78,10 @@
                                                         <strong style="color: red">DUE</strong>
                                                     @endif
                                                 </td>
-                                                <td class="text-center"><a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm({{ $appointment->id }})" title="Delete"><i class="fa fa-trash"></i></a></td>
+                                                <td class="text-center">
+                                                    <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm({{ $appointment->id }})" title="Delete"><i class="fa fa-trash"></i></a>
+                                                    <a class="btn btn-sm btn-primary text-white" href="{{route('my.payment.option')}}" style="cursor:pointer" title="Payment"><i class="fa fa-money-bill mr-2"></i>Payment</a>
+                                                </td>
                                             </tr>
                                         @empty
                                             <tr>
@@ -87,8 +90,6 @@
                                             </tr>
                                         @endforelse
                                     </tbody>
-
-
                                 </table>
                             </div><!-- table-responsive -->
                         </div><!-- card -->
@@ -134,6 +135,7 @@
                 success: function (resp) {
                     console.log(resp);
                     // Reloade DataTable
+                    location.reload();
                     $('#example').DataTable().ajax.reload();
                     if (resp.success === true) {
                         // show toast message

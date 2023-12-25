@@ -55,7 +55,7 @@
                             <button type="button"
                                 style="background-color:#36b445; color:white; padding:15px 97px; outline: none; display: block; margin: auto; border-radius: 31px;
                                 font-weight: bold; margin-top: 25px; margin-bottom: 25px; border: none; text-transform:uppercase; "><a
-                                    href="">Join</a></button>
+                                    href="{{ $mailData['meet'] }}">Join</a></button>
                         </td>
                     </tr>
                     <tr>

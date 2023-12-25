@@ -71,7 +71,7 @@ class AppoinmentController extends Controller
                     'phone' => $user->phone,
                     'username' => $user->username,
                     'body' => $request->message,
-                    'body' => $request->message,
+                    'meet' => $slot->Team->meet,
                     'facebook' => $dashboard->facebook,
                     'twitter' => $dashboard->twitter,
                     'linkedin' => $dashboard->linkedin,

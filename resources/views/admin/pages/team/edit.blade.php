@@ -107,6 +107,17 @@
                                         </span>
                                     @enderror
                                 </div>
+                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
+                                    <label for="google_meet"><b>Google Meet</b><span class="text-danger">*</span></label>
+                                    <input type="text" name="google_meet" id="google_meet"
+                                        class="form-control @error('google_meet') is-invalid @enderror"
+                                        value="{{ $team->meet }}" placeholder="Enter Meet Link">
+                                    @error('google_meet')
+                                        <span class="alert text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                                 <div class="form-group col-12 col-sm-12 col-md-6 mb-2">
                                     <label for="legal_area_id"><b>Legal Area</b><span class="text-danger">*</span></label>
                                     <select name="legal_area_id[]" id="legal_area_id" multiple="multiple"
