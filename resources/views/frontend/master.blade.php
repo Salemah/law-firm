@@ -59,7 +59,7 @@
 
 <body class="hidden-bar-wrapper">
 
-    <div class="page-wrapper">
+    <div class="page-wrapper p-2">
 
         <!-- Preloader -->
         <div class="preloader" style=" background-image:url({{ asset('../frontend/images/icons/preloader.svg') }})">

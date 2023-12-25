@@ -243,11 +243,6 @@ class HomeController extends Controller
     }
     public function aboutus(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'icon' => 'required',
-        ]);
         try {
             $aboutus =  AboutUs::first();
             $uniques =  MakeUsUnique::take(3)->get();

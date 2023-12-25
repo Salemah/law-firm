@@ -113,7 +113,7 @@
                             <div class="lower-box">
                                 <h5><a href="{{ route('home.aboutus') }}">{{ $team->name }}</a></h5>
                                 <div class="designation">{{ $team->positions }}</div>
-                                <a class="arrow flaticon-right-arrow-3" href="{{ route('home.aboutus') }}"></a>
+                                <a class="arrow flaticon-right-arrow-3" href="{{ route('home.view.shedule',$team->id) }}"></a>
                             </div>
                         </div>
                     </div>
