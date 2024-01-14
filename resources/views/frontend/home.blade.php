@@ -22,7 +22,8 @@
         <div class="main-slider-carousel owl-carousel owl-theme">
 
             @foreach ($sliders as $slider)
-                <div class="slide" style="background-image: url({{ URL::asset('/image/slider/' . $slider->image) }});height: 100%;
+                <div class="slide"
+                    style="background-image: url({{ URL::asset('/image/slider/' . $slider->image) }});height: 100%;
 width: 100%;
 /* extended code */
 background-size: cover;
@@ -122,9 +123,11 @@ background-position: center center;">
                         <div class="practice-block col-lg-3 col-md-6 col-sm-12">
                             <div class="inner-box">
                                 <div class="{{ $legalarea->icon }}"></div>
-                                <h5><a href="{{ route('home.ourservice.sub',$legalarea->id) }}">{{ $legalarea->name }}</a></h5>
+                                <h5><a href="{{ route('home.ourservice.sub', $legalarea->id) }}">{{ $legalarea->name }}</a>
+                                </h5>
                                 <div class="text">{{ $legalarea->description }}</div>
-                                <a class="arrow flaticon-right-arrow-3" href="{{ route('home.ourservice.sub',$legalarea->id) }}"></a>
+                                <a class="arrow flaticon-right-arrow-3"
+                                    href="{{ route('home.ourservice.sub', $legalarea->id) }}"></a>
                             </div>
                         </div>
                     @endforeach
@@ -244,7 +247,7 @@ background-position: center center;">
     </section>
     <!-- End Clients Section -->
     <!-- Fluid Section One -->
-    <section class="fluid-section-one mb-5 " >
+    <section class="fluid-section-one mb-5 ">
         <div class="side-icon"><img src="frontend/images/icons/fluid-icon.png" alt="" /></div>
         <div class="outer-container clearfix">
             <!-- Image Column -->
@@ -320,17 +323,17 @@ background-position: center center;">
 
                     <!-- Default Form -->
                     <div class="default-form">
-                             @if (session('message'))
-
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{ session('message') }}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-                           <form method="post" action="{{ route('home.contact.message') }}" id="" method="POST">
-                    @csrf
+                        @if (session('message'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('message') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        <form method="post" action="{{ route('home.contact.message') }}" id=""
+                            method="POST">
+                            @csrf
                             <div class="row clearfix">
 
                                 <div class="col-lg-6 col-md-6 col-sm-12 form-group">
