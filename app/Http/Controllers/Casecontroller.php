@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\cased;
 use App\Models\legalarea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -18,7 +19,13 @@ class Casecontroller extends Controller
         try {
             if ($request->ajax()) {
                 // $posts = Post::with('category')->get();
-                $posts = cased::get();
+
+                if (!Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('superadmin')) {
+                    $posts = cased::where('created_by', Auth::user()->id);
+                }
+                else{
+                    $posts = cased::get();
+                }
                 return DataTables::of($posts)
                     ->addIndexColumn()
 
@@ -88,6 +95,7 @@ class Casecontroller extends Controller
             $data->name = $request->title;
             $data->legal_area_id = $request->category;
             $data->description = $request->description;
+            $data->created_by = Auth::user()->id;
 
             $data->status = $request->status;
 

@@ -67,6 +67,7 @@
                                             <th class="">Time</th>
                                             <th class="">Date</th>
                                             <th class="">Status</th>
+                                            <th class="">Meet</th>
 
                                             <th class="">Action</th>
                                         </tr>
@@ -145,6 +146,12 @@
                     {
                         data: 'status',
                         name: 'status'
+                    },
+                    {
+                        data: 'meet',
+                        name: 'meet',
+                         orderable: false,
+                        searchable: false
                     },
                     //only those have manage_user permission will get access
 

@@ -17,26 +17,34 @@ class AdminController extends Controller
     {
         try {
             if ($request->ajax()) {
-                // $posts = Post::with('category')->get();
-                $apts = Appoiinment::get();
                 if (!Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('superadmin')) {
-                    $apts->where('appointments.team_id', Auth::user()->id);
+                    $apts = Appoiinment::where('team_id', Auth::user()->id);
+                }
+                else{
+                    $apts = Appoiinment::get();
                 }
                 return DataTables::of($apts)
                     ->addIndexColumn()
                     ->addColumn('time', function ($apt) {
                         return Carbon::parse($apt->Slot->from_time)->format('g:i A');
                     })
+                    ->addColumn('date', function ($apt) {
+                        return Carbon::parse($apt->date)->format('d-M-y');
+                    })
                     ->addColumn('name', function ($apt) {
                         return $apt->Client->name;
                     })
+                    ->addColumn('meet', function ($apt) {
+                    return '<a class="btn btn-sm btn-info " href="'. $apt->Team->meet.'" style="cursor:pointer" title="Google Meet"><i class="fas fa-link"></i></a>';
+
+                    })
                     ->addColumn('action', function ($post) {
                         return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                 
+
                                   <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm(' . $post->id . ')" title="Delete"><i class="fas fa-trash-alt"></i></a>
                             </div>';
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['action','meet'])
                     ->make(true);
             }
             return view('admin.pages.appointment.index');
