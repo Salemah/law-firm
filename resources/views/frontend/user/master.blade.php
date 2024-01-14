@@ -17,7 +17,9 @@
         $dashboard_settings = \Illuminate\Support\Facades\DB::table('dashboard_settings')->first();
     @endphp
     <title>User Dashbord ARC</title>
-    <link rel="icon"href=" {{ asset('image/AdminLTELogo.png') }}"type="image/x-icon">
+    <link rel="shortcut icon"
+        href="@if ($dashboard_settings) {{ asset('image/dashboard/' . $dashboard_settings->favicon) }} @else {{ asset('image/AdminLTELogo.png') }} @endif "
+        type="image/x-icon">
     <!-- vendor css -->
     <link href="{{ asset('userf/lib/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('userf/lib/ionicons/css/ionicons.min.css') }}" rel="stylesheet">
