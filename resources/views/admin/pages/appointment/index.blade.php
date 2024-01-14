@@ -182,9 +182,9 @@
 
         // Delete Button
         function deleteItem(id) {
-            var url = '{{ route('admin.case.destroy', ':id') }}';
+            var url = '{{ route('admin.team-appointment.destroy',':id') }}';
             $.ajax({
-                type: "DELETE",
+               type: "DELETE",
                 url: url.replace(':id', id),
                 success: function(resp) {
                     console.log(resp);
@@ -200,47 +200,11 @@
                     }
                 }, // success end
                 error: function(error) {
-                    //location.reload();
+                   // location.reload();
                 } // Error
             })
         }
 
-        // Status Change Confirm Alert
-        function showStatusChangeAlert(id) {
-            event.preventDefault();
-            swal({
-                title: `Are you sure?`,
-                text: "You want to update the status?.",
-                buttons: true,
-                infoMode: true,
-            }).then((willStatusChange) => {
-                if (willStatusChange) {
-                    statusChange(id);
-                }
-            });
-        };
 
-        // Status Change
-        function statusChange(id) {
-            var url = '{{ route('admin.case.update.status', ':id') }}';
-            $.ajax({
-                type: "GET",
-                url: url.replace(':id', id),
-                success: function(resp) {
-                    // Reloade DataTable
-                    $('#table').DataTable().ajax.reload();
-                    if (resp == "active") {
-                        toastr.success('This status has been changed to Publish.');
-                        return false;
-                    } else {
-                        toastr.error('This status has been changed to Un Publish.');
-                        return false;
-                    }
-                }, // success end
-                error: function(error) {
-                    // location.reload();
-                } // Error
-            })
-        }
     </script>
 @endpush

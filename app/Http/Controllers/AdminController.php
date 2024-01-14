@@ -97,8 +97,18 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            try {
+                Appoiinment::findOrFail($request->id)->delete();
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Appointment Deleted Successfully.',
+                ]);
+            } catch (\Exception $exception) {
+                return redirect()->back()->with('error', $exception->getMessage());
+            }
+        }
     }
 }
