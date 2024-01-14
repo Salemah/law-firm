@@ -21,10 +21,10 @@ class PostController extends Controller
             if ($request->ajax()) {
                 // $posts = Post::with('category')->get();
                 $posts = DB::table('posts')
-                                    ->orderBy('posts.ID','DESC')
-                                    ->where('posts.deleted_at',null)
+                    ->orderBy('posts.ID', 'DESC')
+                    ->where('posts.deleted_at', null)
                     ->select('posts.*',);
-                                    if (!Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('superadmin') ) {
+                if (!Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('superadmin')) {
                     $posts->where('posts.created_by', Auth::user()->id);
                 }
                 return DataTables::of($posts)
@@ -40,15 +40,14 @@ class PostController extends Controller
                     })
                     ->addColumn('category', function ($post) {
                         $ids = explode(',', $post->category_id);
-                    $items =Category::whereIn('id', $ids)->pluck('name')->toArray();
+                        $items = Category::whereIn('id', $ids)->pluck('name')->toArray();
 
-                    if ($items) {
-                        $itemName = implode(',', $items);
-                        return $items;
-                    } else {
-                        return $items;
-                    }
-
+                        if ($items) {
+                            $itemName = implode(',', $items);
+                            return $items;
+                        } else {
+                            return $items;
+                        }
                     })
 
                     ->addColumn('action', function ($post) {
@@ -57,7 +56,7 @@ class PostController extends Controller
                                   <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm(' . $post->id . ')" title="Delete"><i class="fas fa-trash-alt"></i></a>
                             </div>';
                     })
-                    ->rawColumns(['category','action', 'status' ])
+                    ->rawColumns(['category', 'action', 'status'])
                     ->make(true);
             }
             return view('admin.pages.post.index');
@@ -72,8 +71,8 @@ class PostController extends Controller
     public function create()
     {
         try {
-            $categories =  Category::where('status',1)->get();
-            return view('admin.pages.post.create',compact('categories'));
+            $categories =  Category::where('status', 1)->get();
+            return view('admin.pages.post.create', compact('categories'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -109,9 +108,9 @@ class PostController extends Controller
             }
 
             $data->title = $request->title;
-            $data->category_id = implode(',',$request->category);
+            $data->category_id = implode(',', $request->category);
             $data->description = $request->description;
-            $data->snddescription= $request->snddescription;
+            $data->snddescription = $request->snddescription;
             $data->thddescription = $request->thddescription;
             $data->quote = $request->quote;
             $data->quoteby = $request->quoteby;
@@ -140,9 +139,9 @@ class PostController extends Controller
     public function edit(string $id)
     {
         try {
-            $categories =  Category::where('status',1)->get();
+            $categories =  Category::where('status', 1)->get();
             $post = Post::findOrFail($id);
-            return view('admin.pages.post.edit',compact('categories','post'));
+            return view('admin.pages.post.edit', compact('categories', 'post'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -161,7 +160,7 @@ class PostController extends Controller
         ]);
         try {
 
-            $data =Post::findOrFail($id);
+            $data = Post::findOrFail($id);
             if ($request->file('scndimage')) {
                 $file = $request->file('scndimage');
                 $filename = time() . $file->getClientOriginalName();
@@ -170,9 +169,9 @@ class PostController extends Controller
             }
 
             $data->title = $request->title;
-            $data->category_id =implode(',', $request->category);
+            $data->category_id = implode(',', $request->category);
             $data->description = $request->description;
-            $data->snddescription= $request->snddescription;
+            $data->snddescription = $request->snddescription;
             $data->thddescription = $request->thddescription;
             $data->quote = $request->quote;
             $data->quoteby = $request->quoteby;

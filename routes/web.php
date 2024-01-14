@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppoinmentController;
 use App\Http\Controllers\Casecontroller;
 use App\Http\Controllers\CategoryController;
@@ -116,6 +117,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::get('status/update/{id}', [ClientController::class, 'statusUpdate'])->name('update.status');
         });
         Route::resource('sublegalarea', SubLegalAreaController::class)->middleware(['auth', 'verified']);
+
+        Route::resource('team-appointment', AdminController::class)->middleware(['auth', 'verified']);
+        // Route::group(['prefix' => 'question', 'as' => 'question.'], function () {
+        //     Route::get('status/update/{id}', [AdminController::class, 'statusUpdate'])->name('update.status');
+        // });
+
 
         //permission
 

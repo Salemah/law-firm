@@ -127,7 +127,6 @@ class AppoinmentController extends Controller
             ->rawColumns(['action'])
             ->make(true);
     }
-    f
     public function myAppointmentDelete(Request $request)
     {
         if ($request->ajax()) {

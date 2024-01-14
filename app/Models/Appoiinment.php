@@ -17,4 +17,8 @@ class Appoiinment extends Model
     {
         return $this->belongsTo(Slot::class, 'slot_id');
     }
+    public function Client()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
