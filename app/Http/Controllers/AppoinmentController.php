@@ -99,7 +99,7 @@ class AppoinmentController extends Controller
 
         return DataTables::of($banks)
             ->addIndexColumn()
-            ->addColumn('team', function ($banks) {
+            ->addColumn('name', function ($banks) {
 
                 return $banks->Team->name;
             })
@@ -109,6 +109,15 @@ class AppoinmentController extends Controller
             ->addColumn('date', function ($banks) {
                 return Carbon::parse($banks->date)->format('d/m/y');
             })
+            ->addColumn('meet', function ($banks) {
+            if ($banks->payment){
+                return '<a class="btn btn-sm btn-info "  href="' . $banks->Team->meet . '" style="cursor:pointer" title="Google Meet"><i class="fas fa-link"></i></a>';
+            }
+            else{
+                return '<a class="btn btn-sm btn-info disabled"  href="' . $banks->Team->meet . '" disabled style="cursor:pointer" title="Google Meet"><i class="fas fa-link"></i></a>';
+            }
+
+            })
             ->addColumn('payment', function ($banks) {
                 if ($banks->payment) {
                     return '<span>Paid</span>';
@@ -117,14 +126,15 @@ class AppoinmentController extends Controller
                 }
             })
             ->addColumn('action', function ($banks) {
+                //  <a class="btn btn-sm btn-success text-white " style="cursor:pointer"
+                //         href="#" title="Edit"><i class="fa fa-edit"></i></a>
                 return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <a class="btn btn-sm btn-success text-white " style="cursor:pointer"
-                        href="#" title="Edit"><i class="bx bxs-edit"></i></a>
 
-                        <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm(' . $banks->id . ')" title="Delete"><i class="bx bxs-trash"></i></a>
+
+                        <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm(' . $banks->id . ')" title="Delete"><i class="fas fa-trash"></i></a>
                             </div>';
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'meet', 'payment'])
             ->make(true);
     }
     public function myAppointmentDelete(Request $request)

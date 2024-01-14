@@ -51,7 +51,7 @@
                             {{-- <p class="az-content-text mg-b-20">Part of this date range occurs before the new users metric
                                 had been calculated, so the old users metric is displayed.</p> --}}
                             <div class="table-responsive">
-                                <table id="example" class="table table-striped" style="width:100%">
+                                {{-- <table id="example" class="table table-striped" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th >Sl</th>
@@ -89,6 +89,21 @@
                                     </tbody>
 
 
+                                </table> --}}
+                                <table id="example" class="display" style="width:100%">
+                                   <thead class="table-light fw-semibold">
+                                        <tr class="align-middle table">
+                                            <th width="1%">#</th>
+
+                                            <th class="">Team</th>
+                                            <th class="">Time</th>
+                                            <th class="">Date</th>
+                                            <th class="">Status</th>
+                                            <th class="">Meet</th>
+
+                                            <th class="">Action</th>
+                                        </tr>
+                                    </thead>
                                 </table>
                             </div><!-- table-responsive -->
                         </div><!-- card -->
@@ -100,17 +115,78 @@
     </div><!-- az-content -->
 @endsection
 @section('script')
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
         // new DataTable('#example');
-        $('#example').DataTable({
-                processing: true,
-                responsive: true,
-                serverSide: true,
+        new DataTable('#example', {
+            order: [],
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"]
+            ],
+            processing: true,
+            responsive: true,
+            serverSide: true,
+            language: {
+                processing: '<i class="ace-icon fa fa-spinner fa-spin orange bigger-500" style="font-size:60px;margin-top:50px;"></i>'
+            },
+            scroller: {
+                loadingIndicator: false
+            },
+            pagingType: "full_numbers",
+            // dom: "<'row'<'col-sm-2'l><'col-sm-7 text-center'B><'col-sm-3'f>>tipr",
+            ajax: {
+                url: "{{ route('my.appointment.data') }}",
+                type: "get"
+            },
+            columns: [{
+                    data: "DT_RowIndex",
+                    name: "DT_RowIndex",
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'name',
+                    name: 'name',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'time',
+                    name: 'time',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'date',
+                    name: 'date',
+                    orderable: true,
+                    searchable: true
+                },
 
-            });
-             // delete Confirm
+                {
+                    data: 'payment',
+                    name: 'payment'
+                },
+                {
+                    data: 'meet',
+                    name: 'meet',
+                    orderable: false,
+                    searchable: false
+                },
+                //only those have manage_user permission will get access
+
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
+            ],
+        });
+
+        // delete Confirm
         function showDeleteConfirm(id) {
             event.preventDefault();
             swal({
@@ -127,14 +203,14 @@
 
         // Delete Button
         function deleteItem(id) {
-            var url = '{{ route("my.appointment.delete",":id") }}';
+            var url = '{{ route('my.appointment.delete', ':id') }}';
             $.ajax({
                 type: "get",
                 url: url.replace(':id', id),
-                success: function (resp) {
+                success: function(resp) {
                     console.log(resp);
                     // Reloade DataTable
-                    // $('#example').DataTable().ajax.reload();
+                     $('#example').DataTable().ajax.reload();
                     if (resp.success === true) {
                         location.reload();
                         toastr.success(resp.message);
@@ -144,7 +220,7 @@
                         toastr.error(resp.message);
                     }
                 }, // success end
-                error: function (error) {
+                error: function(error) {
                     // location.reload();
                 } // Error
             })

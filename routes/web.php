@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('my/appointment/data', [AppoinmentController::class, 'myAppointmentData'])->name('my.appointment.data');
 Route::resource('/', HomeController::class);
 Route::get('e', [HomeController::class, 'index2']);
 Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
@@ -61,7 +62,7 @@ Route::post('signUp-process', [HomeController::class, 'SignUpProcess'])->name('s
 Route::post('appointment/save', [AppoinmentController::class, 'AppointmentSave'])->name('appointment.save');
 // Category
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::group(['middleware' => ['role:admin|superadmin|team']], function () {
+    Route::group(['middleware' => ['role:admin|superadmin|team|user']], function () {
         Route::resource('category', CategoryController::class)->middleware(['auth', 'verified']);
         Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
             Route::get('status/update/{id}', [CategoryController::class, 'statusUpdate'])->name('update.status');
@@ -154,7 +155,7 @@ Route::middleware('auth')->group(function () {
     Route::get('view-shedule/{id?}', [HomeController::class, 'ViewShedule'])->name('home.view.shedule');
     Route::get('my/appointment/{id?}', [UserController::class, 'myAppointment'])->name('my.appointment');
     Route::get('my/appointment/delete/{id?}', [AppoinmentController::class, 'myAppointmentDelete'])->name('my.appointment.delete');
-    Route::get('my/appointment/data', [AppoinmentController::class, 'myAppointmentData'])->name('my.appointment.data');
+
     Route::get('my/payment/option', [PaymentController::class, 'PaymentOption'])->name('my.payment.option');
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
@@ -163,6 +164,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/profile/user/update', [UserController::class, 'UserUpdate'])->name('update');
     });
 });
+
 Route::middleware('auth')->group(function () {
     // Route::get('/profile', [ProfileController::class, 'editProfile'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

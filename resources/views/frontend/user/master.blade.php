@@ -31,8 +31,14 @@
     <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"> --}}
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+    a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+</style>
 </head>
 
 <body>
@@ -49,7 +55,8 @@
         </div><!-- container -->
     </div><!-- az-footer -->
 
-
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('userf/lib/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('userf/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('userf/lib/ionicons/ionicons.js') }}"></script>
