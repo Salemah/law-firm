@@ -59,8 +59,8 @@
                 <div class="az-img-user">
                   <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="">
                 </div><!-- az-img-user -->
-                <h6>Aziana Pechon</h6>
-                <span>Premium Member</span>
+                <h6>{{Auth::user()->name}}</h6>
+                {{-- <span>Premium Member</span> --}}
               </div><!-- az-header-profile -->
 
               <a href="{{route('user.my.profile')}}" class="dropdown-item"><i class="typcn typcn-user-outline"></i> My Profile</a>

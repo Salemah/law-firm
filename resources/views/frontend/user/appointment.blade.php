@@ -134,9 +134,9 @@
                 success: function (resp) {
                     console.log(resp);
                     // Reloade DataTable
-                    $('#example').DataTable().ajax.reload();
+                    // $('#example').DataTable().ajax.reload();
                     if (resp.success === true) {
-                        // show toast message
+                        location.reload();
                         toastr.success(resp.message);
                     } else if (resp.errors) {
                         toastr.error(resp.errors[0]);
