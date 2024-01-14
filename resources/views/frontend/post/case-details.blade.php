@@ -25,37 +25,12 @@
 				<div class="lower-content">
 					<h2>{{$case->name}}</h2>
 					<p>{!!$case->description!!}</p>
-					{{-- <div class="row clearfix">
-						<div class="column col-lg-3 col-md-6 col-sm-6">
-							<ul class="list-style-one">
-								<li>Velit esse quam nihilumi</li>
-								<li>Qui dolorem eum fugiat</li>
-							</ul>
-						</div>
-						<div class="column col-lg-3 col-md-6 col-sm-6">
-							<ul class="list-style-one">
-								<li>Nostrum exercitationem</li>
-								<li>Reprehenderit qui nulla</li>
-							</ul>
-						</div>
-						<div class="column col-lg-3 col-md-6 col-sm-6">
-							<ul class="list-style-one">
-								<li>Tempora incidunt utao</li>
-								<li>Nihil molestiae conseua</li>
-							</ul>
-						</div>
-						<div class="column col-lg-3 col-md-6 col-sm-6">
-							<ul class="list-style-one">
-								<li>Aspernatur aut odit aut</li>
-								<li>Ratione voluptatem sea</li>
-							</ul>
-						</div>
-					</div> --}}
+
 					<div class="btn-box">
-						<a href="contact.html" class="theme-btn btn-style-two"><span class="txt">Consultation <i class="arrow flaticon-right"></i></span></a>
+						<a href="{{ route('home.ourteam.area.wise',$case->legal->id) }}" class="theme-btn btn-style-two"><span class="txt">Consultation <i class="arrow flaticon-right"></i></span></a>
 					</div>
 					<!-- Consult Form -->
-					<div class="consult-form">
+					{{-- <div class="consult-form">
 						<div class="sec-title">
 							<h2>Consult Now</h2>
 						</div>
@@ -85,7 +60,7 @@
 							</div>
 						</form>
 						<!-- End Consult Form -->
-					</div>
+					</div> --}}
 				</div>
 			</div>
 		</div>

@@ -23,7 +23,10 @@ class PostController extends Controller
                 $posts = DB::table('posts')
                                     ->orderBy('posts.ID','DESC')
                                     ->where('posts.deleted_at',null)
-                                    ->get();
+                    ->select('posts.*',);
+                                    if (!Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('superadmin') ) {
+                    $posts->where('posts.created_by', Auth::user()->id);
+                }
                 return DataTables::of($posts)
                     ->addIndexColumn()
 

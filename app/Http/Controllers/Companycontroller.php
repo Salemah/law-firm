@@ -30,7 +30,7 @@ class Companycontroller extends Controller
 
                     ->addColumn('action', function ($post) {
                         return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                  <a href="' . route('admin.case.edit', $post->id) . '" class="btn btn-sm btn-success text-white" style="cursor:pointer" title="Edit"><i class="fas fa-edit"></i></a>
+                                  <a href="' . route('admin.company.edit', $post->id) . '" class="btn btn-sm btn-success text-white" style="cursor:pointer" title="Edit"><i class="fas fa-edit"></i></a>
                                   <a class="btn btn-sm btn-danger text-white" style="cursor:pointer" type="submit" onclick="showDeleteConfirm(' . $post->id . ')" title="Delete"><i class="fas fa-trash-alt"></i></a>
                             </div>';
                     })
@@ -97,8 +97,8 @@ class Companycontroller extends Controller
     public function edit(string $id)
     {
         try {
-            $post = company::findOrFail($id);
-            return view('admin.pages.company.edit', compact( 'post'));
+            $Company = company::findOrFail($id);
+            return view('admin.pages.company.edit', compact('Company'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
