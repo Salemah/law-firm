@@ -144,7 +144,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 });
 // Route::get('send-mail', [MailController::class, 'index']);
 Route::get('/dashboard', function () {
-    return view('admin.dashboard.master');
+    return view('admin.dashboard.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 // Route::get('user/dashboard', function () {
 //     return view('admin.dashboard.master');

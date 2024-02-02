@@ -34,6 +34,9 @@ class AdminController extends Controller
                     ->addColumn('name', function ($apt) {
                         return $apt->Client->name;
                     })
+                    ->addColumn('team', function ($apt) {
+                        return $apt->Team->name;
+                    })
                     ->addColumn('meet', function ($apt) {
                     return '<a class="btn btn-sm btn-info " href="'. $apt->Team->meet.'" style="cursor:pointer" title="Google Meet"><i class="fas fa-link"></i></a>';
 
