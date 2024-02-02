@@ -246,4 +246,14 @@ class TeamController extends Controller
         return $result;
     }
 
+    public function teamSearch(Request $request)
+    {
+        $result = Team::query()
+       
+            ->where('name', 'LIKE', "%{$request->search}%")
+            ->get(['name', 'id']);
+
+        return $result;
+    }
+
 }

@@ -86,6 +86,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::group(['prefix' => 'team', 'as' => 'team.'], function () {
             Route::get('status/update/{id}', [TeamController::class, 'statusUpdate'])->name('update.status');
         });
+
+        Route::post('team-search', [TeamController::class, 'teamSearch'])->name('team.search');
+
         Route::resource('case', Casecontroller::class)->middleware(['auth', 'verified']);
         Route::group(['prefix' => 'case', 'as' => 'case.'], function () {
             Route::get('status/update/{id}', [Casecontroller::class, 'statusUpdate'])->name('update.status');

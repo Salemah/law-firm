@@ -34,10 +34,10 @@
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Appoitnment</li>
-                        <li class="breadcrumb-item active"><a class="btn btn-sm btn-success text-white"
+                        {{-- <li class="breadcrumb-item active"><a class="btn btn-sm btn-success text-white"
                                 href="{{ route('admin.case.create') }}">
                                 <i class="fa fa-plus"></i> Create
-                            </a></li>
+                            </a></li> --}}
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -53,9 +53,18 @@
         @include('admin.dashboard.layouts.partials.alert')
 
         <div class="row">
+            <div class="form-group col-6 col-sm-4 col-md-4 mb-2">
+                <label for="consultant"><b>Select Consultant</b><span class="text-danger">*</span></label>
+                <select name="consultant" id="consultant" class="custom-select ">
+                    <option value="">--Select Consultant--</option>
+
+                </select>
+
+            </div>
             <div class="col-12 col-md-12">
                 <div class="card mb-4">
                     <div class="card-body">
+
                         <div class="table-responsive">
                             <div class="table-responsive">
                                 <table class="table border mb-0" id="table">
@@ -91,12 +100,14 @@
 
     <script>
         $(document).ready(function() {
+
             var searchable = [];
             $.ajaxSetup({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 }
             });
+            var consultant = $("#consultant").val();
             var dTable = $('#table').DataTable({
                 order: [],
                 lengthMenu: [
@@ -116,7 +127,10 @@
                 // dom: "<'row'<'col-sm-2'l><'col-sm-7 text-center'B><'col-sm-3'f>>tipr",
                 ajax: {
                     url: "{{ route('admin.team-appointment.index') }}",
-                    type: "get"
+                    type: "get",
+                     data:{
+                            'consultant':consultant,
+                         }
                 },
                 columns: [{
                         data: "DT_RowIndex",
@@ -150,7 +164,7 @@
                     {
                         data: 'meet',
                         name: 'meet',
-                         orderable: false,
+                        orderable: false,
                         searchable: false
                     },
                     //only those have manage_user permission will get access
@@ -182,9 +196,9 @@
 
         // Delete Button
         function deleteItem(id) {
-            var url = '{{ route('admin.team-appointment.destroy',':id') }}';
+            var url = '{{ route('admin.team-appointment.destroy', ':id') }}';
             $.ajax({
-               type: "DELETE",
+                type: "DELETE",
                 url: url.replace(':id', id),
                 success: function(resp) {
                     console.log(resp);
@@ -200,11 +214,41 @@
                     }
                 }, // success end
                 error: function(error) {
-                   // location.reload();
+                    // location.reload();
                 } // Error
             })
         }
+        $('#consultant').select2({
+            ajax: {
+                url: '{{ route('admin.team.search') }}',
+                dataType: 'json',
+                type: "POST",
+                data: function(params) {
+                    var query = {
+                        search: params.term,
+                        type: 'public'
+                    }
+                    return query;
+                },
+                processResults: function(data) {
+                    console.log();
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.name,
+                                value: item.id,
+                                id: item.id,
+                            }
+                        })
+                    };
+                }
+            }
+        });
+         $(document).on('change', '#consultant', function() {
 
-
+                $('#table').DataTable().draw(true);
+                 alert($("#consultant").val());
+            });
     </script>
 @endpush

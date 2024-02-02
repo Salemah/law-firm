@@ -23,6 +23,9 @@ class AdminController extends Controller
                 else{
                     $apts = Appoiinment::get();
                 }
+                if($request->consultant){
+                    $apts = Appoiinment::where('team_id', $request->consultant);
+                }
                 return DataTables::of($apts)
                     ->addIndexColumn()
                     ->addColumn('time', function ($apt) {
