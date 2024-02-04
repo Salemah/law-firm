@@ -1,6 +1,6 @@
 @extends('frontend.master')
 
-@section('title', 'Post Show')
+@section('title', 'Contact')
 
 
 
