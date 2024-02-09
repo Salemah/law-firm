@@ -1,12 +1,20 @@
 @extends('frontend.user.master')
 @section('content')
+
+ <section class="content">
+
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="d-flex align-items-center justify-content-between">
+            </div>
+        </div>
     <div class="az-content az-content-dashboard">
         <div class="container">
             <div class="az-content-body">
                 <div class="az-dashboard-one-title">
                     <div>
-                        <h2 class="az-dashboard-title">Hi, {{ Auth::user()->name }}</h2>
-                        <p class="az-dashboard-text">Welcome To Your Pofile</p>
+                        <h2 class="text-light">Hi, {{ Auth::user()->name }}</h2>
+                        <p class="text-light">Welcome To Your Pofile</p>
                     </div>
 
                 </div><!-- az-dashboard-one-title -->
@@ -135,6 +143,7 @@
     </div><!-- az-content-body -->
     </div>
     </div><!-- az-content -->
+</section >
 @endsection
 @section('script')
     <script>
