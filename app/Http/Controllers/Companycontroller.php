@@ -109,6 +109,7 @@ class Companycontroller extends Controller
      */
     public function update(Request $request, string $id)
     {
+       
         $request->validate([
 
             'image' => 'required',

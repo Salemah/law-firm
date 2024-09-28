@@ -114,7 +114,7 @@
                 </div>
             </div>
         </form>
-        <div class="mb-5"></div>
+        
     </div>
 
 @endsection
@@ -130,7 +130,7 @@
     <script>
         $(document).ready(function() {
             $('.dropify').dropify();
-            
+
         });
         CKEDITOR.replace('description', {
             toolbarGroups: [{

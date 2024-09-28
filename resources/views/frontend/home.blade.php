@@ -123,7 +123,8 @@ background-position: center center;">
                         <div class="practice-block col-lg-3 col-md-6 col-sm-12">
                             <div class="inner-box">
                                 <div class="{{ $legalarea->icon }}"></div>
-                                <h5><a href="{{ route('home.ourservice.sub', $legalarea->id) }}">{{ $legalarea->name }}</a>
+                                <h5><a
+                                        href="{{ route('home.ourservice.sub', $legalarea->id) }}">{{ $legalarea->name }}</a>
                                 </h5>
                                 <div class="text">{{ $legalarea->description }}</div>
                                 <a class="arrow flaticon-right-arrow-3"
@@ -208,11 +209,11 @@ background-position: center center;">
                 <div class="sponsors-outer">
                     <!--Sponsors Carousel-->
                     <ul class="sponsors-carousel owl-carousel owl-theme">
-                        <li class="slide-item">
+                        {{-- <li class="slide-item">
                             <figure class="image-box"><a href="#"><img src="frontend/images/clients/1.png"
                                         alt=""></a></figure>
-                        </li>
-                        <li class="slide-item">
+                        </li> --}}
+                        {{-- <li class="slide-item">
                             <figure class="image-box"><a href="#"><img src="frontend/images/clients/2.png"
                                         alt=""></a></figure>
                         </li>
@@ -239,7 +240,14 @@ background-position: center center;">
                         <li class="slide-item">
                             <figure class="image-box"><a href="#"><img src="frontend/images/clients/4.png"
                                         alt=""></a></figure>
-                        </li>
+                        </li> --}}
+                          @foreach ($companies as $company)
+                            <li class="slide-item">
+                                <figure class="image-box"><a href="#"><img
+                                            src="{{ URL::asset('image/company/' . $company->image . '') }}" alt=""></a>
+                                </figure>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

@@ -46,8 +46,8 @@ class HomeController extends Controller
             $questions = Question::take(3)->get();
             $clients = Client::get();
             $welcome = WelcomeSection::first();
-
-            return view('frontend.home',compact('welcome','clients','questions','posts', 'legalareas','teams','sliders'));
+            $companies =  company::get();
+            return view('frontend.home',compact('welcome','clients','questions','posts', 'legalareas','teams','sliders', 'companies'));
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
